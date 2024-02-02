@@ -1,0 +1,98 @@
+version: '3'
+services:
+
+  # Config servers
+  config1:
+    container_name: config1
+    image: mongo
+    ports:
+      - 27018:27017
+    volumes:
+      - ./data/config/config1:/data/db
+    command: mongod --configsvr --replSet confg --port 27017 --dbpath /data/db 
+
+  config2:
+    container_name: config2
+    image: mongo
+    ports:
+      - 27019:27017
+    volumes:
+      - ./data/config/config2:/data/db
+    command: mongod --configsvr --replSet confg --port 27017 --dbpath /data/db 
+
+  config3:
+    container_name: config3
+    image: mongo
+    ports:
+      - 27020:27017
+    volumes:
+      - ./data/config/config3:/data/db
+    command: mongod --configsvr --replSet confg --port 27017 --dbpath /data/db 
+
+  # Shards
+  # Shard 1
+  shard1_1:
+    container_name: shard1_1
+    image: mongo
+    ports:
+      - 27021:27017
+    volumes:
+      - ./data/shards/shard1_1:/data/db
+    command: mongod --shardsvr --replSet shard1 --port 27017 --dbpath /data/db
+
+  shard1_2:
+    container_name: shard1_2
+    image: mongo
+    ports:
+      - 27022:27017
+    volumes:
+      - ./data/shards/shard1_2:/data/db
+    command: mongod --shardsvr --replSet shard1 --port 27017 --dbpath /data/db
+
+  shard1_3:
+    container_name: shard1_3
+    image: mongo
+    ports:
+      - 27023:27017
+    volumes:
+      - ./data/shards/shard1_3:/data/db
+    command: mongod --shardsvr --replSet shard1 --port 27017 --dbpath /data/db
+
+  # Shard 2
+  shard2_1:
+    container_name: shard2_1
+    image: mongo
+    ports:
+      - 27024:27017
+    volumes:
+      - ./data/shards/shard2_1:/data/db
+    command: mongod --shardsvr --replSet shard2 --port 27017 --dbpath /data/db
+
+  shard2_2:
+    container_name: shard2_2
+    image: mongo
+    ports:
+      - 27025:27017
+    volumes:
+      - ./data/shards/shard2_2:/data/db
+    command: mongod --shardsvr --replSet shard2 --port 27017 --dbpath /data/db
+
+  shard2_3:
+    container_name: shard2_3
+    image: mongo
+    ports:
+      - 27026:27017
+    volumes:
+      - ./data/shards/shard2_3:/data/db
+    command: mongod --shardsvr --replSet shard2 --port 27017 --dbpath /data/db
+
+
+  # Mongos
+  mongos:
+    container_name: mongos
+    image: mongo
+    ports:
+      - 27027:27017
+    volumes:
+      - ./data/router:/data/db
+    command: mongos --configdb confg/172.17.0.1:27018,172.17.0.1:27019,172.17.0.1:27020 --port 27017 --bind_ip 0.0.0.0 #enable to connect other machines

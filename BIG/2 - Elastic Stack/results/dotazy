@@ -1,0 +1,48 @@
+# 1. Filtrování. Všechny záznamy z 1. ledna 2016 od 9:00 do 10:00 v selské oblasti.
+GET /london/_search
+{
+  "query": {
+    "bool": {
+      "must": [
+        { "match": { "date": "2016-01-01" } },
+        { "wildcard": { "time.keyword": "09:*" } },
+        { "match": { "Urban_or_Rural_Area": 2 } } 
+      ]
+    }
+  }
+}
+
+
+# 2. Třídění. Počet vypůjčených kol během víkendu. Pro zajímavost vypišme průměrnou teplotu, čas a datum.
+# a. Vypiš pouze sloupce mean_temp (průměrná teplota), cnt (počet vypůjčených kol), datum a čas.
+# b. Najdeme pouze záznamy o víkendu.
+# c. Seřadime je sestupně podle počtu vypůjčených kol.
+GET /london/_search
+{ 
+  "_source": ["mean_temp", "cnt", "date", "time"],
+  "query": {
+    "bool": {
+      "must": [
+        { "match": { "is_weekend": 1 } }
+      ]
+    }
+  },
+  
+  "sort": [
+    { "cnt": { "order": "desc" } }
+  ]
+}
+
+
+# 3. Wildcard hledání. Počet vypůjčených kol od 7 do 8 hodin ráno.
+# a. Vypiš pouze sloupce time (čas) a cnt (počet vypůjčených kol).
+# b. Najdeme pouze záznamy od 7 do 8 ráno, tedy 07:*.
+GET /london/_search
+{ 
+  "_source": ["cnt", "time"],
+  "query": {
+    "wildcard": {
+      "time.keyword" : "07:*"
+    }
+  }
+}

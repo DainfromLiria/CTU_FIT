@@ -1,0 +1,1802 @@
+{
+  "paragraphs": [
+    {
+      "text": "import org.apache.spark.sql.functions._\r\nimport org.apache.spark.sql.types._\r\nimport spark.implicits._",
+      "user": "anonymous",
+      "dateUpdated": "2023-12-10 00:08:44.193",
+      "config": {
+        "colWidth": 12.0,
+        "fontSize": 9.0,
+        "enabled": true,
+        "results": {},
+        "editorSetting": {
+          "language": "scala",
+          "editOnDblClick": false,
+          "completionKey": "TAB",
+          "completionSupport": true
+        },
+        "editorMode": "ace/mode/scala"
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "TEXT",
+            "data": "import org.apache.spark.sql.functions._\nimport org.apache.spark.sql.types._\nimport spark.implicits._\n"
+          }
+        ]
+      },
+      "apps": [],
+      "jobName": "paragraph_1701361330699_-1296715657",
+      "id": "20231130-162210_656162321",
+      "dateCreated": "2023-11-30 16:22:10.700",
+      "dateStarted": "2023-12-10 00:08:44.235",
+      "dateFinished": "2023-12-10 00:08:45.081",
+      "status": "FINISHED",
+      "progressUpdateIntervalMs": 500
+    },
+    {
+      "text": "val london_weather \u003d spark.read.format(\"csv\")\r\n  .option(\"sep\", \",\")\r\n  .option(\"inferSchema\", \"true\")\r\n  .option(\"header\", \"true\")\r\n  .load(\"london_weather.csv\")\r\n\r\nlondon_weather.show()",
+      "user": "anonymous",
+      "dateUpdated": "2023-12-10 00:05:30.588",
+      "config": {
+        "colWidth": 12.0,
+        "fontSize": 9.0,
+        "enabled": true,
+        "results": {},
+        "editorSetting": {
+          "language": "scala",
+          "editOnDblClick": false,
+          "completionKey": "TAB",
+          "completionSupport": true
+        },
+        "editorMode": "ace/mode/scala"
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "TEXT",
+            "data": "+--------+-----------+--------+----------------+--------+---------+--------+-------------+--------+----------+\n|    date|cloud_cover|sunshine|global_radiation|max_temp|mean_temp|min_temp|precipitation|pressure|snow_depth|\n+--------+-----------+--------+----------------+--------+---------+--------+-------------+--------+----------+\n|19790101|        2.0|     7.0|            52.0|     2.3|     -4.1|    -7.5|          0.4|101900.0|       9.0|\n|19790102|        6.0|     1.7|            27.0|     1.6|     -2.6|    -7.5|          0.0|102530.0|       8.0|\n|19790103|        5.0|     0.0|            13.0|     1.3|     -2.8|    -7.2|          0.0|102050.0|       4.0|\n|19790104|        8.0|     0.0|            13.0|    -0.3|     -2.6|    -6.5|          0.0|100840.0|       2.0|\n|19790105|        6.0|     2.0|            29.0|     5.6|     -0.8|    -1.4|          0.0|102250.0|       1.0|\n|19790106|        5.0|     3.8|            39.0|     8.3|     -0.5|    -6.6|          0.7|102780.0|       1.0|\n|19790107|        8.0|     0.0|            13.0|     8.5|      1.5|    -5.3|          5.2|102520.0|       0.0|\n|19790108|        8.0|     0.1|            15.0|     5.8|      6.9|     5.3|          0.8|101870.0|       0.0|\n|19790109|        4.0|     5.8|            50.0|     5.2|      3.7|     1.6|          7.2|101170.0|       0.0|\n|19790110|        7.0|     1.9|            30.0|     4.9|      3.3|     1.4|          2.1| 98700.0|       0.0|\n|19790111|        1.0|     6.8|            55.0|     2.9|      2.6|     0.3|          2.3| 98960.0|       0.0|\n|19790112|        3.0|     6.4|            54.0|     2.0|      0.4|    -2.0|          0.0|100650.0|       1.0|\n|19790113|        1.0|     7.0|            57.0|     4.3|     -2.6|    -7.1|          0.0|102350.0|       1.0|\n|19790114|        7.0|     0.0|            14.0|     6.7|     -0.6|    -5.6|          0.8|102700.0|       1.0|\n|19790115|       null|     0.0|            15.0|     5.9|      3.8|     1.0|          0.1|102990.0|       0.0|\n|19790116|        8.0|     0.0|            15.0|     2.6|      5.0|     4.1|          3.9|103100.0|       0.0|\n|19790117|        8.0|     0.0|            15.0|     1.9|      2.1|     1.6|          2.5|102220.0|       0.0|\n|19790118|        8.0|     0.0|            15.0|     3.0|      0.8|    -0.2|          0.2|101860.0|       0.0|\n|19790119|        8.0|     0.0|            16.0|     7.2|      0.8|    -1.4|          5.2|100910.0|       0.0|\n|19790120|        7.0|     0.0|            16.0|     3.5|      3.1|    -1.0|          0.0|100920.0|       0.0|\n+--------+-----------+--------+----------------+--------+---------+--------+-------------+--------+----------+\nonly showing top 20 rows\n\nlondon_weather: org.apache.spark.sql.DataFrame \u003d [date: int, cloud_cover: double ... 8 more fields]\n"
+          }
+        ]
+      },
+      "runtimeInfos": {
+        "jobUrl": {
+          "propertyName": "jobUrl",
+          "label": "SPARK JOB",
+          "tooltip": "View in Spark web UI",
+          "group": "spark",
+          "values": [
+            "http://4790d6697e05:4040/jobs/job?id\u003d0",
+            "http://4790d6697e05:4040/jobs/job?id\u003d1",
+            "http://4790d6697e05:4040/jobs/job?id\u003d2"
+          ],
+          "interpreterSettingId": "spark"
+        }
+      },
+      "apps": [],
+      "jobName": "paragraph_1701348533569_-1030763991",
+      "id": "20231130-124853_1723498662",
+      "dateCreated": "2023-11-30 12:48:53.569",
+      "dateStarted": "2023-12-10 00:05:30.714",
+      "dateFinished": "2023-12-10 00:05:36.030",
+      "status": "FINISHED",
+      "progressUpdateIntervalMs": 500
+    },
+    {
+      "text": "val london_bike_sharing \u003d spark.read.format(\"csv\")\r\n  .option(\"sep\", \",\")\r\n  .option(\"inferSchema\", \"true\")\r\n  .option(\"header\", \"true\")\r\n  .load(\"london_bike_sharing.csv\")\r\n\r\nlondon_bike_sharing.show()",
+      "user": "anonymous",
+      "dateUpdated": "2023-12-10 00:05:41.050",
+      "config": {
+        "colWidth": 12.0,
+        "fontSize": 9.0,
+        "enabled": true,
+        "results": {},
+        "editorSetting": {
+          "language": "scala",
+          "editOnDblClick": false,
+          "completionKey": "TAB",
+          "completionSupport": true
+        },
+        "editorMode": "ace/mode/scala"
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "TEXT",
+            "data": "+-------------------+----+---+----+-----+----------+------------+----------+----------+------+\n|          timestamp| cnt| t1|  t2|  hum|wind_speed|weather_code|is_holiday|is_weekend|season|\n+-------------------+----+---+----+-----+----------+------------+----------+----------+------+\n|2015-01-04 00:00:00| 182|3.0| 2.0| 93.0|       6.0|         3.0|       0.0|       1.0|   3.0|\n|2015-01-04 01:00:00| 138|3.0| 2.5| 93.0|       5.0|         1.0|       0.0|       1.0|   3.0|\n|2015-01-04 02:00:00| 134|2.5| 2.5| 96.5|       0.0|         1.0|       0.0|       1.0|   3.0|\n|2015-01-04 03:00:00|  72|2.0| 2.0|100.0|       0.0|         1.0|       0.0|       1.0|   3.0|\n|2015-01-04 04:00:00|  47|2.0| 0.0| 93.0|       6.5|         1.0|       0.0|       1.0|   3.0|\n|2015-01-04 05:00:00|  46|2.0| 2.0| 93.0|       4.0|         1.0|       0.0|       1.0|   3.0|\n|2015-01-04 06:00:00|  51|1.0|-1.0|100.0|       7.0|         4.0|       0.0|       1.0|   3.0|\n|2015-01-04 07:00:00|  75|1.0|-1.0|100.0|       7.0|         4.0|       0.0|       1.0|   3.0|\n|2015-01-04 08:00:00| 131|1.5|-1.0| 96.5|       8.0|         4.0|       0.0|       1.0|   3.0|\n|2015-01-04 09:00:00| 301|2.0|-0.5|100.0|       9.0|         3.0|       0.0|       1.0|   3.0|\n|2015-01-04 10:00:00| 528|3.0|-0.5| 93.0|      12.0|         3.0|       0.0|       1.0|   3.0|\n|2015-01-04 11:00:00| 727|2.0|-1.5|100.0|      12.0|         3.0|       0.0|       1.0|   3.0|\n|2015-01-04 12:00:00| 862|2.0|-1.5| 96.5|      13.0|         4.0|       0.0|       1.0|   3.0|\n|2015-01-04 13:00:00| 916|3.0|-0.5| 87.0|      15.0|         3.0|       0.0|       1.0|   3.0|\n|2015-01-04 14:00:00|1039|2.5| 0.0| 90.0|       8.0|         3.0|       0.0|       1.0|   3.0|\n|2015-01-04 15:00:00| 869|2.0|-1.5| 93.0|      11.0|         3.0|       0.0|       1.0|   3.0|\n|2015-01-04 16:00:00| 737|3.0| 0.0| 93.0|      12.0|         3.0|       0.0|       1.0|   3.0|\n|2015-01-04 17:00:00| 594|3.0| 0.0| 93.0|      11.0|         3.0|       0.0|       1.0|   3.0|\n|2015-01-04 18:00:00| 522|3.0| 1.5| 93.0|       6.5|         3.0|       0.0|       1.0|   3.0|\n|2015-01-04 19:00:00| 379|3.0| 1.0| 93.0|       7.0|         3.0|       0.0|       1.0|   3.0|\n+-------------------+----+---+----+-----+----------+------------+----------+----------+------+\nonly showing top 20 rows\n\nlondon_bike_sharing: org.apache.spark.sql.DataFrame \u003d [timestamp: timestamp, cnt: int ... 8 more fields]\n"
+          }
+        ]
+      },
+      "runtimeInfos": {
+        "jobUrl": {
+          "propertyName": "jobUrl",
+          "label": "SPARK JOB",
+          "tooltip": "View in Spark web UI",
+          "group": "spark",
+          "values": [
+            "http://4790d6697e05:4040/jobs/job?id\u003d3",
+            "http://4790d6697e05:4040/jobs/job?id\u003d4",
+            "http://4790d6697e05:4040/jobs/job?id\u003d5"
+          ],
+          "interpreterSettingId": "spark"
+        }
+      },
+      "apps": [],
+      "jobName": "paragraph_1701348883800_-491130208",
+      "id": "20231130-125443_1265024096",
+      "dateCreated": "2023-11-30 12:54:43.800",
+      "dateStarted": "2023-12-10 00:05:41.145",
+      "dateFinished": "2023-12-10 00:05:42.371",
+      "status": "FINISHED",
+      "progressUpdateIntervalMs": 500
+    },
+    {
+      "text": "val cycling_safety_uk_gov \u003d spark.read.format(\"csv\")\r\n  .option(\"sep\", \",\")\r\n  .option(\"inferSchema\", \"true\")\r\n  .option(\"header\", \"true\")\r\n  .load(\"cycling_safety_uk_gov.csv\")\r\n\r\ncycling_safety_uk_gov.show()",
+      "user": "anonymous",
+      "dateUpdated": "2023-12-10 00:05:44.978",
+      "config": {
+        "colWidth": 12.0,
+        "fontSize": 9.0,
+        "enabled": true,
+        "results": {},
+        "editorSetting": {
+          "language": "scala",
+          "editOnDblClick": false,
+          "completionKey": "TAB",
+          "completionSupport": true
+        },
+        "editorMode": "ace/mode/scala"
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "TEXT",
+            "data": "+---+--------------+---------------------+----------------------+---------+---------+------------+-----------------+------------------+--------------------+-------------------+-----------+-----+--------------------------+-------------------------+--------------+---------------+---------+-----------+---------------+----------------+--------------+---------------+---------------------------------+---------------------------------------+----------------+------------------+-----------------------+--------------------------+-------------------+-------------------+-------------------------------------------+-------------------------+------------+--------+-----+-------+------+--------------------+-----------+\n| id|Accident_Index|Location_Easting_OSGR|Location_Northing_OSGR|Longitude| Latitude|Police_Force|Accident_Severity|Number_of_Vehicles|Number_of_Casualties|               Date|Day_of_Week| Time|Local_Authority_(District)|Local_Authority_(Highway)|1st_Road_Class|1st_Road_Number|Road_Type|Speed_limit|Junction_Detail|Junction_Control|2nd_Road_Class|2nd_Road_Number|Pedestrian_Crossing-Human_Control|Pedestrian_Crossing-Physical_Facilities|Light_Conditions|Weather_Conditions|Road_Surface_Conditions|Special_Conditions_at_Site|Carriageway_Hazards|Urban_or_Rural_Area|Did_Police_Officer_Attend_Scene_of_Accident|LSOA_of_Accident_Location|Vehicle_Type|Bicycles|fatal|serious|slight|            geometry|index_right|\n+---+--------------+---------------------+----------------------+---------+---------+------------+-----------------+------------------+--------------------+-------------------+-----------+-----+--------------------------+-------------------------+--------------+---------------+---------+-----------+---------------+----------------+--------------+---------------+---------------------------------+---------------------------------------+----------------+------------------+-----------------------+--------------------------+-------------------+-------------------+-------------------------------------------+-------------------------+------------+--------+-----+-------+------+--------------------+-----------+\n|  0| 200501BS00024|             524700.0|              180880.0|-0.204346|51.513039|           1|                3|                 2|                   1|2005-01-24 00:00:00|          2|17:05|                        12|                E09000020|             4|            415|        6|       30.0|              3|               4|             5|              0|                                0|                                      0|               4|                 1|                      1|                         0|                  0|                  1|                                          2|                E01002882|     9; bike|       1|    0|      0|     1|POINT (-0.204346 ...|          0|\n|  1| 200501BS00032|             524470.0|              180980.0|-0.207623|51.513988|           1|                3|                 2|                   1|2005-01-30 00:00:00|          1|20:00|                        12|                E09000020|             4|            450|        6|       30.0|              0|              -1|            -1|              0|                                0|                                      0|               4|                 1|                      1|                         0|                  0|                  1|                                          1|                E01002874|     bike; 9|       1|    0|      0|     1|POINT (-0.207623 ...|          0|\n|  2| 200501BS70004|             524870.0|              181880.0|-0.201543|51.521988|           1|                3|                 2|                   1|2005-03-02 00:00:00|          5|12:30|                         1|                E09000033|             3|           4207|        6|       30.0|              3|               4|             5|              0|                                0|                                      1|               1|                 9|                      1|                         0|                  0|                  1|                                          2|                E01002854|     bike; 9|       1|    0|      0|     1|POINT (-0.201543 ...|          0|\n|  3| 200501BS70009|             525840.0|              177020.0|-0.189301|51.478096|           1|                3|                 2|                   1|2005-03-02 00:00:00|          5|17:30|                        11|                E09000013|             3|            308|        6|       30.0|              0|              -1|            -1|              0|                                0|                                      0|               4|                 1|                      1|                         0|                  0|                  1|                                          1|                E01001921|     9; bike|       1|    0|      0|     1|POINT (-0.189301 ...|          0|\n|  4| 200501BS70010|             526940.0|              177460.0|-0.173312|51.481804|           1|                3|                 2|                   1|2005-06-02 00:00:00|          1|15:00|                        12|                E09000020|             3|           3220|        6|       30.0|              0|              -1|            -1|              0|                                0|                                      0|               1|                 1|                      1|                         0|                  0|                  1|                                          1|                     null|     bike; 9|       1|    0|      0|     1|POINT (-0.173312 ...|          0|\n|  5| 200501BS70020|             527020.0|              179020.0|-0.171599|51.495806|           1|                3|                 2|                   1|2005-10-02 00:00:00|          5|18:10|                        12|                E09000020|             3|              4|        6|       30.0|              3|               4|             3|           3218|                                0|                                      0|               4|                 2|                      2|                         0|                  0|                  1|                                          1|                E01002821|     bike; 3|       1|    0|      0|     1|POINT (-0.171599 ...|          0|\n|  6| 200501BS70027|             525190.0|              180500.0|-0.197423|51.509515|           1|                3|                 2|                   1|2005-02-17 00:00:00|          5|18:00|                        12|                E09000020|             3|           4206|        6|       30.0|              9|               4|             4|            415|                                0|                                      1|               4|                 2|                      2|                         0|                  0|                  1|                                          2|                E01002884|    bike; 19|       1|    0|      0|     1|POINT (-0.197423 ...|          0|\n|  7| 200501BS70030|             526360.0|              177420.0|-0.181674|51.481575|           1|                3|                 2|                   1|2005-02-16 00:00:00|          4|10:35|                        12|                E09000020|             3|           3220|        6|       30.0|              6|               2|             3|           3217|                                0|                                      0|               1|                 1|                      1|                         0|                  0|                  1|                                          1|                E01002913|    21; bike|       1|    0|      0|     1|POINT (-0.181674 ...|          0|\n|  8| 200501BS70034|             524220.0|              181510.0|-0.211037|51.518806|           1|                3|                 2|                   1|2005-02-16 00:00:00|          4|14:10|                        12|                E09000020|             4|            450|        6|       30.0|              6|               4|             6|              0|                                0|                                      0|               1|                 1|                      1|                         0|                  0|                  1|                                          1|                E01002878|     bike; 9|       1|    0|      0|     1|POINT (-0.211037 ...|          0|\n|  9| 200501BS70040|             524900.0|              178780.0|-0.202208|51.494121|           1|                3|                 2|                   1|2005-02-20 00:00:00|          1|12:40|                        12|                E09000020|             3|           3220|        2|       30.0|              0|              -1|            -1|              0|                                0|                                      5|               1|                 1|                      1|                         0|                  0|                  1|                                          1|                E01002814|     9; bike|       1|    0|      0|     1|POINT (-0.202208 ...|          0|\n| 10| 200501BS70050|             525330.0|              180460.0|-0.195421|51.509125|           1|                3|                 3|                   1|2005-02-23 00:00:00|          4|19:00|                        12|                E09000020|             3|            402|        2|       30.0|              3|               4|             3|           4204|                                0|                                      5|               4|                 1|                      1|                         0|                  0|                  1|                                          1|                E01002827|  9; 9; bike|       1|    0|      0|     1|POINT (-0.195421 ...|          0|\n| 11| 200501BS70054|             527670.0|              178410.0|-0.162461|51.490178|           1|                3|                 2|                   1|2005-02-25 00:00:00|          6|08:22|                        12|                E09000020|             3|           3217|        6|       30.0|              3|               4|             6|              0|                                0|                                      1|               1|                 3|                      2|                         0|                  0|                  1|                                          1|                E01002861|     9; bike|       1|    0|      0|     1|POINT (-0.162461 ...|          0|\n| 12| 200501BS70058|             527200.0|              178760.0|-0.169101|51.493429|           1|                3|                 2|                   1|2005-01-03 00:00:00|          3|00:30|                        12|                E09000020|             3|            308|        6|       30.0|              6|               2|             5|              0|                                0|                                      0|               4|                 1|                      2|                         0|                  0|                  1|                                          1|                E01002821|     9; bike|       1|    0|      0|     1|POINT (-0.169101 ...|          0|\n| 13| 200501BS70065|             526470.0|              177970.0|-0.179894|51.486493|           1|                3|                 2|                   1|2005-03-03 00:00:00|          5|14:30|                        12|                E09000020|             3|            308|        6|       30.0|              3|               4|             6|              0|                                0|                                      0|               1|                 1|                      1|                         0|                  0|                  1|                                          1|                E01002912|     9; bike|       1|    0|      0|     1|POINT (-0.179894 ...|          0|\n| 14| 200501BS70067|             524580.0|              179010.0|-0.206734|51.496259|           1|                3|                 2|                   1|2005-01-03 00:00:00|          3|18:31|                        12|                E09000020|             3|            315|        6|       30.0|              3|               4|             6|              0|                                0|                                      4|               4|                 2|                      2|                         0|                  0|                  1|                                          1|                E01002814|     9; bike|       1|    0|      0|     1|POINT (-0.206734 ...|          0|\n| 15| 200501BS70073|             525000.0|              180660.0|-0.200102|51.510995|           1|                2|                 2|                   1|2005-05-03 00:00:00|          7|18:40|                        12|                E09000020|             4|            415|        6|       30.0|              3|               4|             6|              0|                                0|                                      0|               4|                 2|                      2|                         0|                  0|                  1|                                          1|                E01002882|     8; bike|       1|    0|      1|     0|POINT (-0.200102 ...|          0|\n| 16| 200501BS70076|             525410.0|              180490.0|-0.194258|51.509377|           1|                3|                 2|                   1|2005-06-03 00:00:00|          1|01:05|                        12|                E09000020|             3|            402|        6|       30.0|              6|               2|             3|           4204|                                0|                                      0|               4|                 1|                      1|                         0|                  0|                  1|                                          1|                E01002827|    bike; 11|       1|    0|      0|     1|POINT (-0.194258 ...|          0|\n| 17| 200501BS70078|             524050.0|              179700.0|-0.214123|51.502577|           1|                3|                 2|                   1|2005-08-03 00:00:00|          3|08:56|                        12|                E09000020|             3|           3220|        6|       30.0|              6|               2|             5|              0|                                0|                                      5|               1|                 1|                      1|                         0|                  0|                  1|                                          1|                E01002869|     9; bike|       1|    0|      0|     1|POINT (-0.214123 ...|          0|\n| 18| 200501BS70084|             524340.0|              181240.0|-0.209404|51.516353|           1|                3|                 2|                   1|2005-03-13 00:00:00|          1|00:15|                        12|                E09000020|             4|            450|        6|       30.0|              6|               4|             6|              0|                                0|                                      0|               4|                 1|                      1|                         0|                  0|                  1|                                          3|                E01002879|     bike; 8|       1|    0|      0|     1|POINT (-0.209404 ...|          0|\n| 19| 200501BS70089|             524120.0|              180010.0|-0.213006|51.505347|           1|                2|                 2|                   1|2005-09-03 00:00:00|          4|09:13|                        12|                E09000020|             3|            402|        2|       30.0|              3|               2|             5|              0|                                0|                                      5|               1|                 1|                      1|                         0|                  0|                  1|                                          1|                E01002873|     9; bike|       1|    0|      1|     0|POINT (-0.213006 ...|          0|\n+---+--------------+---------------------+----------------------+---------+---------+------------+-----------------+------------------+--------------------+-------------------+-----------+-----+--------------------------+-------------------------+--------------+---------------+---------+-----------+---------------+----------------+--------------+---------------+---------------------------------+---------------------------------------+----------------+------------------+-----------------------+--------------------------+-------------------+-------------------+-------------------------------------------+-------------------------+------------+--------+-----+-------+------+--------------------+-----------+\nonly showing top 20 rows\n\ncycling_safety_uk_gov: org.apache.spark.sql.DataFrame \u003d [id: int, Accident_Index: string ... 38 more fields]\n"
+          }
+        ]
+      },
+      "runtimeInfos": {
+        "jobUrl": {
+          "propertyName": "jobUrl",
+          "label": "SPARK JOB",
+          "tooltip": "View in Spark web UI",
+          "group": "spark",
+          "values": [
+            "http://4790d6697e05:4040/jobs/job?id\u003d6",
+            "http://4790d6697e05:4040/jobs/job?id\u003d7",
+            "http://4790d6697e05:4040/jobs/job?id\u003d8"
+          ],
+          "interpreterSettingId": "spark"
+        }
+      },
+      "apps": [],
+      "jobName": "paragraph_1701349226023_-2011366429",
+      "id": "20231130-130026_1707530214",
+      "dateCreated": "2023-11-30 13:00:26.023",
+      "dateStarted": "2023-12-10 00:05:45.055",
+      "dateFinished": "2023-12-10 00:05:47.949",
+      "status": "FINISHED",
+      "progressUpdateIntervalMs": 500
+    },
+    {
+      "text": "cycling_safety_uk_gov.columns.length",
+      "user": "anonymous",
+      "dateUpdated": "2023-12-10 00:05:47.529",
+      "config": {
+        "colWidth": 12.0,
+        "fontSize": 9.0,
+        "enabled": true,
+        "results": {},
+        "editorSetting": {
+          "language": "scala",
+          "editOnDblClick": false,
+          "completionKey": "TAB",
+          "completionSupport": true
+        },
+        "editorMode": "ace/mode/scala"
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "TEXT",
+            "data": "res4: Int \u003d 40\n"
+          }
+        ]
+      },
+      "apps": [],
+      "jobName": "paragraph_1701350111772_-1391140555",
+      "id": "20231130-131511_1634314641",
+      "dateCreated": "2023-11-30 13:15:11.772",
+      "dateStarted": "2023-12-10 00:05:47.697",
+      "dateFinished": "2023-12-10 00:05:48.308",
+      "status": "FINISHED",
+      "progressUpdateIntervalMs": 500
+    },
+    {
+      "text": "val uniqueValues \u003d cycling_safety_uk_gov.select(\"Vehicle_Type\").distinct().collect()\nuniqueValues.foreach(println)",
+      "user": "anonymous",
+      "dateUpdated": "2023-12-10 00:05:51.060",
+      "config": {
+        "colWidth": 12.0,
+        "fontSize": 9.0,
+        "enabled": true,
+        "results": {},
+        "editorSetting": {
+          "language": "scala",
+          "editOnDblClick": false,
+          "completionKey": "TAB",
+          "completionSupport": true
+        },
+        "editorMode": "ace/mode/scala"
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "TEXT",
+            "data": "[9; 2; bike]\n[20; bike; 19; 4]\n[11; bike; 21]\n[8; 11; bike]\n[9; 9; 5; bike]\n[bike; bike; 90]\n[bike; 9; 2; 9; 9]\n[bike; 11; 9; 11]\n[bike; 10; 9; 9]\n[5; 19; bike]\n[-1; bike]\n[5; bike; 9; 9]\n[2; 8; bike]\n[9; bike; bike; 21]\n[bike; 4; 19]\n[bike; bike; 17]\n[bike; 11]\n[bike; 3; 2]\n[9; bike; 9; 90]\n[19; 9; 9; 9; bike]\n[9; bike; -1]\n[11; bike; 11]\n[4; bike; 9; 9]\n[bike; 9; 20]\n[bike; bike; bike; 17]\n[bike; 19; bike]\n[bike; 9; 9; 9; 9; 9; 9; 9]\n[9; 5; 5; bike; bike]\n[bike; 9]\n[9; bike; 98]\n[-1; bike; -1]\n[8; 19; 9; 9; bike]\n[90; bike; bike]\n[8; 8; 9; bike]\n[9; bike; bike]\n[bike; 9; bike]\n[bike; 90; 11]\n[5; bike; bike; 11; 9; 9]\n[bike; 98]\n[20; 5; bike; bike; bike]\n[19; bike; bike]\n[8; 19; bike]\n[9; 9; bike; bike; bike; bike]\n[19; 5; bike; 9]\n[98; 9; bike]\n[9; 19; bike; bike; bike]\n[2; bike]\n[10; 9; bike]\n[9; 9; bike; 9]\n[bike; 21; 11]\n[9; bike; bike; bike; bike; bike]\n[9; 8; 9; bike]\n[bike; 97]\n[9; bike; 9; 9; 5]\n[21; 19; bike]\n[9; 4; bike; bike; 9]\n[11; 19; bike; bike]\n[bike; 90; 19]\n[9; 9; bike; 3]\n[2; bike; bike]\n[3; 9; 9; bike]\n[9; bike; 2]\n[8; bike; 19]\n[21; bike; bike; bike; bike]\n[11; 19; bike]\n[19; bike; 9; 9; 5]\n[bike; bike; 2; 90]\n[4; 2; bike]\n[bike; 9; 10; 9]\n[19; 9; 9; bike; 19]\n[bike; 3; 16]\n[9; bike; bike; bike; 9]\n[9; bike; 3]\n[bike; 19; 9; 9]\n[19; 9; 9; 20; bike]\n[bike; 9; 3]\n[11; bike; 9]\n[bike; 4; 8]\n[9; bike; 9; 9; 9; 9]\n[bike; 5; 9; 9; 9]\n[bike; 97; 9]\n[16; bike; bike; bike]\n[bike; 5]\n[bike; 3; 9]\n[9; 9; 9; 9; 9; bike]\n[9; bike; 5; 9]\n[9; 9; 9; 19; 9; bike]\n[bike; 4; 4; 4]\n[bike; 9; 5; 5]\n[9; 4; bike; bike]\n[2; 19; bike]\n[bike; 21; 90]\n[9; 9; 19; 9; bike]\n[9; 9; 19; 9; 9; bike]\n[bike; 20; 90]\n[bike; 9; 90; 9]\n[9; bike; 21]\n[9; 8; bike]\n[bike; bike; 8]\n[20; bike; 3]\n[bike; 11; bike]\n[16; bike]\n[9; bike; 10; 9; 9; 9]\n[8; bike; 9; 9]\n[3; 3; bike]\n[3; 9; bike]\n[19; bike; 20]\n[9; 9; bike; 21]\n[9; 2; 2; bike; 9]\n[4; 9; bike]\n[9; 9; 19; bike]\n[98; bike; 9]\n[9; 9; 21; bike; bike]\n[9; 90; bike]\n[bike; 10]\n[bike; 17]\n[9; 10; bike]\n[21; bike; 9; 9; 9]\n[9; 19; bike]\n[5; 9; 9; bike]\n[9; bike; 11; 11]\n[9; 5; bike]\n[11; 5; bike]\n[bike; 9; 19; 9]\n[bike; 11; 19; bike]\n[9; 9; bike; bike; bike; bike; bike]\n[8; 9; bike; bike; bike]\n[10; bike; 19]\n[19; bike; 9; 9]\n[bike; bike; bike; bike]\n[16; 16; 9; bike; 9]\n[20; bike; 21; 9; 19]\n[9; 19; bike; bike]\n[9; bike; 19; 21]\n[bike; 4; 9]\n[9; 9; 9; 9; 19; 9; bike]\n[bike; 9; 9; 11]\n[20; 8; bike]\n[4; 9; 9; bike]\n[8; bike; bike]\n[16; bike; bike]\n[bike; 2; 11]\n[-1; -1; bike]\n[8; bike; 9]\n[19; 21; bike]\n[20; 8; 9; bike]\n[9; 21; bike; 9; 9]\n[10; bike; 90]\n[20; 4; bike]\n[bike; bike; 2; 9]\n[20; bike; 20]\n[5; bike; 3]\n[9; bike; 21; 9]\n[bike; bike; bike; bike; bike; bike; bike; bike; bike; bike]\n[22; bike]\n[bike; 9; 11]\n[bike; 9; 90]\n[bike; 8; 9]\n[bike; 19; 9]\n[bike; 19; 90]\n[9; bike; bike; bike; bike; 9; bike]\n[bike; bike; 98]\n[19; bike; bike; bike; bike; bike; bike; bike]\n[bike; 22; 9]\n[9; bike; 19]\n[bike; 9; 5]\n[5; 3; bike]\n[10; bike; 9]\n[bike; bike; bike; bike; 9]\n[bike; 8; 20]\n[-1; bike; 9]\n[11; 21; bike]\n[19; 17; bike]\n[9; bike; 9; bike]\n[bike; 9; 9; 3]\n[11; 9; bike]\n[9; 9; bike; 90]\n[4; bike; bike]\n[bike; bike; bike; 19; 21]\n[21; 9; 9; 9; bike]\n[19; 9; 5; bike]\n[9; bike; 19; 9]\n[90; bike; 9; 5]\n[bike; 19; 5]\n[21; 8; bike]\n[bike; 90]\n[bike; 9; 10]\n[bike; 21; 19]\n[20; bike; 19]\n[90; bike; 90]\n[11; 11; bike]\n[21; 9; 9; bike]\n[21; bike]\n[90; bike; 9]\n[9; 9; 9; bike]\n[8; bike; 19; 19]\n[9; 9; bike; 11]\n[19; bike; bike; bike; bike]\n[bike; 8; 3]\n[bike; bike]\n[90; bike; 21]\n[17; 21; bike]\n[19; bike; 16]\n[bike; 10; 11]\n[9; bike; 9; 98]\n[bike; 9; 9; 10]\n[9; 3; bike; 9]\n[bike; 10; 9]\n[11; bike; 19]\n[bike; 90; 11; 11]\n[9; 9; 20; bike]\n[5; 19; bike; 21]\n[9; bike; bike; 19; 9]\n[9; 9; bike; 90; 9]\n[9; bike; bike; bike; bike; bike; bike; bike]\n[20; 20; bike]\n[5; bike; 8]\n[9; bike; 16]\n[9; 9; 9; bike; 90]\n[22; 22; bike]\n[21; 21; bike]\n[bike; 19; 11]\n[20; bike; 9]\n[2; bike; 9]\n[9; 9; 9; 9; bike]\n[8; bike; 21]\n[9; bike; 5]\n[21; bike; 11]\n[bike; 19; 21]\n[21; 3; bike]\n[bike; 21; 9]\n[11; 20; bike]\n[20; bike; 8]\n[11; bike; bike; bike]\n[9; 9; 9; bike; bike]\n[19; bike; bike; 9]\n[bike; 22]\n[97; bike; 9]\n[19; bike; 5]\n[9; bike; 11]\n[19; bike; 21]\n[9; bike; 98; 9]\n[8; bike; bike; bike]\n[9; bike; bike; 9]\n[9; 9; bike; bike; bike]\n[9; 9; 9; 9; 9; bike; bike]\n[20; 9; bike]\n[19; 3; bike]\n[9; bike; 20; 9]\n[19; 9; bike; bike]\n[9; 21; bike]\n[19; bike; 8]\n[19; bike; bike; 9; 9]\n[9; 9; bike; 9; 9; 9; 9]\n[bike; 2; 2]\n[bike; 5; 11]\n[bike; 19; 19; 9]\n[9; 10; 9; bike]\n[2; 9; bike]\n[3; bike; bike]\n[bike; 90; 90]\n[9; 16; bike; bike]\n[21; bike; 20]\n[19; 9; 19; bike; bike]\n[9; bike; 9; 11]\n[bike; bike; bike; 9; 9]\n[bike; 19]\n[9; 9; 9; bike; bike; bike; 9; 9; 21; 9; 9]\n[21; 9; bike; bike]\n[19; 9; bike; 9]\n[9; bike; bike; bike]\n[20; bike; 11]\n[9; 5; 9; bike]\n[bike; 9; 8]\n[11; 9; 9; bike]\n[bike; 9; 9; 9]\n[21; 5; bike]\n[19; bike; 9; bike]\n[19; bike; 98]\n[5; bike; bike; bike; bike]\n[9; bike; bike; 9; 9; 9]\n[9; bike; 9; 9]\n[bike; 9; 9; 9; 9]\n[bike; 9; 17; 21]\n[98; bike; bike]\n[bike; 3; bike]\n[bike; 3; 9; 9]\n[98; bike; bike; 9]\n[2; 19; 19; bike]\n[4; bike; 19]\n[9; 9; bike; 9; 9; 9]\n[17; bike; bike; bike]\n[19; 8; bike]\n[bike; 8; 19]\n[10; 11; bike]\n[bike; 5; bike]\n[bike; 19; 2]\n[9; 9; bike; 9; 19]\n[bike; bike; 3]\n[bike; bike; 5]\n[9; bike; 9]\n[9; 90; bike; bike]\n[3; bike; 5]\n[10; 21; bike]\n[9; 9; 11; bike]\n[20; 11; bike]\n[10; bike; 11]\n[9; bike; 9; 9; 21]\n[4; bike; 9]\n[9; 21; 9; bike]\n[19; 9; 9; bike]\n[5; 9; bike; 9]\n[bike; bike; 20]\n[bike; 19; 21; 9; 21]\n[19; bike; 9]\n[9; bike; bike; 19]\n[bike; 11; 90]\n[bike; 9; 9; 19; 9]\n[bike; 9; 9]\n[19; bike; 90]\n[3; bike; 19]\n[5; bike]\n[4; bike]\n[bike; 18]\n[bike; 5; 19]\n[bike; 11; 20]\n[bike; bike; bike; bike; bike; bike]\n[bike; 4]\n[bike; 2]\n[21; bike; 21]\n[11; 8; bike]\n[bike; bike; 21]\n[9; bike; 9; 9; 11]\n[bike; 17; bike]\n[21; 9; bike]\n[9; bike; 17]\n[8; 9; 11; bike]\n[bike; 5; 9; 9]\n[19; 20; bike]\n[9; 9; 9; 9; bike; 9; 9; 9]\n[23; bike]\n[8; 8; bike]\n[9; 9; bike; bike]\n[9; bike; 8; bike]\n[9; bike; bike; bike; bike; bike; bike; bike; bike; bike; bike; bike; bike]\n[bike; 19; 8]\n[bike; 19; 20]\n[bike; 9; 17]\n[9; 98; bike; 9]\n[bike; 9; 9; 9; 11]\n[5; 9; bike]\n[17; 17; bike]\n[2; 9; bike; bike]\n[bike; 11; 11]\n[11; 10; 10; bike]\n[9; 9; 3; bike]\n[20; bike; 9; 9; 9]\n[bike; 9; 2]\n[4; bike; 11]\n[11; bike; 8]\n[3; 21; bike; bike]\n[3; bike; 9]\n[9; bike; 9; 19]\n[bike; 8; 11]\n[5; bike; 9]\n[2; 2; bike; bike; 2; 2; 2]\n[3; bike; 11]\n[9; 9; bike]\n[9; 9; 9; bike; 9]\n[bike; 9; bike; bike]\n[10; bike; bike]\n[9; 98; bike]\n[5; 8; bike]\n[bike; 5; bike; bike]\n[5; 11; bike]\n[9; 9; 9; 9; bike; 9]\n[98; bike]\n[9; 5; bike; bike; bike]\n[20; bike; bike]\n[bike; 20; 11]\n[9; 11; 11; bike]\n[10; bike]\n[9; bike; 90]\n[9; 8; 5; 3; bike]\n[9; 9; 9; bike; bike; 9]\n[bike; 9; 19]\n[9; bike; 11; 9]\n[98; 8; bike]\n[2; 2; bike]\n[11; 9; 3; bike]\n[90; bike; 11]\n[21; 4; bike]\n[bike; 9; 9; 90]\n[19; bike; 11]\n[11; bike; 10]\n[21; bike; 16; 9]\n[10; bike; 8]\n[9; 3; bike]\n[5; 9; 19; bike]\n[19; 19; 9; bike; 9]\n[2; bike; 9; 9]\n[9; bike; 8]\n[19; 9; bike]\n[3; 19; bike]\n[90; 9; bike]\n[21; bike; 10]\n[5; bike; 5]\n[2; 9; bike; 9]\n[bike; 19; 19]\n[bike; 20; 9]\n[3; 90; bike]\n[9; 9; 9; bike; bike; bike]\n[90; 90; bike]\n[19; 19; 90; bike]\n[bike; 8; bike]\n[9; 20; bike; bike]\n[bike; 5; 5; 5; 9]\n[bike; bike; bike; bike; bike]\n[9; 11; 9; bike]\n[9; bike; 9; 20; 9]\n[90; 90; bike; 9]\n[19; bike; 19]\n[bike; 9; 98]\n[20; 21; bike]\n[bike; 19; 10]\n[2; bike; 21]\n[19; 19; bike; bike]\n[90; 19; bike]\n[9; bike; 10]\n[9; 9; bike; 20]\n[bike; 11; 8]\n[17; bike; bike]\n[bike; bike; bike; 9]\n[2; 2; 2; bike]\n[bike; 9; bike; 9]\n[bike; 21; 21]\n[bike; 9; 9; 21]\n[21; bike; bike]\n[9; 9; 8; bike]\n[9; bike; 8; 8]\n[bike; 2; 19]\n[bike; bike; bike; 19]\n[20; 9; bike; 9; 9]\n[11; bike; bike; 9]\n[90; bike; 19]\n[bike; -1]\n[8; bike; 90]\n[9; bike; bike; bike; bike]\n[8; 3; bike]\n[9; bike; 9; 9; 9]\n[bike; 3; 90]\n[bike; 9; 9; 17]\n[97; bike; bike]\n[9; bike; bike; bike; bike; bike; bike; bike; bike]\n[2; bike; 2]\n[21; bike; 19]\n[17; bike; 9]\n[97; 9; bike]\n[8; 9; bike]\n[20; 9; bike; bike; bike; bike]\n[5; 5; bike; bike]\n[bike; 16]\n[8; bike]\n[bike; 3; 3; 20]\n[19; bike; bike; bike]\n[98; bike; 11]\n[3; 8; bike]\n[9; bike; 3; 9]\n[11; bike]\n[17; bike]\n[9; bike; 9; bike; bike]\n[9; 19; 9; bike]\n[9; 4; bike]\n[4; 4; bike]\n[2; bike; 19]\n[bike; 20; bike]\n[bike; 3]\n[19; bike]\n[9; bike]\n[5; bike; 19]\n[21; 20; bike]\n[17; 9; bike]\n[bike; 21]\n[bike; bike; 9]\n[bike; 11; 21]\n[11; bike; 20]\n[9; 9; 9; bike; 9; 9]\n[9; 90; 21; bike]\n[9; 9; 9; 9; 9; 9; 9; 9; bike]\n[bike; 3; 19]\n[9; 9; bike; 9; 9]\n[21; bike; 5]\n[bike; 5; 5]\n[bike; 20; 19]\n[97; bike]\n[21; 2; 19; bike]\n[bike; bike; bike]\n[8; bike; 8]\n[9; 3; 9; 9; bike]\n[bike; 9; 8; 10]\n[19; bike; 3]\n[bike; 8]\n[bike; bike; 19]\n[11; 5; bike; bike]\n[3; bike]\n[bike; 11; 9]\n[21; bike; 9]\n[9; 18; bike]\n[bike; 5; 21]\n[11; bike; bike]\n[20; bike; 9; bike]\n[8; 9; bike; 9]\n[19; 9; bike; 9; 9; 9]\n[bike]\n[bike; 20]\n[19; 11; bike]\n[bike; bike; 11]\n[5; bike; 90]\n[20; 5; bike]\n[20; 9; 9; bike]\n[90; bike]\n[bike; 11; 19]\n[9; 5; bike; bike]\n[21; 11; bike]\n[bike; 9; 9; 19]\n[9; 11; bike]\n[3; bike; 8]\n[8; bike; 8; 8]\n[9; 20; bike]\n[19; 19; bike]\n[5; 9; bike; bike]\n[5; bike; bike]\n[bike; 10; 10]\n[9; bike; 19; bike]\n[bike; 11; 9; 9; 9; 9]\n[10; 10; bike]\n[bike; 3; 11]\n[bike; 9; 21]\n[8; bike; 11]\n[bike; bike; 9; 9]\n[bike; 8; 8]\n[bike; 9; 20; 11]\n[bike; 9; 9; 9; 9; 9]\n[5; bike; 11]\n[21; 9; 9; 21; 9; bike]\n[18; bike]\n[bike; 90; 9]\n[19; 9; 9; 9; 11; 9; bike]\n[bike; bike; bike; bike; 9; bike]\n[bike; 5; 9]\n[9; 17; bike]\n[20; 20; 9; bike]\n[bike; 9; 4]\n[bike; 2; 9]\n[9; bike; 4]\n[bike; 21; 9; bike]\n[bike; bike; 9; 19]\n[5; 5; bike]\n[9; 8; bike; 8]\n[10; 19; bike]\n[bike; bike; 22]\n[20; bike]\n[9; bike; 20]\n[11; 9; 20; bike]\n[19; 5; bike]\nuniqueValues: Array[org.apache.spark.sql.Row] \u003d Array([9; 2; bike], [20; bike; 19; 4], [11; bike; 21], [8; 11; bike], [9; 9; 5; bike], [bike; bike; 90], [bike; 9; 2; 9; 9], [bike; 11; 9; 11], [bike; 10; 9; 9], [5; 19; bike], [-1; bike], [5; bike; 9; 9], [2; 8; bike], [9; bike; bike; 21], [bike; 4; 19], [bike; bike; 17], [bike; 11], [bike; 3; 2], [9; bike; 9; 90], [19; 9; 9; 9; bike], [9; bike; -1], [11; bike; 11], [4; bike; 9; 9], [bike; 9; 20], [bike; bike; bike; 17], [bike; 19; bike], [bike; 9; 9; 9; 9; 9; 9; 9], [9; 5; 5; bike; bike], [bike; 9], [9; bike; 98], [-1; bike; -1], [8; 19; 9; 9; bike], [90; bike; bike], [8; 8; 9; bike], [9; bike; bike], [bike; 9; bike], [bike; 90; 11], [5; bike; bike; 11; 9; 9], [bike; 98], [20; 5; bike; bike; bike], [19; bike; bike], [8; 19; bike], [9; 9;..."
+          }
+        ]
+      },
+      "runtimeInfos": {
+        "jobUrl": {
+          "propertyName": "jobUrl",
+          "label": "SPARK JOB",
+          "tooltip": "View in Spark web UI",
+          "group": "spark",
+          "values": [
+            "http://4790d6697e05:4040/jobs/job?id\u003d9"
+          ],
+          "interpreterSettingId": "spark"
+        }
+      },
+      "apps": [],
+      "jobName": "paragraph_1701359261528_1586255279",
+      "id": "20231130-154741_2137055015",
+      "dateCreated": "2023-11-30 15:47:41.528",
+      "dateStarted": "2023-12-10 00:05:51.119",
+      "dateFinished": "2023-12-10 00:05:54.930",
+      "status": "FINISHED",
+      "progressUpdateIntervalMs": 500
+    },
+    {
+      "text": "val uniqueValues \u003d cycling_safety_uk_gov.select(\"Bicycles\").distinct().collect()\nuniqueValues.foreach(println)",
+      "user": "anonymous",
+      "dateUpdated": "2023-12-10 00:05:53.670",
+      "config": {
+        "colWidth": 12.0,
+        "fontSize": 9.0,
+        "enabled": true,
+        "results": {},
+        "editorSetting": {
+          "language": "scala",
+          "editOnDblClick": false,
+          "completionKey": "TAB",
+          "completionSupport": true
+        },
+        "editorMode": "ace/mode/scala"
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "TEXT",
+            "data": "[1]\nuniqueValues: Array[org.apache.spark.sql.Row] \u003d Array([1])\n"
+          }
+        ]
+      },
+      "runtimeInfos": {
+        "jobUrl": {
+          "propertyName": "jobUrl",
+          "label": "SPARK JOB",
+          "tooltip": "View in Spark web UI",
+          "group": "spark",
+          "values": [
+            "http://4790d6697e05:4040/jobs/job?id\u003d10"
+          ],
+          "interpreterSettingId": "spark"
+        }
+      },
+      "apps": [],
+      "jobName": "paragraph_1701359583869_1829285472",
+      "id": "20231130-155303_767693129",
+      "dateCreated": "2023-11-30 15:53:03.869",
+      "dateStarted": "2023-12-10 00:05:53.894",
+      "dateFinished": "2023-12-10 00:05:57.050",
+      "status": "FINISHED",
+      "progressUpdateIntervalMs": 500
+    },
+    {
+      "text": "val uniqueValues \u003d cycling_safety_uk_gov.select(\"fatal\").distinct().collect()\nuniqueValues.foreach(println)",
+      "user": "anonymous",
+      "dateUpdated": "2023-12-10 00:05:55.678",
+      "config": {
+        "colWidth": 12.0,
+        "fontSize": 9.0,
+        "enabled": true,
+        "results": {},
+        "editorSetting": {
+          "language": "scala",
+          "editOnDblClick": false,
+          "completionKey": "TAB",
+          "completionSupport": true
+        },
+        "editorMode": "ace/mode/scala"
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "TEXT",
+            "data": "[1]\n[0]\nuniqueValues: Array[org.apache.spark.sql.Row] \u003d Array([1], [0])\n"
+          }
+        ]
+      },
+      "runtimeInfos": {
+        "jobUrl": {
+          "propertyName": "jobUrl",
+          "label": "SPARK JOB",
+          "tooltip": "View in Spark web UI",
+          "group": "spark",
+          "values": [
+            "http://4790d6697e05:4040/jobs/job?id\u003d11"
+          ],
+          "interpreterSettingId": "spark"
+        }
+      },
+      "apps": [],
+      "jobName": "paragraph_1701359626637_1403616933",
+      "id": "20231130-155346_531410520",
+      "dateCreated": "2023-11-30 15:53:46.637",
+      "dateStarted": "2023-12-10 00:05:55.784",
+      "dateFinished": "2023-12-10 00:05:58.498",
+      "status": "FINISHED",
+      "progressUpdateIntervalMs": 500
+    },
+    {
+      "text": "val modified_cycling_safety_uk_gov \u003d cycling_safety_uk_gov.drop(\"id\", \"Accident_Index\", \"Location_Easting_OSGR\", \"Location_Northing_OSGR\", \"serious\", \"slight\", \"index_right\", \"2nd_Road_Number\",\n\"1st_Road_Number\", \"Local_Authority_(District)\", \"Local_Authority_(Highway)\", \"1st_Road_Class\", \"Road_Type\", \"Accident_Severity\", \"Junction_Detail\", \"Junction_Control\", \"2nd_Road_Class\", \"LSOA_of_Accident_Location\",\"Special_Conditions_at_Site\", \"Pedestrian_Crossing-Human_Control\", \"Pedestrian_Crossing-Physical_Facilities\", \"Vehicle_Type\", \"Bicycles\", \"Carriageway_Hazards\", \"Police_Force\", \"Light_Conditions\", \"Weather_Conditions\", \"Road_Surface_Conditions\")",
+      "user": "anonymous",
+      "dateUpdated": "2023-12-10 00:07:22.094",
+      "config": {
+        "colWidth": 12.0,
+        "fontSize": 9.0,
+        "enabled": true,
+        "results": {},
+        "editorSetting": {
+          "language": "scala",
+          "editOnDblClick": false,
+          "completionKey": "TAB",
+          "completionSupport": true
+        },
+        "editorMode": "ace/mode/scala"
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "TEXT",
+            "data": "modified_cycling_safety_uk_gov: org.apache.spark.sql.DataFrame \u003d [Longitude: double, Latitude: double ... 10 more fields]\n"
+          }
+        ]
+      },
+      "apps": [],
+      "jobName": "paragraph_1701357974819_-1635445124",
+      "id": "20231130-152614_600985044",
+      "dateCreated": "2023-11-30 15:26:14.819",
+      "dateStarted": "2023-12-10 00:07:22.139",
+      "dateFinished": "2023-12-10 00:07:22.537",
+      "status": "FINISHED",
+      "progressUpdateIntervalMs": 500
+    },
+    {
+      "text": "modified_cycling_safety_uk_gov.show()",
+      "user": "anonymous",
+      "dateUpdated": "2023-12-10 00:07:24.505",
+      "config": {
+        "colWidth": 12.0,
+        "fontSize": 9.0,
+        "enabled": true,
+        "results": {},
+        "editorSetting": {
+          "language": "scala",
+          "editOnDblClick": false,
+          "completionKey": "TAB",
+          "completionSupport": true
+        },
+        "editorMode": "ace/mode/scala"
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "TEXT",
+            "data": "+---------+---------+------------------+--------------------+-------------------+-----------+-----+-----------+-------------------+-------------------------------------------+-----+--------------------+\n|Longitude| Latitude|Number_of_Vehicles|Number_of_Casualties|               Date|Day_of_Week| Time|Speed_limit|Urban_or_Rural_Area|Did_Police_Officer_Attend_Scene_of_Accident|fatal|            geometry|\n+---------+---------+------------------+--------------------+-------------------+-----------+-----+-----------+-------------------+-------------------------------------------+-----+--------------------+\n|-0.204346|51.513039|                 2|                   1|2005-01-24 00:00:00|          2|17:05|       30.0|                  1|                                          2|    0|POINT (-0.204346 ...|\n|-0.207623|51.513988|                 2|                   1|2005-01-30 00:00:00|          1|20:00|       30.0|                  1|                                          1|    0|POINT (-0.207623 ...|\n|-0.201543|51.521988|                 2|                   1|2005-03-02 00:00:00|          5|12:30|       30.0|                  1|                                          2|    0|POINT (-0.201543 ...|\n|-0.189301|51.478096|                 2|                   1|2005-03-02 00:00:00|          5|17:30|       30.0|                  1|                                          1|    0|POINT (-0.189301 ...|\n|-0.173312|51.481804|                 2|                   1|2005-06-02 00:00:00|          1|15:00|       30.0|                  1|                                          1|    0|POINT (-0.173312 ...|\n|-0.171599|51.495806|                 2|                   1|2005-10-02 00:00:00|          5|18:10|       30.0|                  1|                                          1|    0|POINT (-0.171599 ...|\n|-0.197423|51.509515|                 2|                   1|2005-02-17 00:00:00|          5|18:00|       30.0|                  1|                                          2|    0|POINT (-0.197423 ...|\n|-0.181674|51.481575|                 2|                   1|2005-02-16 00:00:00|          4|10:35|       30.0|                  1|                                          1|    0|POINT (-0.181674 ...|\n|-0.211037|51.518806|                 2|                   1|2005-02-16 00:00:00|          4|14:10|       30.0|                  1|                                          1|    0|POINT (-0.211037 ...|\n|-0.202208|51.494121|                 2|                   1|2005-02-20 00:00:00|          1|12:40|       30.0|                  1|                                          1|    0|POINT (-0.202208 ...|\n|-0.195421|51.509125|                 3|                   1|2005-02-23 00:00:00|          4|19:00|       30.0|                  1|                                          1|    0|POINT (-0.195421 ...|\n|-0.162461|51.490178|                 2|                   1|2005-02-25 00:00:00|          6|08:22|       30.0|                  1|                                          1|    0|POINT (-0.162461 ...|\n|-0.169101|51.493429|                 2|                   1|2005-01-03 00:00:00|          3|00:30|       30.0|                  1|                                          1|    0|POINT (-0.169101 ...|\n|-0.179894|51.486493|                 2|                   1|2005-03-03 00:00:00|          5|14:30|       30.0|                  1|                                          1|    0|POINT (-0.179894 ...|\n|-0.206734|51.496259|                 2|                   1|2005-01-03 00:00:00|          3|18:31|       30.0|                  1|                                          1|    0|POINT (-0.206734 ...|\n|-0.200102|51.510995|                 2|                   1|2005-05-03 00:00:00|          7|18:40|       30.0|                  1|                                          1|    0|POINT (-0.200102 ...|\n|-0.194258|51.509377|                 2|                   1|2005-06-03 00:00:00|          1|01:05|       30.0|                  1|                                          1|    0|POINT (-0.194258 ...|\n|-0.214123|51.502577|                 2|                   1|2005-08-03 00:00:00|          3|08:56|       30.0|                  1|                                          1|    0|POINT (-0.214123 ...|\n|-0.209404|51.516353|                 2|                   1|2005-03-13 00:00:00|          1|00:15|       30.0|                  1|                                          3|    0|POINT (-0.209404 ...|\n|-0.213006|51.505347|                 2|                   1|2005-09-03 00:00:00|          4|09:13|       30.0|                  1|                                          1|    0|POINT (-0.213006 ...|\n+---------+---------+------------------+--------------------+-------------------+-----------+-----+-----------+-------------------+-------------------------------------------+-----+--------------------+\nonly showing top 20 rows\n\n"
+          }
+        ]
+      },
+      "runtimeInfos": {
+        "jobUrl": {
+          "propertyName": "jobUrl",
+          "label": "SPARK JOB",
+          "tooltip": "View in Spark web UI",
+          "group": "spark",
+          "values": [
+            "http://4790d6697e05:4040/jobs/job?id\u003d12"
+          ],
+          "interpreterSettingId": "spark"
+        }
+      },
+      "apps": [],
+      "jobName": "paragraph_1701358637849_958608284",
+      "id": "20231130-153717_780739945",
+      "dateCreated": "2023-11-30 15:37:17.849",
+      "dateStarted": "2023-12-10 00:07:24.551",
+      "dateFinished": "2023-12-10 00:07:25.040",
+      "status": "FINISHED",
+      "progressUpdateIntervalMs": 500
+    },
+    {
+      "text": "modified_cycling_safety_uk_gov.columns.length",
+      "user": "anonymous",
+      "dateUpdated": "2023-12-10 00:07:53.820",
+      "config": {
+        "colWidth": 12.0,
+        "fontSize": 9.0,
+        "enabled": true,
+        "results": {},
+        "editorSetting": {
+          "language": "scala",
+          "editOnDblClick": false,
+          "completionKey": "TAB",
+          "completionSupport": true
+        },
+        "editorMode": "ace/mode/scala"
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "TEXT",
+            "data": "res9: Int \u003d 12\n"
+          }
+        ]
+      },
+      "apps": [],
+      "jobName": "paragraph_1701358757663_1563845192",
+      "id": "20231130-153917_2067173461",
+      "dateCreated": "2023-11-30 15:39:17.663",
+      "dateStarted": "2023-12-10 00:07:53.864",
+      "dateFinished": "2023-12-10 00:07:54.118",
+      "status": "FINISHED",
+      "progressUpdateIntervalMs": 500
+    },
+    {
+      "text": "val maxVal \u003d london_weather.agg(max(\"date\")).head().get(0)\r\nval minVal \u003d london_weather.agg(min(\"date\")).head().get(0)",
+      "user": "anonymous",
+      "dateUpdated": "2023-12-10 00:07:56.523",
+      "config": {
+        "colWidth": 12.0,
+        "fontSize": 9.0,
+        "enabled": true,
+        "results": {},
+        "editorSetting": {
+          "language": "scala",
+          "editOnDblClick": false,
+          "completionKey": "TAB",
+          "completionSupport": true
+        },
+        "editorMode": "ace/mode/scala"
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "TEXT",
+            "data": "maxVal: Any \u003d 20201231\nminVal: Any \u003d 19790101\n"
+          }
+        ]
+      },
+      "runtimeInfos": {
+        "jobUrl": {
+          "propertyName": "jobUrl",
+          "label": "SPARK JOB",
+          "tooltip": "View in Spark web UI",
+          "group": "spark",
+          "values": [
+            "http://4790d6697e05:4040/jobs/job?id\u003d13",
+            "http://4790d6697e05:4040/jobs/job?id\u003d14"
+          ],
+          "interpreterSettingId": "spark"
+        }
+      },
+      "apps": [],
+      "jobName": "paragraph_1701359755866_-1666430859",
+      "id": "20231130-155555_457577429",
+      "dateCreated": "2023-11-30 15:55:55.866",
+      "dateStarted": "2023-12-10 00:07:56.563",
+      "dateFinished": "2023-12-10 00:07:57.389",
+      "status": "FINISHED",
+      "progressUpdateIntervalMs": 500
+    },
+    {
+      "text": "val maxVal \u003d london_bike_sharing.agg(max(\"timestamp\")).head().get(0)\r\nval minVal \u003d london_bike_sharing.agg(min(\"timestamp\")).head().get(0)",
+      "user": "anonymous",
+      "dateUpdated": "2023-12-10 00:07:58.959",
+      "config": {
+        "colWidth": 12.0,
+        "fontSize": 9.0,
+        "enabled": true,
+        "results": {},
+        "editorSetting": {
+          "language": "scala",
+          "editOnDblClick": false,
+          "completionKey": "TAB",
+          "completionSupport": true
+        },
+        "editorMode": "ace/mode/scala"
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "TEXT",
+            "data": "maxVal: Any \u003d 2017-01-03 23:00:00.0\nminVal: Any \u003d 2015-01-04 00:00:00.0\n"
+          }
+        ]
+      },
+      "runtimeInfos": {
+        "jobUrl": {
+          "propertyName": "jobUrl",
+          "label": "SPARK JOB",
+          "tooltip": "View in Spark web UI",
+          "group": "spark",
+          "values": [
+            "http://4790d6697e05:4040/jobs/job?id\u003d15",
+            "http://4790d6697e05:4040/jobs/job?id\u003d16"
+          ],
+          "interpreterSettingId": "spark"
+        }
+      },
+      "apps": [],
+      "jobName": "paragraph_1701360538970_557681369",
+      "id": "20231130-160858_265449013",
+      "dateCreated": "2023-11-30 16:08:58.970",
+      "dateStarted": "2023-12-10 00:07:59.011",
+      "dateFinished": "2023-12-10 00:08:00.202",
+      "status": "FINISHED",
+      "progressUpdateIntervalMs": 500
+    },
+    {
+      "text": "val maxVal \u003d modified_cycling_safety_uk_gov.agg(max(\"Date\")).head().get(0)\nval minVal \u003d modified_cycling_safety_uk_gov.agg(min(\"Date\")).head().get(0)",
+      "user": "anonymous",
+      "dateUpdated": "2023-12-10 00:08:02.059",
+      "config": {
+        "colWidth": 12.0,
+        "fontSize": 9.0,
+        "enabled": true,
+        "results": {},
+        "editorSetting": {
+          "language": "scala",
+          "editOnDblClick": false,
+          "completionKey": "TAB",
+          "completionSupport": true
+        },
+        "editorMode": "ace/mode/scala"
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "TEXT",
+            "data": "maxVal: Any \u003d 2018-12-31 00:00:00.0\nminVal: Any \u003d 2005-01-01 00:00:00.0\n"
+          }
+        ]
+      },
+      "runtimeInfos": {
+        "jobUrl": {
+          "propertyName": "jobUrl",
+          "label": "SPARK JOB",
+          "tooltip": "View in Spark web UI",
+          "group": "spark",
+          "values": [
+            "http://4790d6697e05:4040/jobs/job?id\u003d17",
+            "http://4790d6697e05:4040/jobs/job?id\u003d18"
+          ],
+          "interpreterSettingId": "spark"
+        }
+      },
+      "apps": [],
+      "jobName": "paragraph_1701360618261_-1654102365",
+      "id": "20231130-161018_1057544219",
+      "dateCreated": "2023-11-30 16:10:18.261",
+      "dateStarted": "2023-12-10 00:08:02.099",
+      "dateFinished": "2023-12-10 00:08:04.188",
+      "status": "FINISHED",
+      "progressUpdateIntervalMs": 500
+    },
+    {
+      "text": "val formattedDF \u003d modified_cycling_safety_uk_gov.withColumn(\"time\", date_format(to_timestamp($\"Time\", \"HH:mm\"), \"HH:mm:ss\"))\r\nval final_cycling_safety_uk_gov \u003d formattedDF.withColumn(\"date\", date_format(to_timestamp($\"Date\", \"yyyy-MM-dd HH:mm:ss\"), \"yyyy-MM-dd\"))\r\n\r\nfinal_cycling_safety_uk_gov.show()",
+      "user": "anonymous",
+      "dateUpdated": "2023-12-10 00:08:06.625",
+      "config": {
+        "colWidth": 12.0,
+        "fontSize": 9.0,
+        "enabled": true,
+        "results": {},
+        "editorSetting": {
+          "language": "scala",
+          "editOnDblClick": false,
+          "completionKey": "TAB",
+          "completionSupport": true
+        },
+        "editorMode": "ace/mode/scala"
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "TEXT",
+            "data": "+---------+---------+------------------+--------------------+----------+-----------+--------+-----------+-------------------+-------------------------------------------+-----+--------------------+\n|Longitude| Latitude|Number_of_Vehicles|Number_of_Casualties|      date|Day_of_Week|    time|Speed_limit|Urban_or_Rural_Area|Did_Police_Officer_Attend_Scene_of_Accident|fatal|            geometry|\n+---------+---------+------------------+--------------------+----------+-----------+--------+-----------+-------------------+-------------------------------------------+-----+--------------------+\n|-0.204346|51.513039|                 2|                   1|2005-01-24|          2|17:05:00|       30.0|                  1|                                          2|    0|POINT (-0.204346 ...|\n|-0.207623|51.513988|                 2|                   1|2005-01-30|          1|20:00:00|       30.0|                  1|                                          1|    0|POINT (-0.207623 ...|\n|-0.201543|51.521988|                 2|                   1|2005-03-02|          5|12:30:00|       30.0|                  1|                                          2|    0|POINT (-0.201543 ...|\n|-0.189301|51.478096|                 2|                   1|2005-03-02|          5|17:30:00|       30.0|                  1|                                          1|    0|POINT (-0.189301 ...|\n|-0.173312|51.481804|                 2|                   1|2005-06-02|          1|15:00:00|       30.0|                  1|                                          1|    0|POINT (-0.173312 ...|\n|-0.171599|51.495806|                 2|                   1|2005-10-02|          5|18:10:00|       30.0|                  1|                                          1|    0|POINT (-0.171599 ...|\n|-0.197423|51.509515|                 2|                   1|2005-02-17|          5|18:00:00|       30.0|                  1|                                          2|    0|POINT (-0.197423 ...|\n|-0.181674|51.481575|                 2|                   1|2005-02-16|          4|10:35:00|       30.0|                  1|                                          1|    0|POINT (-0.181674 ...|\n|-0.211037|51.518806|                 2|                   1|2005-02-16|          4|14:10:00|       30.0|                  1|                                          1|    0|POINT (-0.211037 ...|\n|-0.202208|51.494121|                 2|                   1|2005-02-20|          1|12:40:00|       30.0|                  1|                                          1|    0|POINT (-0.202208 ...|\n|-0.195421|51.509125|                 3|                   1|2005-02-23|          4|19:00:00|       30.0|                  1|                                          1|    0|POINT (-0.195421 ...|\n|-0.162461|51.490178|                 2|                   1|2005-02-25|          6|08:22:00|       30.0|                  1|                                          1|    0|POINT (-0.162461 ...|\n|-0.169101|51.493429|                 2|                   1|2005-01-03|          3|00:30:00|       30.0|                  1|                                          1|    0|POINT (-0.169101 ...|\n|-0.179894|51.486493|                 2|                   1|2005-03-03|          5|14:30:00|       30.0|                  1|                                          1|    0|POINT (-0.179894 ...|\n|-0.206734|51.496259|                 2|                   1|2005-01-03|          3|18:31:00|       30.0|                  1|                                          1|    0|POINT (-0.206734 ...|\n|-0.200102|51.510995|                 2|                   1|2005-05-03|          7|18:40:00|       30.0|                  1|                                          1|    0|POINT (-0.200102 ...|\n|-0.194258|51.509377|                 2|                   1|2005-06-03|          1|01:05:00|       30.0|                  1|                                          1|    0|POINT (-0.194258 ...|\n|-0.214123|51.502577|                 2|                   1|2005-08-03|          3|08:56:00|       30.0|                  1|                                          1|    0|POINT (-0.214123 ...|\n|-0.209404|51.516353|                 2|                   1|2005-03-13|          1|00:15:00|       30.0|                  1|                                          3|    0|POINT (-0.209404 ...|\n|-0.213006|51.505347|                 2|                   1|2005-09-03|          4|09:13:00|       30.0|                  1|                                          1|    0|POINT (-0.213006 ...|\n+---------+---------+------------------+--------------------+----------+-----------+--------+-----------+-------------------+-------------------------------------------+-----+--------------------+\nonly showing top 20 rows\n\nformattedDF: org.apache.spark.sql.DataFrame \u003d [Longitude: double, Latitude: double ... 10 more fields]\nfinal_cycling_safety_uk_gov: org.apache.spark.sql.DataFrame \u003d [Longitude: double, Latitude: double ... 10 more fields]\n"
+          }
+        ]
+      },
+      "runtimeInfos": {
+        "jobUrl": {
+          "propertyName": "jobUrl",
+          "label": "SPARK JOB",
+          "tooltip": "View in Spark web UI",
+          "group": "spark",
+          "values": [
+            "http://4790d6697e05:4040/jobs/job?id\u003d19"
+          ],
+          "interpreterSettingId": "spark"
+        }
+      },
+      "apps": [],
+      "jobName": "paragraph_1701361917331_-328139699",
+      "id": "20231130-163157_879829491",
+      "dateCreated": "2023-11-30 16:31:57.331",
+      "dateStarted": "2023-12-10 00:08:06.665",
+      "dateFinished": "2023-12-10 00:08:07.245",
+      "status": "FINISHED",
+      "progressUpdateIntervalMs": 500
+    },
+    {
+      "text": "london_bike_sharing.show()",
+      "user": "anonymous",
+      "dateUpdated": "2023-12-10 00:08:09.373",
+      "config": {
+        "colWidth": 12.0,
+        "fontSize": 9.0,
+        "enabled": true,
+        "results": {},
+        "editorSetting": {
+          "language": "scala",
+          "editOnDblClick": false,
+          "completionKey": "TAB",
+          "completionSupport": true
+        },
+        "editorMode": "ace/mode/scala"
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "TEXT",
+            "data": "+-------------------+----+---+----+-----+----------+------------+----------+----------+------+\n|          timestamp| cnt| t1|  t2|  hum|wind_speed|weather_code|is_holiday|is_weekend|season|\n+-------------------+----+---+----+-----+----------+------------+----------+----------+------+\n|2015-01-04 00:00:00| 182|3.0| 2.0| 93.0|       6.0|         3.0|       0.0|       1.0|   3.0|\n|2015-01-04 01:00:00| 138|3.0| 2.5| 93.0|       5.0|         1.0|       0.0|       1.0|   3.0|\n|2015-01-04 02:00:00| 134|2.5| 2.5| 96.5|       0.0|         1.0|       0.0|       1.0|   3.0|\n|2015-01-04 03:00:00|  72|2.0| 2.0|100.0|       0.0|         1.0|       0.0|       1.0|   3.0|\n|2015-01-04 04:00:00|  47|2.0| 0.0| 93.0|       6.5|         1.0|       0.0|       1.0|   3.0|\n|2015-01-04 05:00:00|  46|2.0| 2.0| 93.0|       4.0|         1.0|       0.0|       1.0|   3.0|\n|2015-01-04 06:00:00|  51|1.0|-1.0|100.0|       7.0|         4.0|       0.0|       1.0|   3.0|\n|2015-01-04 07:00:00|  75|1.0|-1.0|100.0|       7.0|         4.0|       0.0|       1.0|   3.0|\n|2015-01-04 08:00:00| 131|1.5|-1.0| 96.5|       8.0|         4.0|       0.0|       1.0|   3.0|\n|2015-01-04 09:00:00| 301|2.0|-0.5|100.0|       9.0|         3.0|       0.0|       1.0|   3.0|\n|2015-01-04 10:00:00| 528|3.0|-0.5| 93.0|      12.0|         3.0|       0.0|       1.0|   3.0|\n|2015-01-04 11:00:00| 727|2.0|-1.5|100.0|      12.0|         3.0|       0.0|       1.0|   3.0|\n|2015-01-04 12:00:00| 862|2.0|-1.5| 96.5|      13.0|         4.0|       0.0|       1.0|   3.0|\n|2015-01-04 13:00:00| 916|3.0|-0.5| 87.0|      15.0|         3.0|       0.0|       1.0|   3.0|\n|2015-01-04 14:00:00|1039|2.5| 0.0| 90.0|       8.0|         3.0|       0.0|       1.0|   3.0|\n|2015-01-04 15:00:00| 869|2.0|-1.5| 93.0|      11.0|         3.0|       0.0|       1.0|   3.0|\n|2015-01-04 16:00:00| 737|3.0| 0.0| 93.0|      12.0|         3.0|       0.0|       1.0|   3.0|\n|2015-01-04 17:00:00| 594|3.0| 0.0| 93.0|      11.0|         3.0|       0.0|       1.0|   3.0|\n|2015-01-04 18:00:00| 522|3.0| 1.5| 93.0|       6.5|         3.0|       0.0|       1.0|   3.0|\n|2015-01-04 19:00:00| 379|3.0| 1.0| 93.0|       7.0|         3.0|       0.0|       1.0|   3.0|\n+-------------------+----+---+----+-----+----------+------------+----------+----------+------+\nonly showing top 20 rows\n\n"
+          }
+        ]
+      },
+      "runtimeInfos": {
+        "jobUrl": {
+          "propertyName": "jobUrl",
+          "label": "SPARK JOB",
+          "tooltip": "View in Spark web UI",
+          "group": "spark",
+          "values": [
+            "http://4790d6697e05:4040/jobs/job?id\u003d20"
+          ],
+          "interpreterSettingId": "spark"
+        }
+      },
+      "apps": [],
+      "jobName": "paragraph_1701362295258_250078218",
+      "id": "20231130-163815_593029900",
+      "dateCreated": "2023-11-30 16:38:15.259",
+      "dateStarted": "2023-12-10 00:08:09.410",
+      "dateFinished": "2023-12-10 00:08:09.718",
+      "status": "FINISHED",
+      "progressUpdateIntervalMs": 500
+    },
+    {
+      "text": "val formattedDF \u003d london_bike_sharing.withColumn(\"time_of_bike_sharing\", date_format(to_timestamp($\"timestamp\", \"HH:mm:ss\"), \"HH:mm:ss\"))\r\nval formattedDF2 \u003d formattedDF.withColumn(\"date\", date_format(to_timestamp($\"timestamp\", \"yyyy-MM-dd HH:mm:ss\"), \"yyyy-MM-dd\"))\r\nval final_london_bike_sharing \u003d formattedDF2.drop(\"timestamp\")\r\n\r\nfinal_london_bike_sharing.show()",
+      "user": "anonymous",
+      "dateUpdated": "2023-12-10 00:08:17.469",
+      "config": {
+        "colWidth": 12.0,
+        "fontSize": 9.0,
+        "enabled": true,
+        "results": {},
+        "editorSetting": {
+          "language": "scala",
+          "editOnDblClick": false,
+          "completionKey": "TAB",
+          "completionSupport": true
+        },
+        "editorMode": "ace/mode/scala"
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "TEXT",
+            "data": "+----+---+----+-----+----------+------------+----------+----------+------+--------------------+----------+\n| cnt| t1|  t2|  hum|wind_speed|weather_code|is_holiday|is_weekend|season|time_of_bike_sharing|      date|\n+----+---+----+-----+----------+------------+----------+----------+------+--------------------+----------+\n| 182|3.0| 2.0| 93.0|       6.0|         3.0|       0.0|       1.0|   3.0|            00:00:00|2015-01-04|\n| 138|3.0| 2.5| 93.0|       5.0|         1.0|       0.0|       1.0|   3.0|            01:00:00|2015-01-04|\n| 134|2.5| 2.5| 96.5|       0.0|         1.0|       0.0|       1.0|   3.0|            02:00:00|2015-01-04|\n|  72|2.0| 2.0|100.0|       0.0|         1.0|       0.0|       1.0|   3.0|            03:00:00|2015-01-04|\n|  47|2.0| 0.0| 93.0|       6.5|         1.0|       0.0|       1.0|   3.0|            04:00:00|2015-01-04|\n|  46|2.0| 2.0| 93.0|       4.0|         1.0|       0.0|       1.0|   3.0|            05:00:00|2015-01-04|\n|  51|1.0|-1.0|100.0|       7.0|         4.0|       0.0|       1.0|   3.0|            06:00:00|2015-01-04|\n|  75|1.0|-1.0|100.0|       7.0|         4.0|       0.0|       1.0|   3.0|            07:00:00|2015-01-04|\n| 131|1.5|-1.0| 96.5|       8.0|         4.0|       0.0|       1.0|   3.0|            08:00:00|2015-01-04|\n| 301|2.0|-0.5|100.0|       9.0|         3.0|       0.0|       1.0|   3.0|            09:00:00|2015-01-04|\n| 528|3.0|-0.5| 93.0|      12.0|         3.0|       0.0|       1.0|   3.0|            10:00:00|2015-01-04|\n| 727|2.0|-1.5|100.0|      12.0|         3.0|       0.0|       1.0|   3.0|            11:00:00|2015-01-04|\n| 862|2.0|-1.5| 96.5|      13.0|         4.0|       0.0|       1.0|   3.0|            12:00:00|2015-01-04|\n| 916|3.0|-0.5| 87.0|      15.0|         3.0|       0.0|       1.0|   3.0|            13:00:00|2015-01-04|\n|1039|2.5| 0.0| 90.0|       8.0|         3.0|       0.0|       1.0|   3.0|            14:00:00|2015-01-04|\n| 869|2.0|-1.5| 93.0|      11.0|         3.0|       0.0|       1.0|   3.0|            15:00:00|2015-01-04|\n| 737|3.0| 0.0| 93.0|      12.0|         3.0|       0.0|       1.0|   3.0|            16:00:00|2015-01-04|\n| 594|3.0| 0.0| 93.0|      11.0|         3.0|       0.0|       1.0|   3.0|            17:00:00|2015-01-04|\n| 522|3.0| 1.5| 93.0|       6.5|         3.0|       0.0|       1.0|   3.0|            18:00:00|2015-01-04|\n| 379|3.0| 1.0| 93.0|       7.0|         3.0|       0.0|       1.0|   3.0|            19:00:00|2015-01-04|\n+----+---+----+-----+----------+------------+----------+----------+------+--------------------+----------+\nonly showing top 20 rows\n\nformattedDF: org.apache.spark.sql.DataFrame \u003d [timestamp: timestamp, cnt: int ... 9 more fields]\nformattedDF2: org.apache.spark.sql.DataFrame \u003d [timestamp: timestamp, cnt: int ... 10 more fields]\nfinal_london_bike_sharing: org.apache.spark.sql.DataFrame \u003d [cnt: int, t1: double ... 9 more fields]\n"
+          }
+        ]
+      },
+      "runtimeInfos": {
+        "jobUrl": {
+          "propertyName": "jobUrl",
+          "label": "SPARK JOB",
+          "tooltip": "View in Spark web UI",
+          "group": "spark",
+          "values": [
+            "http://4790d6697e05:4040/jobs/job?id\u003d21"
+          ],
+          "interpreterSettingId": "spark"
+        }
+      },
+      "apps": [],
+      "jobName": "paragraph_1701375275631_316756070",
+      "id": "20231130-201435_1305480281",
+      "dateCreated": "2023-11-30 20:14:35.631",
+      "dateStarted": "2023-12-10 00:08:17.504",
+      "dateFinished": "2023-12-10 00:08:17.971",
+      "status": "FINISHED",
+      "progressUpdateIntervalMs": 500
+    },
+    {
+      "text": "london_weather.show()",
+      "user": "anonymous",
+      "dateUpdated": "2023-12-10 00:08:38.086",
+      "config": {
+        "colWidth": 12.0,
+        "fontSize": 9.0,
+        "enabled": true,
+        "results": {},
+        "editorSetting": {
+          "language": "scala",
+          "editOnDblClick": false,
+          "completionKey": "TAB",
+          "completionSupport": true
+        },
+        "editorMode": "ace/mode/scala"
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "TEXT",
+            "data": "+--------+-----------+--------+----------------+--------+---------+--------+-------------+--------+----------+\n|    date|cloud_cover|sunshine|global_radiation|max_temp|mean_temp|min_temp|precipitation|pressure|snow_depth|\n+--------+-----------+--------+----------------+--------+---------+--------+-------------+--------+----------+\n|19790101|        2.0|     7.0|            52.0|     2.3|     -4.1|    -7.5|          0.4|101900.0|       9.0|\n|19790102|        6.0|     1.7|            27.0|     1.6|     -2.6|    -7.5|          0.0|102530.0|       8.0|\n|19790103|        5.0|     0.0|            13.0|     1.3|     -2.8|    -7.2|          0.0|102050.0|       4.0|\n|19790104|        8.0|     0.0|            13.0|    -0.3|     -2.6|    -6.5|          0.0|100840.0|       2.0|\n|19790105|        6.0|     2.0|            29.0|     5.6|     -0.8|    -1.4|          0.0|102250.0|       1.0|\n|19790106|        5.0|     3.8|            39.0|     8.3|     -0.5|    -6.6|          0.7|102780.0|       1.0|\n|19790107|        8.0|     0.0|            13.0|     8.5|      1.5|    -5.3|          5.2|102520.0|       0.0|\n|19790108|        8.0|     0.1|            15.0|     5.8|      6.9|     5.3|          0.8|101870.0|       0.0|\n|19790109|        4.0|     5.8|            50.0|     5.2|      3.7|     1.6|          7.2|101170.0|       0.0|\n|19790110|        7.0|     1.9|            30.0|     4.9|      3.3|     1.4|          2.1| 98700.0|       0.0|\n|19790111|        1.0|     6.8|            55.0|     2.9|      2.6|     0.3|          2.3| 98960.0|       0.0|\n|19790112|        3.0|     6.4|            54.0|     2.0|      0.4|    -2.0|          0.0|100650.0|       1.0|\n|19790113|        1.0|     7.0|            57.0|     4.3|     -2.6|    -7.1|          0.0|102350.0|       1.0|\n|19790114|        7.0|     0.0|            14.0|     6.7|     -0.6|    -5.6|          0.8|102700.0|       1.0|\n|19790115|       null|     0.0|            15.0|     5.9|      3.8|     1.0|          0.1|102990.0|       0.0|\n|19790116|        8.0|     0.0|            15.0|     2.6|      5.0|     4.1|          3.9|103100.0|       0.0|\n|19790117|        8.0|     0.0|            15.0|     1.9|      2.1|     1.6|          2.5|102220.0|       0.0|\n|19790118|        8.0|     0.0|            15.0|     3.0|      0.8|    -0.2|          0.2|101860.0|       0.0|\n|19790119|        8.0|     0.0|            16.0|     7.2|      0.8|    -1.4|          5.2|100910.0|       0.0|\n|19790120|        7.0|     0.0|            16.0|     3.5|      3.1|    -1.0|          0.0|100920.0|       0.0|\n+--------+-----------+--------+----------------+--------+---------+--------+-------------+--------+----------+\nonly showing top 20 rows\n\n"
+          }
+        ]
+      },
+      "runtimeInfos": {
+        "jobUrl": {
+          "propertyName": "jobUrl",
+          "label": "SPARK JOB",
+          "tooltip": "View in Spark web UI",
+          "group": "spark",
+          "values": [
+            "http://4790d6697e05:4040/jobs/job?id\u003d22"
+          ],
+          "interpreterSettingId": "spark"
+        }
+      },
+      "apps": [],
+      "jobName": "paragraph_1701362451947_1608733682",
+      "id": "20231130-164051_1152249253",
+      "dateCreated": "2023-11-30 16:40:51.947",
+      "dateStarted": "2023-12-10 00:08:38.124",
+      "dateFinished": "2023-12-10 00:08:38.401",
+      "status": "FINISHED",
+      "progressUpdateIntervalMs": 500
+    },
+    {
+      "text": "val formattedDF3 \u003d london_weather.withColumn(\"date\", to_date(col(\"date\").cast(\"string\"), \"yyyyMMdd\"))\r\n\r\nformattedDF3.show()",
+      "user": "anonymous",
+      "dateUpdated": "2023-12-10 00:08:40.380",
+      "config": {
+        "colWidth": 12.0,
+        "fontSize": 9.0,
+        "enabled": true,
+        "results": {},
+        "editorSetting": {
+          "language": "scala",
+          "editOnDblClick": false,
+          "completionKey": "TAB",
+          "completionSupport": true
+        },
+        "editorMode": "ace/mode/scala"
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "TEXT",
+            "data": "+----------+-----------+--------+----------------+--------+---------+--------+-------------+--------+----------+\n|      date|cloud_cover|sunshine|global_radiation|max_temp|mean_temp|min_temp|precipitation|pressure|snow_depth|\n+----------+-----------+--------+----------------+--------+---------+--------+-------------+--------+----------+\n|1979-01-01|        2.0|     7.0|            52.0|     2.3|     -4.1|    -7.5|          0.4|101900.0|       9.0|\n|1979-01-02|        6.0|     1.7|            27.0|     1.6|     -2.6|    -7.5|          0.0|102530.0|       8.0|\n|1979-01-03|        5.0|     0.0|            13.0|     1.3|     -2.8|    -7.2|          0.0|102050.0|       4.0|\n|1979-01-04|        8.0|     0.0|            13.0|    -0.3|     -2.6|    -6.5|          0.0|100840.0|       2.0|\n|1979-01-05|        6.0|     2.0|            29.0|     5.6|     -0.8|    -1.4|          0.0|102250.0|       1.0|\n|1979-01-06|        5.0|     3.8|            39.0|     8.3|     -0.5|    -6.6|          0.7|102780.0|       1.0|\n|1979-01-07|        8.0|     0.0|            13.0|     8.5|      1.5|    -5.3|          5.2|102520.0|       0.0|\n|1979-01-08|        8.0|     0.1|            15.0|     5.8|      6.9|     5.3|          0.8|101870.0|       0.0|\n|1979-01-09|        4.0|     5.8|            50.0|     5.2|      3.7|     1.6|          7.2|101170.0|       0.0|\n|1979-01-10|        7.0|     1.9|            30.0|     4.9|      3.3|     1.4|          2.1| 98700.0|       0.0|\n|1979-01-11|        1.0|     6.8|            55.0|     2.9|      2.6|     0.3|          2.3| 98960.0|       0.0|\n|1979-01-12|        3.0|     6.4|            54.0|     2.0|      0.4|    -2.0|          0.0|100650.0|       1.0|\n|1979-01-13|        1.0|     7.0|            57.0|     4.3|     -2.6|    -7.1|          0.0|102350.0|       1.0|\n|1979-01-14|        7.0|     0.0|            14.0|     6.7|     -0.6|    -5.6|          0.8|102700.0|       1.0|\n|1979-01-15|       null|     0.0|            15.0|     5.9|      3.8|     1.0|          0.1|102990.0|       0.0|\n|1979-01-16|        8.0|     0.0|            15.0|     2.6|      5.0|     4.1|          3.9|103100.0|       0.0|\n|1979-01-17|        8.0|     0.0|            15.0|     1.9|      2.1|     1.6|          2.5|102220.0|       0.0|\n|1979-01-18|        8.0|     0.0|            15.0|     3.0|      0.8|    -0.2|          0.2|101860.0|       0.0|\n|1979-01-19|        8.0|     0.0|            16.0|     7.2|      0.8|    -1.4|          5.2|100910.0|       0.0|\n|1979-01-20|        7.0|     0.0|            16.0|     3.5|      3.1|    -1.0|          0.0|100920.0|       0.0|\n+----------+-----------+--------+----------------+--------+---------+--------+-------------+--------+----------+\nonly showing top 20 rows\n\nformattedDF3: org.apache.spark.sql.DataFrame \u003d [date: date, cloud_cover: double ... 8 more fields]\n"
+          }
+        ]
+      },
+      "runtimeInfos": {
+        "jobUrl": {
+          "propertyName": "jobUrl",
+          "label": "SPARK JOB",
+          "tooltip": "View in Spark web UI",
+          "group": "spark",
+          "values": [
+            "http://4790d6697e05:4040/jobs/job?id\u003d23"
+          ],
+          "interpreterSettingId": "spark"
+        }
+      },
+      "apps": [],
+      "jobName": "paragraph_1701362482731_-938803232",
+      "id": "20231130-164122_2083983688",
+      "dateCreated": "2023-11-30 16:41:22.731",
+      "dateStarted": "2023-12-10 00:08:40.411",
+      "dateFinished": "2023-12-10 00:08:40.913",
+      "status": "FINISHED",
+      "progressUpdateIntervalMs": 500
+    },
+    {
+      "text": "val london_weather_final \u003d formattedDF3.filter(($\"date\" \u003e\u003d \"2015-01-04\") \u0026\u0026 ($\"date\" \u003c\u003d \"2017-01-03\"))\nlondon_weather_final.count()",
+      "user": "anonymous",
+      "dateUpdated": "2023-12-10 00:08:57.660",
+      "config": {
+        "colWidth": 12.0,
+        "fontSize": 9.0,
+        "enabled": true,
+        "results": {},
+        "editorSetting": {
+          "language": "scala",
+          "editOnDblClick": false,
+          "completionKey": "TAB",
+          "completionSupport": true
+        },
+        "editorMode": "ace/mode/scala"
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "TEXT",
+            "data": "london_weather_final: org.apache.spark.sql.Dataset[org.apache.spark.sql.Row] \u003d [date: date, cloud_cover: double ... 8 more fields]\nres15: Long \u003d 731\n"
+          }
+        ]
+      },
+      "runtimeInfos": {
+        "jobUrl": {
+          "propertyName": "jobUrl",
+          "label": "SPARK JOB",
+          "tooltip": "View in Spark web UI",
+          "group": "spark",
+          "values": [
+            "http://4790d6697e05:4040/jobs/job?id\u003d24"
+          ],
+          "interpreterSettingId": "spark"
+        }
+      },
+      "apps": [],
+      "jobName": "paragraph_1701376063430_-874882095",
+      "id": "20231130-202743_2136472376",
+      "dateCreated": "2023-11-30 20:27:43.430",
+      "dateStarted": "2023-12-10 00:08:57.691",
+      "dateFinished": "2023-12-10 00:08:58.479",
+      "status": "FINISHED",
+      "progressUpdateIntervalMs": 500
+    },
+    {
+      "text": "val cycling_safety_uk_gov_final \u003d final_cycling_safety_uk_gov.filter(($\"date\" \u003e\u003d \"2015-01-04\") \u0026\u0026 ($\"date\" \u003c\u003d \"2017-01-03\"))\ncycling_safety_uk_gov_final.count()",
+      "user": "anonymous",
+      "dateUpdated": "2023-12-10 00:09:00.299",
+      "config": {
+        "colWidth": 12.0,
+        "fontSize": 9.0,
+        "enabled": true,
+        "results": {},
+        "editorSetting": {
+          "language": "scala",
+          "editOnDblClick": false,
+          "completionKey": "TAB",
+          "completionSupport": true
+        },
+        "editorMode": "ace/mode/scala"
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "TEXT",
+            "data": "cycling_safety_uk_gov_final: org.apache.spark.sql.Dataset[org.apache.spark.sql.Row] \u003d [Longitude: double, Latitude: double ... 10 more fields]\nres16: Long \u003d 35686\n"
+          }
+        ]
+      },
+      "runtimeInfos": {
+        "jobUrl": {
+          "propertyName": "jobUrl",
+          "label": "SPARK JOB",
+          "tooltip": "View in Spark web UI",
+          "group": "spark",
+          "values": [
+            "http://4790d6697e05:4040/jobs/job?id\u003d25"
+          ],
+          "interpreterSettingId": "spark"
+        }
+      },
+      "apps": [],
+      "jobName": "paragraph_1701376790190_-1543336864",
+      "id": "20231130-203950_93845809",
+      "dateCreated": "2023-11-30 20:39:50.191",
+      "dateStarted": "2023-12-10 00:09:00.334",
+      "dateFinished": "2023-12-10 00:09:02.001",
+      "status": "FINISHED",
+      "progressUpdateIntervalMs": 500
+    },
+    {
+      "text": "val london_bike_sharing_final \u003d final_london_bike_sharing.filter(($\"date\" \u003e\u003d \"2015-01-04\") \u0026\u0026 ($\"date\" \u003c\u003d \"2017-01-03\"))\nlondon_bike_sharing_final.count()",
+      "user": "anonymous",
+      "dateUpdated": "2023-12-10 00:09:03.034",
+      "config": {
+        "colWidth": 12.0,
+        "fontSize": 9.0,
+        "enabled": true,
+        "results": {},
+        "editorSetting": {
+          "language": "scala",
+          "editOnDblClick": false,
+          "completionKey": "TAB",
+          "completionSupport": true
+        },
+        "editorMode": "ace/mode/scala"
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "TEXT",
+            "data": "london_bike_sharing_final: org.apache.spark.sql.Dataset[org.apache.spark.sql.Row] \u003d [cnt: int, t1: double ... 9 more fields]\nres17: Long \u003d 17414\n"
+          }
+        ]
+      },
+      "runtimeInfos": {
+        "jobUrl": {
+          "propertyName": "jobUrl",
+          "label": "SPARK JOB",
+          "tooltip": "View in Spark web UI",
+          "group": "spark",
+          "values": [
+            "http://4790d6697e05:4040/jobs/job?id\u003d26"
+          ],
+          "interpreterSettingId": "spark"
+        }
+      },
+      "apps": [],
+      "jobName": "paragraph_1701376998186_66254418",
+      "id": "20231130-204318_1936378549",
+      "dateCreated": "2023-11-30 20:43:18.186",
+      "dateStarted": "2023-12-10 00:09:03.071",
+      "dateFinished": "2023-12-10 00:09:03.650",
+      "status": "FINISHED",
+      "progressUpdateIntervalMs": 500
+    },
+    {
+      "text": "val nullCount \u003d london_weather_final.select(london_weather_final.columns.map(c \u003d\u003e sum(when(col(c).isNull, 1).otherwise(0)).alias(c)): _*).show()\n\nval meanValue1 \u003d london_weather_final.select(mean(\"global_radiation\")).first()(0).asInstanceOf[Double]\nval meanValue2 \u003d london_weather_final.select(mean(\"snow_depth\")).first()(0).asInstanceOf[Double]\n\n// Заполним null значения средним значением\nval no_null_london_weather_final \u003d london_weather_final.na.fill(meanValue1, Seq(\"global_radiation\"))\nval no_null_london_weather_final2 \u003d no_null_london_weather_final.na.fill(meanValue2, Seq(\"snow_depth\"))\n\nval nullCount2 \u003d no_null_london_weather_final2.select(london_weather_final.columns.map(c \u003d\u003e sum(when(col(c).isNull, 1).otherwise(0)).alias(c)): _*).show()",
+      "user": "anonymous",
+      "dateUpdated": "2023-12-10 00:09:07.881",
+      "config": {
+        "colWidth": 12.0,
+        "fontSize": 9.0,
+        "enabled": true,
+        "results": {},
+        "editorSetting": {
+          "language": "scala",
+          "editOnDblClick": false,
+          "completionKey": "TAB",
+          "completionSupport": true
+        },
+        "editorMode": "ace/mode/scala"
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "TEXT",
+            "data": "+----+-----------+--------+----------------+--------+---------+--------+-------------+--------+----------+\n|date|cloud_cover|sunshine|global_radiation|max_temp|mean_temp|min_temp|precipitation|pressure|snow_depth|\n+----+-----------+--------+----------------+--------+---------+--------+-------------+--------+----------+\n|   0|          0|       0|               1|       0|        0|       0|            0|       0|         2|\n+----+-----------+--------+----------------+--------+---------+--------+-------------+--------+----------+\n\n+----+-----------+--------+----------------+--------+---------+--------+-------------+--------+----------+\n|date|cloud_cover|sunshine|global_radiation|max_temp|mean_temp|min_temp|precipitation|pressure|snow_depth|\n+----+-----------+--------+----------------+--------+---------+--------+-------------+--------+----------+\n|   0|          0|       0|               0|       0|        0|       0|            0|       0|         0|\n+----+-----------+--------+----------------+--------+---------+--------+-------------+--------+----------+\n\nnullCount: Unit \u003d ()\nmeanValue1: Double \u003d 114.51506849315068\nmeanValue2: Double \u003d 0.0\nno_null_london_weather_final: org.apache.spark.sql.DataFrame \u003d [date: date, cloud_cover: double ... 8 more fields]\nno_null_london_weather_final2: org.apache.spark.sql.DataFrame \u003d [date: date, cloud_cover: double ... 8 more fields]\nnullCount2: Unit \u003d ()\n"
+          }
+        ]
+      },
+      "runtimeInfos": {
+        "jobUrl": {
+          "propertyName": "jobUrl",
+          "label": "SPARK JOB",
+          "tooltip": "View in Spark web UI",
+          "group": "spark",
+          "values": [
+            "http://4790d6697e05:4040/jobs/job?id\u003d27",
+            "http://4790d6697e05:4040/jobs/job?id\u003d28",
+            "http://4790d6697e05:4040/jobs/job?id\u003d29",
+            "http://4790d6697e05:4040/jobs/job?id\u003d30"
+          ],
+          "interpreterSettingId": "spark"
+        }
+      },
+      "apps": [],
+      "jobName": "paragraph_1701377268689_-1749140236",
+      "id": "20231130-204748_171196860",
+      "dateCreated": "2023-11-30 20:47:48.689",
+      "dateStarted": "2023-12-10 00:09:07.923",
+      "dateFinished": "2023-12-10 00:09:10.405",
+      "status": "FINISHED",
+      "progressUpdateIntervalMs": 500
+    },
+    {
+      "text": "val nullCount \u003d london_bike_sharing_final.select(london_bike_sharing_final.columns.map(c \u003d\u003e sum(when(col(c).isNull, 1).otherwise(0)).alias(c)): _*).show()",
+      "user": "anonymous",
+      "dateUpdated": "2023-12-10 00:09:11.987",
+      "config": {
+        "colWidth": 12.0,
+        "fontSize": 9.0,
+        "enabled": true,
+        "results": {},
+        "editorSetting": {
+          "language": "scala",
+          "editOnDblClick": false,
+          "completionKey": "TAB",
+          "completionSupport": true
+        },
+        "editorMode": "ace/mode/scala"
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "TEXT",
+            "data": "+---+---+---+---+----------+------------+----------+----------+------+--------------------+----+\n|cnt| t1| t2|hum|wind_speed|weather_code|is_holiday|is_weekend|season|time_of_bike_sharing|date|\n+---+---+---+---+----------+------------+----------+----------+------+--------------------+----+\n|  0|  0|  0|  0|         0|           0|         0|         0|     0|                   0|   0|\n+---+---+---+---+----------+------------+----------+----------+------+--------------------+----+\n\nnullCount: Unit \u003d ()\n"
+          }
+        ]
+      },
+      "runtimeInfos": {
+        "jobUrl": {
+          "propertyName": "jobUrl",
+          "label": "SPARK JOB",
+          "tooltip": "View in Spark web UI",
+          "group": "spark",
+          "values": [
+            "http://4790d6697e05:4040/jobs/job?id\u003d31"
+          ],
+          "interpreterSettingId": "spark"
+        }
+      },
+      "apps": [],
+      "jobName": "paragraph_1701377518624_1205480482",
+      "id": "20231130-205158_1437649727",
+      "dateCreated": "2023-11-30 20:51:58.624",
+      "dateStarted": "2023-12-10 00:09:12.026",
+      "dateFinished": "2023-12-10 00:09:13.053",
+      "status": "FINISHED",
+      "progressUpdateIntervalMs": 500
+    },
+    {
+      "text": "val nullCount \u003d cycling_safety_uk_gov_final.select(cycling_safety_uk_gov_final.columns.map(c \u003d\u003e sum(when(col(c).isNull, 1).otherwise(0)).alias(c)): _*).show()\nval no_null_cycling_safety_uk_gov_final \u003d cycling_safety_uk_gov_final.na.drop()\nval nullCount2 \u003d no_null_cycling_safety_uk_gov_final.select(cycling_safety_uk_gov_final.columns.map(c \u003d\u003e sum(when(col(c).isNull, 1).otherwise(0)).alias(c)): _*).show()",
+      "user": "anonymous",
+      "dateUpdated": "2023-12-10 00:09:15.292",
+      "config": {
+        "colWidth": 12.0,
+        "fontSize": 9.0,
+        "enabled": true,
+        "results": {},
+        "editorSetting": {
+          "language": "scala",
+          "editOnDblClick": false,
+          "completionKey": "TAB",
+          "completionSupport": true
+        },
+        "editorMode": "ace/mode/scala"
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "TEXT",
+            "data": "+---------+--------+------------------+--------------------+----+-----------+----+-----------+-------------------+-------------------------------------------+-----+--------+\n|Longitude|Latitude|Number_of_Vehicles|Number_of_Casualties|date|Day_of_Week|time|Speed_limit|Urban_or_Rural_Area|Did_Police_Officer_Attend_Scene_of_Accident|fatal|geometry|\n+---------+--------+------------------+--------------------+----+-----------+----+-----------+-------------------+-------------------------------------------+-----+--------+\n|        0|       0|                 0|                   0|   0|          0|   4|          9|                  0|                                          0|    0|       0|\n+---------+--------+------------------+--------------------+----+-----------+----+-----------+-------------------+-------------------------------------------+-----+--------+\n\n+---------+--------+------------------+--------------------+----+-----------+----+-----------+-------------------+-------------------------------------------+-----+--------+\n|Longitude|Latitude|Number_of_Vehicles|Number_of_Casualties|date|Day_of_Week|time|Speed_limit|Urban_or_Rural_Area|Did_Police_Officer_Attend_Scene_of_Accident|fatal|geometry|\n+---------+--------+------------------+--------------------+----+-----------+----+-----------+-------------------+-------------------------------------------+-----+--------+\n|        0|       0|                 0|                   0|   0|          0|   0|          0|                  0|                                          0|    0|       0|\n+---------+--------+------------------+--------------------+----+-----------+----+-----------+-------------------+-------------------------------------------+-----+--------+\n\nnullCount: Unit \u003d ()\nno_null_cycling_safety_uk_gov_final: org.apache.spark.sql.DataFrame \u003d [Longitude: double, Latitude: double ... 10 more fields]\nnullCount2: Unit \u003d ()\n"
+          }
+        ]
+      },
+      "runtimeInfos": {
+        "jobUrl": {
+          "propertyName": "jobUrl",
+          "label": "SPARK JOB",
+          "tooltip": "View in Spark web UI",
+          "group": "spark",
+          "values": [
+            "http://4790d6697e05:4040/jobs/job?id\u003d32",
+            "http://4790d6697e05:4040/jobs/job?id\u003d33"
+          ],
+          "interpreterSettingId": "spark"
+        }
+      },
+      "apps": [],
+      "jobName": "paragraph_1701377534057_621822719",
+      "id": "20231130-205214_1025868271",
+      "dateCreated": "2023-11-30 20:52:14.057",
+      "dateStarted": "2023-12-10 00:09:15.329",
+      "dateFinished": "2023-12-10 00:09:19.021",
+      "status": "FINISHED",
+      "progressUpdateIntervalMs": 500
+    },
+    {
+      "text": "val final_dataset1 \u003d no_null_cycling_safety_uk_gov_final.join(london_bike_sharing_final, usingColumns \u003d Seq(\"date\"), joinType \u003d \"left\")\nfinal_dataset1.show()",
+      "user": "anonymous",
+      "dateUpdated": "2023-12-10 00:09:21.760",
+      "config": {
+        "colWidth": 12.0,
+        "fontSize": 9.0,
+        "enabled": true,
+        "results": {},
+        "editorSetting": {
+          "language": "scala",
+          "editOnDblClick": false,
+          "completionKey": "TAB",
+          "completionSupport": true
+        },
+        "editorMode": "ace/mode/scala"
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "TEXT",
+            "data": "+----------+---------+---------+------------------+--------------------+-----------+--------+-----------+-------------------+-------------------------------------------+-----+--------------------+----+----+----+----+----------+------------+----------+----------+------+--------------------+\n|      date|Longitude| Latitude|Number_of_Vehicles|Number_of_Casualties|Day_of_Week|    time|Speed_limit|Urban_or_Rural_Area|Did_Police_Officer_Attend_Scene_of_Accident|fatal|            geometry| cnt|  t1|  t2| hum|wind_speed|weather_code|is_holiday|is_weekend|season|time_of_bike_sharing|\n+----------+---------+---------+------------------+--------------------+-----------+--------+-----------+-------------------+-------------------------------------------+-----+--------------------+----+----+----+----+----------+------------+----------+----------+------+--------------------+\n|2015-09-01|-0.206022|51.496572|                 2|                   1|          6|07:30:00|       30.0|                  1|                                          2|    0|POINT (-0.206022 ...| 342|14.0|14.0|88.0|       6.5|         1.0|       0.0|       0.0|   2.0|            23:00:00|\n|2015-09-01|-0.206022|51.496572|                 2|                   1|          6|07:30:00|       30.0|                  1|                                          2|    0|POINT (-0.206022 ...| 510|14.0|14.0|88.0|       6.0|         1.0|       0.0|       0.0|   2.0|            22:00:00|\n|2015-09-01|-0.206022|51.496572|                 2|                   1|          6|07:30:00|       30.0|                  1|                                          2|    0|POINT (-0.206022 ...| 723|14.0|14.0|88.0|       6.0|         1.0|       0.0|       0.0|   2.0|            21:00:00|\n|2015-09-01|-0.206022|51.496572|                 2|                   1|          6|07:30:00|       30.0|                  1|                                          2|    0|POINT (-0.206022 ...|1021|15.0|15.0|82.0|       6.0|         1.0|       0.0|       0.0|   2.0|            20:00:00|\n|2015-09-01|-0.206022|51.496572|                 2|                   1|          6|07:30:00|       30.0|                  1|                                          2|    0|POINT (-0.206022 ...|1877|15.0|15.0|79.5|       7.0|         1.0|       0.0|       0.0|   2.0|            19:00:00|\n|2015-09-01|-0.206022|51.496572|                 2|                   1|          6|07:30:00|       30.0|                  1|                                          2|    0|POINT (-0.206022 ...|2175|15.5|15.5|77.0|      14.0|         7.0|       0.0|       0.0|   2.0|            18:00:00|\n|2015-09-01|-0.206022|51.496572|                 2|                   1|          6|07:30:00|       30.0|                  1|                                          2|    0|POINT (-0.206022 ...|3236|18.5|18.5|54.0|       7.5|         2.0|       0.0|       0.0|   2.0|            17:00:00|\n|2015-09-01|-0.206022|51.496572|                 2|                   1|          6|07:30:00|       30.0|                  1|                                          2|    0|POINT (-0.206022 ...|1703|17.5|17.5|64.0|       7.0|         2.0|       0.0|       0.0|   2.0|            16:00:00|\n|2015-09-01|-0.206022|51.496572|                 2|                   1|          6|07:30:00|       30.0|                  1|                                          2|    0|POINT (-0.206022 ...|1286|17.5|17.5|66.5|      10.0|         2.0|       0.0|       0.0|   2.0|            15:00:00|\n|2015-09-01|-0.206022|51.496572|                 2|                   1|          6|07:30:00|       30.0|                  1|                                          2|    0|POINT (-0.206022 ...|1066|16.5|16.5|75.0|       9.0|         2.0|       0.0|       0.0|   2.0|            14:00:00|\n|2015-09-01|-0.206022|51.496572|                 2|                   1|          6|07:30:00|       30.0|                  1|                                          2|    0|POINT (-0.206022 ...|1075|16.5|16.5|72.5|       9.0|         2.0|       0.0|       0.0|   2.0|            13:00:00|\n|2015-09-01|-0.206022|51.496572|                 2|                   1|          6|07:30:00|       30.0|                  1|                                          2|    0|POINT (-0.206022 ...| 919|16.0|16.0|83.0|       7.0|         7.0|       0.0|       0.0|   2.0|            12:00:00|\n|2015-09-01|-0.206022|51.496572|                 2|                   1|          6|07:30:00|       30.0|                  1|                                          2|    0|POINT (-0.206022 ...| 430|15.5|15.5|77.0|      12.0|         7.0|       0.0|       0.0|   2.0|            11:00:00|\n|2015-09-01|-0.206022|51.496572|                 2|                   1|          6|07:30:00|       30.0|                  1|                                          2|    0|POINT (-0.206022 ...| 606|15.5|15.5|77.0|      11.0|         3.0|       0.0|       0.0|   2.0|            10:00:00|\n|2015-09-01|-0.206022|51.496572|                 2|                   1|          6|07:30:00|       30.0|                  1|                                          2|    0|POINT (-0.206022 ...|1716|15.5|15.5|79.5|      13.0|         2.0|       0.0|       0.0|   2.0|            09:00:00|\n|2015-09-01|-0.206022|51.496572|                 2|                   1|          6|07:30:00|       30.0|                  1|                                          2|    0|POINT (-0.206022 ...|3658|15.0|15.0|82.0|      11.0|         2.0|       0.0|       0.0|   2.0|            08:00:00|\n|2015-09-01|-0.206022|51.496572|                 2|                   1|          6|07:30:00|       30.0|                  1|                                          2|    0|POINT (-0.206022 ...|1878|15.0|15.0|82.0|      14.0|         3.0|       0.0|       0.0|   2.0|            07:00:00|\n|2015-09-01|-0.206022|51.496572|                 2|                   1|          6|07:30:00|       30.0|                  1|                                          2|    0|POINT (-0.206022 ...| 560|15.0|15.0|82.0|      10.0|         3.0|       0.0|       0.0|   2.0|            06:00:00|\n|2015-09-01|-0.206022|51.496572|                 2|                   1|          6|07:30:00|       30.0|                  1|                                          2|    0|POINT (-0.206022 ...| 116|15.0|15.0|85.0|      11.0|         3.0|       0.0|       0.0|   2.0|            05:00:00|\n|2015-09-01|-0.206022|51.496572|                 2|                   1|          6|07:30:00|       30.0|                  1|                                          2|    0|POINT (-0.206022 ...|  79|15.0|15.0|88.0|       8.0|         7.0|       0.0|       0.0|   2.0|            04:00:00|\n+----------+---------+---------+------------------+--------------------+-----------+--------+-----------+-------------------+-------------------------------------------+-----+--------------------+----+----+----+----+----------+------------+----------+----------+------+--------------------+\nonly showing top 20 rows\n\nfinal_dataset1: org.apache.spark.sql.DataFrame \u003d [date: string, Longitude: double ... 20 more fields]\n"
+          }
+        ]
+      },
+      "runtimeInfos": {
+        "jobUrl": {
+          "propertyName": "jobUrl",
+          "label": "SPARK JOB",
+          "tooltip": "View in Spark web UI",
+          "group": "spark",
+          "values": [
+            "http://4790d6697e05:4040/jobs/job?id\u003d34",
+            "http://4790d6697e05:4040/jobs/job?id\u003d35",
+            "http://4790d6697e05:4040/jobs/job?id\u003d36",
+            "http://4790d6697e05:4040/jobs/job?id\u003d37"
+          ],
+          "interpreterSettingId": "spark"
+        }
+      },
+      "apps": [],
+      "jobName": "paragraph_1701377043204_-1714851992",
+      "id": "20231130-204403_549470299",
+      "dateCreated": "2023-11-30 20:44:03.204",
+      "dateStarted": "2023-12-10 00:09:21.795",
+      "dateFinished": "2023-12-10 00:09:24.370",
+      "status": "FINISHED",
+      "progressUpdateIntervalMs": 500
+    },
+    {
+      "text": "final_dataset1.count()",
+      "user": "anonymous",
+      "dateUpdated": "2023-12-10 00:09:24.617",
+      "config": {
+        "colWidth": 12.0,
+        "fontSize": 9.0,
+        "enabled": true,
+        "results": {},
+        "editorSetting": {
+          "language": "scala",
+          "editOnDblClick": false,
+          "completionKey": "TAB",
+          "completionSupport": true
+        },
+        "editorMode": "ace/mode/scala"
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "TEXT",
+            "data": "res19: Long \u003d 850091\n"
+          }
+        ]
+      },
+      "runtimeInfos": {
+        "jobUrl": {
+          "propertyName": "jobUrl",
+          "label": "SPARK JOB",
+          "tooltip": "View in Spark web UI",
+          "group": "spark",
+          "values": [
+            "http://4790d6697e05:4040/jobs/job?id\u003d38",
+            "http://4790d6697e05:4040/jobs/job?id\u003d39"
+          ],
+          "interpreterSettingId": "spark"
+        }
+      },
+      "apps": [],
+      "jobName": "paragraph_1701378366711_346568955",
+      "id": "20231130-210606_67435366",
+      "dateCreated": "2023-11-30 21:06:06.711",
+      "dateStarted": "2023-12-10 00:09:24.658",
+      "dateFinished": "2023-12-10 00:09:26.788",
+      "status": "FINISHED",
+      "progressUpdateIntervalMs": 500
+    },
+    {
+      "text": "val final_dataset \u003d final_dataset1.join(no_null_london_weather_final2, usingColumns \u003d Seq(\"date\"), joinType \u003d \"left\")\nfinal_dataset.show()",
+      "user": "anonymous",
+      "dateUpdated": "2023-12-10 00:09:28.114",
+      "config": {
+        "colWidth": 12.0,
+        "fontSize": 9.0,
+        "enabled": true,
+        "results": {},
+        "editorSetting": {
+          "language": "scala",
+          "editOnDblClick": false,
+          "completionKey": "TAB",
+          "completionSupport": true
+        },
+        "editorMode": "ace/mode/scala"
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "TEXT",
+            "data": "+----------+---------+---------+------------------+--------------------+-----------+--------+-----------+-------------------+-------------------------------------------+-----+--------------------+----+----+----+----+----------+------------+----------+----------+------+--------------------+-----------+--------+----------------+--------+---------+--------+-------------+--------+----------+\n|      date|Longitude| Latitude|Number_of_Vehicles|Number_of_Casualties|Day_of_Week|    time|Speed_limit|Urban_or_Rural_Area|Did_Police_Officer_Attend_Scene_of_Accident|fatal|            geometry| cnt|  t1|  t2| hum|wind_speed|weather_code|is_holiday|is_weekend|season|time_of_bike_sharing|cloud_cover|sunshine|global_radiation|max_temp|mean_temp|min_temp|precipitation|pressure|snow_depth|\n+----------+---------+---------+------------------+--------------------+-----------+--------+-----------+-------------------+-------------------------------------------+-----+--------------------+----+----+----+----+----------+------------+----------+----------+------+--------------------+-----------+--------+----------------+--------+---------+--------+-------------+--------+----------+\n|2015-09-01|-0.206022|51.496572|                 2|                   1|          6|07:30:00|       30.0|                  1|                                          2|    0|POINT (-0.206022 ...| 342|14.0|14.0|88.0|       6.5|         1.0|       0.0|       0.0|   2.0|            23:00:00|        7.0|     3.1|           124.0|    19.0|     16.3|    13.4|          0.2|101780.0|       0.0|\n|2015-09-01|-0.206022|51.496572|                 2|                   1|          6|07:30:00|       30.0|                  1|                                          2|    0|POINT (-0.206022 ...| 510|14.0|14.0|88.0|       6.0|         1.0|       0.0|       0.0|   2.0|            22:00:00|        7.0|     3.1|           124.0|    19.0|     16.3|    13.4|          0.2|101780.0|       0.0|\n|2015-09-01|-0.206022|51.496572|                 2|                   1|          6|07:30:00|       30.0|                  1|                                          2|    0|POINT (-0.206022 ...| 723|14.0|14.0|88.0|       6.0|         1.0|       0.0|       0.0|   2.0|            21:00:00|        7.0|     3.1|           124.0|    19.0|     16.3|    13.4|          0.2|101780.0|       0.0|\n|2015-09-01|-0.206022|51.496572|                 2|                   1|          6|07:30:00|       30.0|                  1|                                          2|    0|POINT (-0.206022 ...|1021|15.0|15.0|82.0|       6.0|         1.0|       0.0|       0.0|   2.0|            20:00:00|        7.0|     3.1|           124.0|    19.0|     16.3|    13.4|          0.2|101780.0|       0.0|\n|2015-09-01|-0.206022|51.496572|                 2|                   1|          6|07:30:00|       30.0|                  1|                                          2|    0|POINT (-0.206022 ...|1877|15.0|15.0|79.5|       7.0|         1.0|       0.0|       0.0|   2.0|            19:00:00|        7.0|     3.1|           124.0|    19.0|     16.3|    13.4|          0.2|101780.0|       0.0|\n|2015-09-01|-0.206022|51.496572|                 2|                   1|          6|07:30:00|       30.0|                  1|                                          2|    0|POINT (-0.206022 ...|2175|15.5|15.5|77.0|      14.0|         7.0|       0.0|       0.0|   2.0|            18:00:00|        7.0|     3.1|           124.0|    19.0|     16.3|    13.4|          0.2|101780.0|       0.0|\n|2015-09-01|-0.206022|51.496572|                 2|                   1|          6|07:30:00|       30.0|                  1|                                          2|    0|POINT (-0.206022 ...|3236|18.5|18.5|54.0|       7.5|         2.0|       0.0|       0.0|   2.0|            17:00:00|        7.0|     3.1|           124.0|    19.0|     16.3|    13.4|          0.2|101780.0|       0.0|\n|2015-09-01|-0.206022|51.496572|                 2|                   1|          6|07:30:00|       30.0|                  1|                                          2|    0|POINT (-0.206022 ...|1703|17.5|17.5|64.0|       7.0|         2.0|       0.0|       0.0|   2.0|            16:00:00|        7.0|     3.1|           124.0|    19.0|     16.3|    13.4|          0.2|101780.0|       0.0|\n|2015-09-01|-0.206022|51.496572|                 2|                   1|          6|07:30:00|       30.0|                  1|                                          2|    0|POINT (-0.206022 ...|1286|17.5|17.5|66.5|      10.0|         2.0|       0.0|       0.0|   2.0|            15:00:00|        7.0|     3.1|           124.0|    19.0|     16.3|    13.4|          0.2|101780.0|       0.0|\n|2015-09-01|-0.206022|51.496572|                 2|                   1|          6|07:30:00|       30.0|                  1|                                          2|    0|POINT (-0.206022 ...|1066|16.5|16.5|75.0|       9.0|         2.0|       0.0|       0.0|   2.0|            14:00:00|        7.0|     3.1|           124.0|    19.0|     16.3|    13.4|          0.2|101780.0|       0.0|\n|2015-09-01|-0.206022|51.496572|                 2|                   1|          6|07:30:00|       30.0|                  1|                                          2|    0|POINT (-0.206022 ...|1075|16.5|16.5|72.5|       9.0|         2.0|       0.0|       0.0|   2.0|            13:00:00|        7.0|     3.1|           124.0|    19.0|     16.3|    13.4|          0.2|101780.0|       0.0|\n|2015-09-01|-0.206022|51.496572|                 2|                   1|          6|07:30:00|       30.0|                  1|                                          2|    0|POINT (-0.206022 ...| 919|16.0|16.0|83.0|       7.0|         7.0|       0.0|       0.0|   2.0|            12:00:00|        7.0|     3.1|           124.0|    19.0|     16.3|    13.4|          0.2|101780.0|       0.0|\n|2015-09-01|-0.206022|51.496572|                 2|                   1|          6|07:30:00|       30.0|                  1|                                          2|    0|POINT (-0.206022 ...| 430|15.5|15.5|77.0|      12.0|         7.0|       0.0|       0.0|   2.0|            11:00:00|        7.0|     3.1|           124.0|    19.0|     16.3|    13.4|          0.2|101780.0|       0.0|\n|2015-09-01|-0.206022|51.496572|                 2|                   1|          6|07:30:00|       30.0|                  1|                                          2|    0|POINT (-0.206022 ...| 606|15.5|15.5|77.0|      11.0|         3.0|       0.0|       0.0|   2.0|            10:00:00|        7.0|     3.1|           124.0|    19.0|     16.3|    13.4|          0.2|101780.0|       0.0|\n|2015-09-01|-0.206022|51.496572|                 2|                   1|          6|07:30:00|       30.0|                  1|                                          2|    0|POINT (-0.206022 ...|1716|15.5|15.5|79.5|      13.0|         2.0|       0.0|       0.0|   2.0|            09:00:00|        7.0|     3.1|           124.0|    19.0|     16.3|    13.4|          0.2|101780.0|       0.0|\n|2015-09-01|-0.206022|51.496572|                 2|                   1|          6|07:30:00|       30.0|                  1|                                          2|    0|POINT (-0.206022 ...|3658|15.0|15.0|82.0|      11.0|         2.0|       0.0|       0.0|   2.0|            08:00:00|        7.0|     3.1|           124.0|    19.0|     16.3|    13.4|          0.2|101780.0|       0.0|\n|2015-09-01|-0.206022|51.496572|                 2|                   1|          6|07:30:00|       30.0|                  1|                                          2|    0|POINT (-0.206022 ...|1878|15.0|15.0|82.0|      14.0|         3.0|       0.0|       0.0|   2.0|            07:00:00|        7.0|     3.1|           124.0|    19.0|     16.3|    13.4|          0.2|101780.0|       0.0|\n|2015-09-01|-0.206022|51.496572|                 2|                   1|          6|07:30:00|       30.0|                  1|                                          2|    0|POINT (-0.206022 ...| 560|15.0|15.0|82.0|      10.0|         3.0|       0.0|       0.0|   2.0|            06:00:00|        7.0|     3.1|           124.0|    19.0|     16.3|    13.4|          0.2|101780.0|       0.0|\n|2015-09-01|-0.206022|51.496572|                 2|                   1|          6|07:30:00|       30.0|                  1|                                          2|    0|POINT (-0.206022 ...| 116|15.0|15.0|85.0|      11.0|         3.0|       0.0|       0.0|   2.0|            05:00:00|        7.0|     3.1|           124.0|    19.0|     16.3|    13.4|          0.2|101780.0|       0.0|\n|2015-09-01|-0.206022|51.496572|                 2|                   1|          6|07:30:00|       30.0|                  1|                                          2|    0|POINT (-0.206022 ...|  79|15.0|15.0|88.0|       8.0|         7.0|       0.0|       0.0|   2.0|            04:00:00|        7.0|     3.1|           124.0|    19.0|     16.3|    13.4|          0.2|101780.0|       0.0|\n+----------+---------+---------+------------------+--------------------+-----------+--------+-----------+-------------------+-------------------------------------------+-----+--------------------+----+----+----+----+----------+------------+----------+----------+------+--------------------+-----------+--------+----------------+--------+---------+--------+-------------+--------+----------+\nonly showing top 20 rows\n\nfinal_dataset: org.apache.spark.sql.DataFrame \u003d [date: string, Longitude: double ... 29 more fields]\n"
+          }
+        ]
+      },
+      "runtimeInfos": {
+        "jobUrl": {
+          "propertyName": "jobUrl",
+          "label": "SPARK JOB",
+          "tooltip": "View in Spark web UI",
+          "group": "spark",
+          "values": [
+            "http://4790d6697e05:4040/jobs/job?id\u003d40",
+            "http://4790d6697e05:4040/jobs/job?id\u003d41",
+            "http://4790d6697e05:4040/jobs/job?id\u003d42",
+            "http://4790d6697e05:4040/jobs/job?id\u003d43",
+            "http://4790d6697e05:4040/jobs/job?id\u003d44"
+          ],
+          "interpreterSettingId": "spark"
+        }
+      },
+      "apps": [],
+      "jobName": "paragraph_1701378383878_912927185",
+      "id": "20231130-210623_2094319588",
+      "dateCreated": "2023-11-30 21:06:23.878",
+      "dateStarted": "2023-12-10 00:09:28.142",
+      "dateFinished": "2023-12-10 00:09:30.743",
+      "status": "FINISHED",
+      "progressUpdateIntervalMs": 500
+    },
+    {
+      "text": "final_dataset.count()",
+      "user": "anonymous",
+      "dateUpdated": "2023-12-10 00:09:31.138",
+      "config": {
+        "colWidth": 12.0,
+        "fontSize": 9.0,
+        "enabled": true,
+        "results": {},
+        "editorSetting": {
+          "language": "scala",
+          "editOnDblClick": false,
+          "completionKey": "TAB",
+          "completionSupport": true
+        },
+        "editorMode": "ace/mode/scala"
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "TEXT",
+            "data": "res21: Long \u003d 850091\n"
+          }
+        ]
+      },
+      "runtimeInfos": {
+        "jobUrl": {
+          "propertyName": "jobUrl",
+          "label": "SPARK JOB",
+          "tooltip": "View in Spark web UI",
+          "group": "spark",
+          "values": [
+            "http://4790d6697e05:4040/jobs/job?id\u003d45",
+            "http://4790d6697e05:4040/jobs/job?id\u003d46",
+            "http://4790d6697e05:4040/jobs/job?id\u003d47"
+          ],
+          "interpreterSettingId": "spark"
+        }
+      },
+      "apps": [],
+      "jobName": "paragraph_1701378753753_-83118402",
+      "id": "20231130-211233_1470788217",
+      "dateCreated": "2023-11-30 21:12:33.753",
+      "dateStarted": "2023-12-10 00:09:31.175",
+      "dateFinished": "2023-12-10 00:09:33.187",
+      "status": "FINISHED",
+      "progressUpdateIntervalMs": 500
+    },
+    {
+      "text": "val nullCount \u003d final_dataset.select(final_dataset.columns.map(c \u003d\u003e sum(when(col(c).isNull, 1).otherwise(0)).alias(c)): _*).show()",
+      "user": "anonymous",
+      "dateUpdated": "2023-12-10 00:09:35.042",
+      "config": {
+        "colWidth": 12.0,
+        "fontSize": 9.0,
+        "enabled": true,
+        "results": {},
+        "editorSetting": {
+          "language": "scala",
+          "editOnDblClick": false,
+          "completionKey": "TAB",
+          "completionSupport": true
+        },
+        "editorMode": "ace/mode/scala"
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "TEXT",
+            "data": "+----+---------+--------+------------------+--------------------+-----------+----+-----------+-------------------+-------------------------------------------+-----+--------+---+---+---+---+----------+------------+----------+----------+------+--------------------+-----------+--------+----------------+--------+---------+--------+-------------+--------+----------+\n|date|Longitude|Latitude|Number_of_Vehicles|Number_of_Casualties|Day_of_Week|time|Speed_limit|Urban_or_Rural_Area|Did_Police_Officer_Attend_Scene_of_Accident|fatal|geometry|cnt| t1| t2|hum|wind_speed|weather_code|is_holiday|is_weekend|season|time_of_bike_sharing|cloud_cover|sunshine|global_radiation|max_temp|mean_temp|min_temp|precipitation|pressure|snow_depth|\n+----+---------+--------+------------------+--------------------+-----------+----+-----------+-------------------+-------------------------------------------+-----+--------+---+---+---+---+----------+------------+----------+----------+------+--------------------+-----------+--------+----------------+--------+---------+--------+-------------+--------+----------+\n|   0|        0|       0|                 0|                   0|          0|   0|          0|                  0|                                          0|    0|       0| 47| 47| 47| 47|        47|          47|        47|        47|    47|                  47|          0|       0|               0|       0|        0|       0|            0|       0|         0|\n+----+---------+--------+------------------+--------------------+-----------+----+-----------+-------------------+-------------------------------------------+-----+--------+---+---+---+---+----------+------------+----------+----------+------+--------------------+-----------+--------+----------------+--------+---------+--------+-------------+--------+----------+\n\nnullCount: Unit \u003d ()\n"
+          }
+        ]
+      },
+      "runtimeInfos": {
+        "jobUrl": {
+          "propertyName": "jobUrl",
+          "label": "SPARK JOB",
+          "tooltip": "View in Spark web UI",
+          "group": "spark",
+          "values": [
+            "http://4790d6697e05:4040/jobs/job?id\u003d48",
+            "http://4790d6697e05:4040/jobs/job?id\u003d49",
+            "http://4790d6697e05:4040/jobs/job?id\u003d50"
+          ],
+          "interpreterSettingId": "spark"
+        }
+      },
+      "apps": [],
+      "jobName": "paragraph_1701378768590_-992728648",
+      "id": "20231130-211248_1493415957",
+      "dateCreated": "2023-11-30 21:12:48.591",
+      "dateStarted": "2023-12-10 00:09:35.080",
+      "dateFinished": "2023-12-10 00:09:39.327",
+      "status": "FINISHED",
+      "progressUpdateIntervalMs": 500
+    },
+    {
+      "text": "val no_null_final_dataset \u003d final_dataset.na.drop()\nval nullCount \u003d no_null_final_dataset.select(final_dataset.columns.map(c \u003d\u003e sum(when(col(c).isNull, 1).otherwise(0)).alias(c)): _*).show()",
+      "user": "anonymous",
+      "dateUpdated": "2023-12-10 00:09:40.063",
+      "config": {
+        "colWidth": 12.0,
+        "fontSize": 9.0,
+        "enabled": true,
+        "results": {},
+        "editorSetting": {
+          "language": "scala",
+          "editOnDblClick": false,
+          "completionKey": "TAB",
+          "completionSupport": true
+        },
+        "editorMode": "ace/mode/scala"
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "TEXT",
+            "data": "+----+---------+--------+------------------+--------------------+-----------+----+-----------+-------------------+-------------------------------------------+-----+--------+---+---+---+---+----------+------------+----------+----------+------+--------------------+-----------+--------+----------------+--------+---------+--------+-------------+--------+----------+\n|date|Longitude|Latitude|Number_of_Vehicles|Number_of_Casualties|Day_of_Week|time|Speed_limit|Urban_or_Rural_Area|Did_Police_Officer_Attend_Scene_of_Accident|fatal|geometry|cnt| t1| t2|hum|wind_speed|weather_code|is_holiday|is_weekend|season|time_of_bike_sharing|cloud_cover|sunshine|global_radiation|max_temp|mean_temp|min_temp|precipitation|pressure|snow_depth|\n+----+---------+--------+------------------+--------------------+-----------+----+-----------+-------------------+-------------------------------------------+-----+--------+---+---+---+---+----------+------------+----------+----------+------+--------------------+-----------+--------+----------------+--------+---------+--------+-------------+--------+----------+\n|   0|        0|       0|                 0|                   0|          0|   0|          0|                  0|                                          0|    0|       0|  0|  0|  0|  0|         0|           0|         0|         0|     0|                   0|          0|       0|               0|       0|        0|       0|            0|       0|         0|\n+----+---------+--------+------------------+--------------------+-----------+----+-----------+-------------------+-------------------------------------------+-----+--------+---+---+---+---+----------+------------+----------+----------+------+--------------------+-----------+--------+----------------+--------+---------+--------+-------------+--------+----------+\n\nno_null_final_dataset: org.apache.spark.sql.DataFrame \u003d [date: string, Longitude: double ... 29 more fields]\nnullCount: Unit \u003d ()\n"
+          }
+        ]
+      },
+      "runtimeInfos": {
+        "jobUrl": {
+          "propertyName": "jobUrl",
+          "label": "SPARK JOB",
+          "tooltip": "View in Spark web UI",
+          "group": "spark",
+          "values": [
+            "http://4790d6697e05:4040/jobs/job?id\u003d51",
+            "http://4790d6697e05:4040/jobs/job?id\u003d52",
+            "http://4790d6697e05:4040/jobs/job?id\u003d53"
+          ],
+          "interpreterSettingId": "spark"
+        }
+      },
+      "apps": [],
+      "jobName": "paragraph_1701963867805_993397838",
+      "id": "20231207-154427_1968585280",
+      "dateCreated": "2023-12-07 15:44:27.805",
+      "dateStarted": "2023-12-10 00:09:40.094",
+      "dateFinished": "2023-12-10 00:09:44.514",
+      "status": "FINISHED",
+      "progressUpdateIntervalMs": 500
+    },
+    {
+      "text": "no_null_final_dataset.count()",
+      "user": "anonymous",
+      "dateUpdated": "2023-12-10 00:09:43.629",
+      "config": {
+        "colWidth": 12.0,
+        "fontSize": 9.0,
+        "enabled": true,
+        "results": {},
+        "editorSetting": {
+          "language": "scala",
+          "editOnDblClick": false,
+          "completionKey": "TAB",
+          "completionSupport": true
+        },
+        "editorMode": "ace/mode/scala"
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "TEXT",
+            "data": "res22: Long \u003d 850044\n"
+          }
+        ]
+      },
+      "runtimeInfos": {
+        "jobUrl": {
+          "propertyName": "jobUrl",
+          "label": "SPARK JOB",
+          "tooltip": "View in Spark web UI",
+          "group": "spark",
+          "values": [
+            "http://4790d6697e05:4040/jobs/job?id\u003d54",
+            "http://4790d6697e05:4040/jobs/job?id\u003d55",
+            "http://4790d6697e05:4040/jobs/job?id\u003d56"
+          ],
+          "interpreterSettingId": "spark"
+        }
+      },
+      "apps": [],
+      "jobName": "paragraph_1701963943834_-1445579325",
+      "id": "20231207-154543_1200830901",
+      "dateCreated": "2023-12-07 15:45:43.834",
+      "dateStarted": "2023-12-10 00:09:43.665",
+      "dateFinished": "2023-12-10 00:09:48.377",
+      "status": "FINISHED",
+      "progressUpdateIntervalMs": 500
+    },
+    {
+      "text": "// no_null_final_dataset.write.format(\"csv\").option(\"sep\", \",\").option(\"header\", \"true\").save(\"final_data\")",
+      "user": "anonymous",
+      "dateUpdated": "2023-12-09 23:27:13.389",
+      "config": {
+        "colWidth": 12.0,
+        "fontSize": 9.0,
+        "enabled": true,
+        "results": {},
+        "editorSetting": {
+          "language": "scala",
+          "editOnDblClick": false,
+          "completionKey": "TAB",
+          "completionSupport": true
+        },
+        "editorMode": "ace/mode/scala"
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": []
+      },
+      "apps": [],
+      "jobName": "paragraph_1701378800451_1508389643",
+      "id": "20231130-211320_1294651057",
+      "dateCreated": "2023-11-30 21:13:20.451",
+      "dateStarted": "2023-12-09 23:27:13.515",
+      "dateFinished": "2023-12-09 23:27:14.047",
+      "status": "FINISHED",
+      "progressUpdateIntervalMs": 500
+    },
+    {
+      "text": "no_null_final_dataset.coalesce(1).write.option(\"header\", \"true\").option(\"sep\", \",\").csv(\"final_data3\")",
+      "user": "anonymous",
+      "dateUpdated": "2023-12-10 00:09:54.617",
+      "config": {
+        "colWidth": 12.0,
+        "fontSize": 9.0,
+        "enabled": true,
+        "results": {},
+        "editorSetting": {
+          "language": "scala",
+          "editOnDblClick": false,
+          "completionKey": "TAB",
+          "completionSupport": true
+        },
+        "editorMode": "ace/mode/scala"
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": []
+      },
+      "runtimeInfos": {
+        "jobUrl": {
+          "propertyName": "jobUrl",
+          "label": "SPARK JOB",
+          "tooltip": "View in Spark web UI",
+          "group": "spark",
+          "values": [
+            "http://4790d6697e05:4040/jobs/job?id\u003d57",
+            "http://4790d6697e05:4040/jobs/job?id\u003d58",
+            "http://4790d6697e05:4040/jobs/job?id\u003d59"
+          ],
+          "interpreterSettingId": "spark"
+        }
+      },
+      "apps": [],
+      "jobName": "paragraph_1701379008392_-310074142",
+      "id": "20231130-211648_421741498",
+      "dateCreated": "2023-11-30 21:16:48.392",
+      "dateStarted": "2023-12-10 00:09:54.653",
+      "dateFinished": "2023-12-10 00:10:08.952",
+      "status": "FINISHED",
+      "progressUpdateIntervalMs": 500
+    },
+    {
+      "text": "val tmp \u003d spark.read.format(\"csv\")\n  .option(\"sep\", \",\")\n  .option(\"inferSchema\", \"true\")\n  .option(\"header\", \"true\")\n  .load(\"final_data2/part-00000-a6c39a21-f68f-4bf1-a893-b40af949c552-c000.csv\")\n\ntmp.show()",
+      "user": "anonymous",
+      "dateUpdated": "2023-12-09 23:28:19.616",
+      "config": {
+        "colWidth": 12.0,
+        "fontSize": 9.0,
+        "enabled": true,
+        "results": {},
+        "editorSetting": {
+          "language": "scala",
+          "editOnDblClick": false,
+          "completionKey": "TAB",
+          "completionSupport": true
+        },
+        "editorMode": "ace/mode/scala"
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "TEXT",
+            "data": "+-------------------+---------+---------+------------------+--------------------+-----------+--------+-----------+------------------+-----------------------+-------------------+-------------------------------------------+-----+--------------------+----+----+----+----+----------+----------+----------+--------------------+-----------+--------+----------------+--------+---------+--------+-------------+--------+----------+\n|               date|Longitude| Latitude|Number_of_Vehicles|Number_of_Casualties|Day_of_Week|    time|Speed_limit|Weather_Conditions|Road_Surface_Conditions|Urban_or_Rural_Area|Did_Police_Officer_Attend_Scene_of_Accident|fatal|            geometry| cnt|  t1|  t2| hum|wind_speed|is_holiday|is_weekend|time_of_bike_sharing|cloud_cover|sunshine|global_radiation|max_temp|mean_temp|min_temp|precipitation|pressure|snow_depth|\n+-------------------+---------+---------+------------------+--------------------+-----------+--------+-----------+------------------+-----------------------+-------------------+-------------------------------------------+-----+--------------------+----+----+----+----+----------+----------+----------+--------------------+-----------+--------+----------------+--------+---------+--------+-------------+--------+----------+\n|2015-09-01 00:00:00|-0.206022|51.496572|                 2|                   1|          6|07:30:00|       30.0|                 2|                      2|                  1|                                          2|    0|POINT (-0.206022 ...| 342|14.0|14.0|88.0|       6.5|       0.0|       0.0|            23:00:00|        7.0|     3.1|           124.0|    19.0|     16.3|    13.4|          0.2|101780.0|       0.0|\n|2015-09-01 00:00:00|-0.206022|51.496572|                 2|                   1|          6|07:30:00|       30.0|                 2|                      2|                  1|                                          2|    0|POINT (-0.206022 ...| 510|14.0|14.0|88.0|       6.0|       0.0|       0.0|            22:00:00|        7.0|     3.1|           124.0|    19.0|     16.3|    13.4|          0.2|101780.0|       0.0|\n|2015-09-01 00:00:00|-0.206022|51.496572|                 2|                   1|          6|07:30:00|       30.0|                 2|                      2|                  1|                                          2|    0|POINT (-0.206022 ...| 723|14.0|14.0|88.0|       6.0|       0.0|       0.0|            21:00:00|        7.0|     3.1|           124.0|    19.0|     16.3|    13.4|          0.2|101780.0|       0.0|\n|2015-09-01 00:00:00|-0.206022|51.496572|                 2|                   1|          6|07:30:00|       30.0|                 2|                      2|                  1|                                          2|    0|POINT (-0.206022 ...|1021|15.0|15.0|82.0|       6.0|       0.0|       0.0|            20:00:00|        7.0|     3.1|           124.0|    19.0|     16.3|    13.4|          0.2|101780.0|       0.0|\n|2015-09-01 00:00:00|-0.206022|51.496572|                 2|                   1|          6|07:30:00|       30.0|                 2|                      2|                  1|                                          2|    0|POINT (-0.206022 ...|1877|15.0|15.0|79.5|       7.0|       0.0|       0.0|            19:00:00|        7.0|     3.1|           124.0|    19.0|     16.3|    13.4|          0.2|101780.0|       0.0|\n|2015-09-01 00:00:00|-0.206022|51.496572|                 2|                   1|          6|07:30:00|       30.0|                 2|                      2|                  1|                                          2|    0|POINT (-0.206022 ...|2175|15.5|15.5|77.0|      14.0|       0.0|       0.0|            18:00:00|        7.0|     3.1|           124.0|    19.0|     16.3|    13.4|          0.2|101780.0|       0.0|\n|2015-09-01 00:00:00|-0.206022|51.496572|                 2|                   1|          6|07:30:00|       30.0|                 2|                      2|                  1|                                          2|    0|POINT (-0.206022 ...|3236|18.5|18.5|54.0|       7.5|       0.0|       0.0|            17:00:00|        7.0|     3.1|           124.0|    19.0|     16.3|    13.4|          0.2|101780.0|       0.0|\n|2015-09-01 00:00:00|-0.206022|51.496572|                 2|                   1|          6|07:30:00|       30.0|                 2|                      2|                  1|                                          2|    0|POINT (-0.206022 ...|1703|17.5|17.5|64.0|       7.0|       0.0|       0.0|            16:00:00|        7.0|     3.1|           124.0|    19.0|     16.3|    13.4|          0.2|101780.0|       0.0|\n|2015-09-01 00:00:00|-0.206022|51.496572|                 2|                   1|          6|07:30:00|       30.0|                 2|                      2|                  1|                                          2|    0|POINT (-0.206022 ...|1286|17.5|17.5|66.5|      10.0|       0.0|       0.0|            15:00:00|        7.0|     3.1|           124.0|    19.0|     16.3|    13.4|          0.2|101780.0|       0.0|\n|2015-09-01 00:00:00|-0.206022|51.496572|                 2|                   1|          6|07:30:00|       30.0|                 2|                      2|                  1|                                          2|    0|POINT (-0.206022 ...|1066|16.5|16.5|75.0|       9.0|       0.0|       0.0|            14:00:00|        7.0|     3.1|           124.0|    19.0|     16.3|    13.4|          0.2|101780.0|       0.0|\n|2015-09-01 00:00:00|-0.206022|51.496572|                 2|                   1|          6|07:30:00|       30.0|                 2|                      2|                  1|                                          2|    0|POINT (-0.206022 ...|1075|16.5|16.5|72.5|       9.0|       0.0|       0.0|            13:00:00|        7.0|     3.1|           124.0|    19.0|     16.3|    13.4|          0.2|101780.0|       0.0|\n|2015-09-01 00:00:00|-0.206022|51.496572|                 2|                   1|          6|07:30:00|       30.0|                 2|                      2|                  1|                                          2|    0|POINT (-0.206022 ...| 919|16.0|16.0|83.0|       7.0|       0.0|       0.0|            12:00:00|        7.0|     3.1|           124.0|    19.0|     16.3|    13.4|          0.2|101780.0|       0.0|\n|2015-09-01 00:00:00|-0.206022|51.496572|                 2|                   1|          6|07:30:00|       30.0|                 2|                      2|                  1|                                          2|    0|POINT (-0.206022 ...| 430|15.5|15.5|77.0|      12.0|       0.0|       0.0|            11:00:00|        7.0|     3.1|           124.0|    19.0|     16.3|    13.4|          0.2|101780.0|       0.0|\n|2015-09-01 00:00:00|-0.206022|51.496572|                 2|                   1|          6|07:30:00|       30.0|                 2|                      2|                  1|                                          2|    0|POINT (-0.206022 ...| 606|15.5|15.5|77.0|      11.0|       0.0|       0.0|            10:00:00|        7.0|     3.1|           124.0|    19.0|     16.3|    13.4|          0.2|101780.0|       0.0|\n|2015-09-01 00:00:00|-0.206022|51.496572|                 2|                   1|          6|07:30:00|       30.0|                 2|                      2|                  1|                                          2|    0|POINT (-0.206022 ...|1716|15.5|15.5|79.5|      13.0|       0.0|       0.0|            09:00:00|        7.0|     3.1|           124.0|    19.0|     16.3|    13.4|          0.2|101780.0|       0.0|\n|2015-09-01 00:00:00|-0.206022|51.496572|                 2|                   1|          6|07:30:00|       30.0|                 2|                      2|                  1|                                          2|    0|POINT (-0.206022 ...|3658|15.0|15.0|82.0|      11.0|       0.0|       0.0|            08:00:00|        7.0|     3.1|           124.0|    19.0|     16.3|    13.4|          0.2|101780.0|       0.0|\n|2015-09-01 00:00:00|-0.206022|51.496572|                 2|                   1|          6|07:30:00|       30.0|                 2|                      2|                  1|                                          2|    0|POINT (-0.206022 ...|1878|15.0|15.0|82.0|      14.0|       0.0|       0.0|            07:00:00|        7.0|     3.1|           124.0|    19.0|     16.3|    13.4|          0.2|101780.0|       0.0|\n|2015-09-01 00:00:00|-0.206022|51.496572|                 2|                   1|          6|07:30:00|       30.0|                 2|                      2|                  1|                                          2|    0|POINT (-0.206022 ...| 560|15.0|15.0|82.0|      10.0|       0.0|       0.0|            06:00:00|        7.0|     3.1|           124.0|    19.0|     16.3|    13.4|          0.2|101780.0|       0.0|\n|2015-09-01 00:00:00|-0.206022|51.496572|                 2|                   1|          6|07:30:00|       30.0|                 2|                      2|                  1|                                          2|    0|POINT (-0.206022 ...| 116|15.0|15.0|85.0|      11.0|       0.0|       0.0|            05:00:00|        7.0|     3.1|           124.0|    19.0|     16.3|    13.4|          0.2|101780.0|       0.0|\n|2015-09-01 00:00:00|-0.206022|51.496572|                 2|                   1|          6|07:30:00|       30.0|                 2|                      2|                  1|                                          2|    0|POINT (-0.206022 ...|  79|15.0|15.0|88.0|       8.0|       0.0|       0.0|            04:00:00|        7.0|     3.1|           124.0|    19.0|     16.3|    13.4|          0.2|101780.0|       0.0|\n+-------------------+---------+---------+------------------+--------------------+-----------+--------+-----------+------------------+-----------------------+-------------------+-------------------------------------------+-----+--------------------+----+----+----+----+----------+----------+----------+--------------------+-----------+--------+----------------+--------+---------+--------+-------------+--------+----------+\nonly showing top 20 rows\n\ntmp: org.apache.spark.sql.DataFrame \u003d [date: timestamp, Longitude: double ... 29 more fields]\n"
+          }
+        ]
+      },
+      "apps": [],
+      "jobName": "paragraph_1701379157527_-2091950857",
+      "id": "20231130-211917_2020514310",
+      "dateCreated": "2023-11-30 21:19:17.527",
+      "dateStarted": "2023-12-09 23:28:19.651",
+      "dateFinished": "2023-12-09 23:28:32.044",
+      "status": "FINISHED",
+      "progressUpdateIntervalMs": 500
+    },
+    {
+      "text": "tmp.count()",
+      "user": "anonymous",
+      "dateUpdated": "2023-12-09 23:28:26.163",
+      "config": {
+        "colWidth": 12.0,
+        "fontSize": 9.0,
+        "enabled": true,
+        "results": {},
+        "editorSetting": {
+          "language": "scala",
+          "editOnDblClick": false,
+          "completionKey": "TAB",
+          "completionSupport": true
+        },
+        "editorMode": "ace/mode/scala"
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "TEXT",
+            "data": "res29: Long \u003d 850044\n"
+          }
+        ]
+      },
+      "apps": [],
+      "jobName": "paragraph_1701379328683_-1851626471",
+      "id": "20231130-212208_605996828",
+      "dateCreated": "2023-11-30 21:22:08.683",
+      "dateStarted": "2023-12-09 23:28:26.447",
+      "dateFinished": "2023-12-09 23:28:34.927",
+      "status": "FINISHED",
+      "progressUpdateIntervalMs": 500
+    },
+    {
+      "user": "anonymous",
+      "config": {},
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "apps": [],
+      "jobName": "paragraph_1701379359279_1725679680",
+      "id": "20231130-212239_144406871",
+      "dateCreated": "2023-11-30 21:22:39.279",
+      "status": "READY",
+      "progressUpdateIntervalMs": 500
+    }
+  ],
+  "name": "concat_data",
+  "id": "2JH6Z8422",
+  "noteParams": {},
+  "noteForms": {},
+  "angularObjects": {
+    "spark:shared_process": []
+  },
+  "config": {
+    "isZeppelinNotebookCronEnable": false
+  },
+  "info": {}
+}

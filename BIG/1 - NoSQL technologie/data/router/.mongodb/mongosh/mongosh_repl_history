@@ -1,0 +1,263 @@
+db.shopCollection.aggregate([ { $match: { rating: 5 } }, { $group: { _id: "$country", total_count: { $sum: 1 } } }, { $sort: { total_count: -1 } }, { $limit: 5 }, { $project: { _id: 0, category: "$_id", total_count: "$total_count" } }] )
+sh.status()
+db.shopCollection.aggregate([ { $match: { rating: 5 } }, { $group: { _id: "$country", total_count: { $sum: 1 } } }, { $sort: { total_count: -1 } }, { $limit: 5 }, { $project: { _id: 0, category: "$_id", total_count: "$total_count" } }] )
+sh.status()
+db.adminCommand({ listShards: 1 })
+db.shopCollection.aggregate([ { $match: { rating: 5 } }, { $group: { _id: "$country", total_count: { $sum: 1 } } }, { $sort: { total_count: -1 } }, { $limit: 5 }, { $project: { _id: 0, category: "$_id", total_count: "$total_count" } }] )
+db.adminCommand({ listShards: 1 })
+sh.status.shards
+sh.status.shards.state()
+sh.status.shards.state
+sh.status()
+db.shopCollection.aggregate([ { $match: { rating: 5 } }, { $group: { _id: "$country", total_count: { $sum: 1 } } }, { $sort: { total_count: -1 } }, { $limit: 5 }, { $project: { _id: 0, category: "$_id", total_count: "$total_count" } }] )
+db.shopCollection.aggregate([ { $match: { category: "smartwatch" } }, { $group: { _id: "$provider", avg_price: { $avg: "$price" } } }, { $sort: { avg_price: -1 } }, { $project: { _id: 0, provider: "$_id", avg_price: "$avg_price" } }] )
+db.shopCollection.aggregate([ { $match: { category: "smartwatch" } }, { $group: { _id: "$provider", avg_price: { $avg: "$price" } } }, { $sort: { total_count: -1 } }, { $project: { _id: 0, provider: "$_id", avg_price: "$avg_price" } }] )
+it
+db.shopCollection.aggregate([ { $match: { category: "smartwatch" } }, { $group: { _id: "$provider", avg_price: { $avg: "$price" } } }, { $project: { _id: 0, provider: "$_id", avg_price: "$avg_price" } }] )
+db.shopCollection.aggregate([ { $match: { rating: 5 } }, { $group: { _id: "$country", total_count: { $sum: 1 } } }, { $sort: { total_count: -1 } }, { $limit: 5 }, { $project: { _id: 0, category: "$_id", total_count: "$total_count" } }] )
+db.shopCollection.aggregate([ { $match: { rating: 5 } }, { $group: { _id: "$country", total_count: { $sum: 1 } } }, { $sort: { total_count: 1 } }, { $limit: 5 }, { $project: { _id: 0, category: "$_id", total_count: "$total_count" } }] )
+db.device.aggregate([ { $group: { _id: "$color", total_count: { $sum: 1 } } }, { $sort: { total_count: -1 } }, { $limit: 1 }, { $project: { _id: 0, color: "$_id", total_count: "$total_count" } }] )
+db.shopCollection.aggregate([ { $match: { "gender": "Female" } }, { $lookup: { from: "device", localField: "product_name", foreignField: "product_name", as: "dev" } }, { $group: { _id: "$dev.color", total_count: { $sum: 1 } } }, { $sort: { total_count: -1 } }, { $limit: 1 }, { $project: { _id: 0, color: "$_id", total_count: "$total_count" } }] )
+db.shopCollection.aggregate([ { $match: { country: "Poland", age: { $gte: 18 }, age: { $lte: 30 } } }, { $group: { _id: "$category", total_count: { $sum: 1 } } }, { $sort: { total_count: -1 } }, { $skip: 1 }, { $limit: 1 }, { $project: { _id: 0, category: "$_id", total_count: "$total_count" } }] )
+db.shopCollection.aggregate([ { $match: { category: "smart mirror" } }, { $group: { _id: "$country", min_price: { $min: "$price" } } }, { $sort: { min_price: 1 } }, { $limit: 1 }, { $project: { _id: 0, category: "$_id", min_price: "$min_price" } }] )
+db.shopCollection.aggregate([ { $match: { category: "smart mirror" } }, { $group: { _id: "$country", min_price: { $min: "$price" } } }, { $sort: { max_price: 1 } }, { $limit: 1 }, { $project: { _id: 0, category: "$_id", averagePrice: "$max_price" } }] )
+use shop
+db.shopCollection.aggregate([ { $match: { provider: "TechPro" } }, { $group: { _id: "$category", max_price: { $max: "$price" } } }, { $sort: { max_price: -1 } }, { $limit: 1 }, { $project: { _id: 0, category: "$_id", averagePrice: "$max_price" } }] )
+db.shopCollection.aggregate([ { $match: { provider: "TechPro" } }, { $group: { _id: "$category", max_price: { $max: "$price" } } }, /*{ max_prc: { $max: "$max_price" } },*/ { $match: { max_price: { $max: "$max_price" } } }, { $project: { _id: 0, category: "$_id", averagePrice: "$max_price" } }] )
+db.shopCollection.aggregate([ { $match: { provider: "TechPro" } }, { $group: { _id: "$category", max_price: { $max: "$price" } } }, { max_prc: { $max: "$max_price" } }, { $match: { max_price: max_prc } }, { $project: { _id: 0, category: "$_id", averagePrice: "$max_price" } }] )
+db.shopCollection.aggregate([ { $match: { age: { $gt: 60 }, country: "Germany" } }, { $group: { _id: "$category", avg_price: { $avg: "$price" } } }, { $project: { _id: 0, category: "$_id", averagePrice: "$avg_price" } }] )
+db.shopCollection.aggregate([ { $match: { age: { $gt: 60 }, country: "Germany" } }, { $group: { _id: "$category", avg_price: { $avg: "$price" } } }, { $group: { _id: 0, category: "$_id", averagePrice: "$avg_price" } }] )
+db.shopCollection.aggregate([ { $match: { "category": "laptop" } }, { $group: { _id: "$product_name", max_rating: { $max: "$rating" } } }, { $match: { "max_rating": 5 } }, { $project: { _id: 0, product_name: "$_id" } }] )
+db.shopCollection.aggregate([ { $match: { "category": "laptop" } }, { $group: { _id: "$product_name", max_rating: { $max: "$rating" } } }, { $match: { "max_rating": 5 } }, { $project: { _id: 0, product_name: "$_id", max_rating: "$max_rating" } }] )
+db.shopCollection.aggregate([ { $match: { "category": "laptop" } }, { $group: { _id: "$product_name", max_rating: { $max: "$rating" } } }, { $match: { "rating": 5 } }, { $project: { _id: 0, product_name: "$_id", max_rating: "$max_rating" } }] )
+db.shopCollection.aggregate([ { $match: { "category": "laptop" } }, { $group: { _id: "$product_name", max_rating: { $max: "$rating" } } }, { $project: { _id: 0, product_name: "$_id", max_rating: "$max_rating" } }] )
+db.device.aggregate([ { $match: { "category": "laptop" } }] )
+db.device.aggregate([ { $match: { "category": "laptop" } }, { $group: { _id: "$product_name", max_rating: { $max: "$rating" } } }, { $project: { _id: 0, product_name: "$_id", max_rating: "$max_rating" } }] )
+db.device.aggregate([ { $match: { "category": "laptop" } }] )
+db.device.aggregate([ { $match: { "category": "laptop" } }, { $group: { _id: "$product_name", max_rating: { $max: "$rating" } } }] )
+  }
+    }
+      max_rating: {$max: "$rating"}
+db.device.aggregate([ { $match: { "category": "laptop" } }, { $group: { _id: category: "$product_name",
+db.shopCollection.aggregate([ { $group: { _id: { gender: "$gender", category: "$category" } } }, { $match: { _id: { gender: 'Female', category: 'laptop' } } }, { $lookup: { from: "device", localField: "product_name", foreignField: "product_name", as: "dev" } }] )
+db.shopCollection.aggregate([ { $group: { _id: { gender: "$gender", category: "$category" } } }, { $match: { _id: { gender: 'Female', category: 'laptop' } } }, { $lookup: { from: "device", localField: "product_name", foreignField: "product_name", as: "dev" } }, { $group: { _id: { product_name: "$dev.product_name", color: "$dev.color" }, total_count: { $sum: 1 } } }] )
+db.shopCollection.aggregate([ { $group: { _id: { gender: "$gender", category: "$category" } } }, { $match: { _id: { gender: 'Female', category: 'laptop' } } }, { $lookup: { from: "device", localField: "product_name", foreignField: "product_name", as: "dev" } }, { $group: { _id: { product_name: "$dev.product_name", color: "$dev.color" }, total_count: { $sum: 1 } } }, { $project: { _id: 0, color: "$dev.color", total_count: "$total_count" } }] )
+db.shopCollection.aggregate([ { $group: { _id: { gender: "$gender", category: "$category" }, total_count: { $sum: 1 } } }, { $match: { _id: { gender: 'Female', category: 'laptop' } } }, { $project: { _id: 0, category: "$_id", total_count: "$total_count" } }] )
+db.device.aggregate([ { $match: { "battery_type": "Li-Po" } }, { $lookup: { from: "shopCollection", localField: "product_name", foreignField: "product_name", as: "customers" } }, { $set: { "max_battery_life": { $add: ["$max_battery_life", 10] }, "customers.price": { $map: { input: "$customers.price", in: { $add: ["$$this", 100] } } } } }, { $project: { _id: 0, product_name: "$product_name", max_battery_life: "$max_battery_life" } }] )
+db.device.aggregate([ { $match: { "battery_type": "Li-Po" } }, { $lookup: { from: "shopCollection", localField: "product_name", foreignField: "product_name", as: "customers" } }, { $project: { _id: 0, price: "$customers.price", product_name: "$product_name", max_battery_life: "$max_battery_life" } }] )
+db.device.aggregate([ { $match: { "battery_type": "Li-Po" } }, { $lookup: { from: "shopCollection", localField: "product_name", foreignField: "product_name", as: "customers" } }, { $set: { "max_battery_life": { $add: ["$max_battery_life", 10] }, "customers.price": { $map: { input: "$customers.price", in: { $subtract: ["$$this", 100] } } } } }, { $project: { _id: 0, product_name: "$product_name", max_battery_life: "$max_battery_life" } }] )
+db.device.aggregate([ { $match: { "battery_type": "Li-Po" } }, { $lookup: { from: "shopCollection", localField: "product_name", foreignField: "product_name", as: "customers" } }, { $set: { "max_battery_life": { $add: ["$max_battery_life", 10] }, "customers.price": { $map: { input: "$customers.price", in: { $subtract: ["$$this", 100] } } } } }, { $project: { _id: 0, "customers.price": 1, product_name: "$product_name", max_battery_life: "$max_battery_life" } }] )
+db.device.aggregate([ { $match: { "battery_type": "Li-Po" } }, { $lookup: { from: "shopCollection", localField: "product_name", foreignField: "product_name", as: "customers" } }, { $set: { "max_battery_life": { $add: ["$max_battery_life", 10] }, "customers.price": { $map: { input: "$customers.price", in: { $subtract: ["$$this", 100] } } } } }, { $project: { _id: 0, "$customers.price": 1, product_name: "$product_name", max_battery_life: "$max_battery_life" } }] )
+db.device.aggregate([ { $match: { "battery_type": "Li-Po" } }, { $lookup: { from: "shopCollection", localField: "product_name", foreignField: "product_name", as: "customers" } }, { $set: { "max_battery_life": { $add: ["$max_battery_life", 10] }, "customers.price": { $map: { input: "$customers.price", in: { $subtract: ["$$this", 100] } } } } }, { $project: { _id: 0, price: "$customers.price", product_name: "$product_name", max_battery_life: "$max_battery_life" } }] )
+db.device.aggregate([ { $match: { "battery_type": "Li-Po" } }, { $lookup: { from: "shopCollection", localField: "product_name", foreignField: "product_name", as: "customers" } }, { $set: { "max_battery_life": { $add: ["$max_battery_life", 10] }, "customers.price": { $map: { input: "$customers.price", in: { $subtract: ["$$this", 100] } } } } }, { $project: { _id: 0, price: "customers.price", product_name: "$product_name", max_battery_life: "$max_battery_life" } }] )
+  }
+    }
+product_name: "$product_name", max_battery_life: "$max_battery_life"
+db.device.aggregate([ { $match: { "battery_type": "Li-Po" } },  { $lookup: { from: "shopCollection", localField: "product_name", foreignField: "product_name", as: "customers" } }, { $set: { "max_battery_life": { $add: ["$max_battery_life", 10] }, "customers.price": { $map: { input: "$customers.price", in: { $subtract: ["$$this", 100] } } } } },  { $project: { _id: 0, customers.price: 1,
+db.device.aggregate([ { $match: { "battery_type": "Li-Po" } }, { $lookup: { from: "shopCollection", localField: "product_name", foreignField: "product_name", as: "customers" } }, { $set: { "max_battery_life": { $add: ["$max_battery_life", 10] }, "customers.price": { $map: { input: "$customers.price", in: { $subtract: ["$$this", 100] } } } } }, { $project: { _id: 0, price: 1, product_name: "$product_name", max_battery_life: "$max_battery_life" } }] )
+db.device.aggregate([ { $match: { "battery_type": "Li-Po" } }, { $lookup: { from: "shopCollection", localField: "product_name", foreignField: "product_name", as: "customers" } }, { $set: { "max_battery_life": { $add: ["$max_battery_life", 10] }, "customers.price": { $map: { input: "$customers.price", in: { $subtract: ["$$this", 100] } } } } }, { $project: { _id: 0, "price": 1, product_name: "$product_name", max_battery_life: "$max_battery_life" } }] )
+db.device.aggregate([ { $match: { "battery_type": "Li-Po" } }, { $lookup: { from: "shopCollection", localField: "product_name", foreignField: "product_name", as: "customers" } }, { $set: { "max_battery_life": { $add: ["$max_battery_life", 10] }, "customers.price": { $map: { input: "$customers.price", in: { $subtract: ["$$this", 100] } } } } }, { $project: { _id: 0, "price": 1, product_name: "$product_name", max_battery_life: "$max_battery_life" } }] )
+db.device.aggregate([ { $match: { "battery_type": "Li-Po" } }, { $lookup: { from: "shopCollection", localField: "product_name", foreignField: "product_name", as: "customers" } }, { $set: { "max_battery_life": { $add: ["$max_battery_life", 10] }, "customers.price": { $map: { input: "$customers.price", in: { $subtract: ["$$this", 100] } } } } }] )
+db.device.aggregate([ { $match: { "battery_type": "Li-Po" } }, { $lookup: { from: "shopCollection", localField: "product_name", foreignField: "product_name", as: "customers" } }, { $set: { "max_battery_life": { $add: ["$max_battery_life", 10] }, "customers.price": { $map: { input: "$customers.price", in: { $subtract: ["$$this", 100] } } } } }, { $match: { "product_name": "ElectroMax-6000" } }, { $project: { _id: 0, "customers.price": 1, product_name: "$product_name", max_battery_life: "$max_battery_life" } }] )
+db.device.aggregate([ { $match: { "battery_type": "Li-Po" } }, { $lookup: { from: "shopCollection", localField: "product_name", foreignField: "product_name", as: "customers" } }, { $project: { _id: 0, price: "$customers.price", product_name: "$product_name", max_battery_life: "$max_battery_life" } }] )
+db.device.aggregate([ { $match: { "battery_type": "Li-Po" } }, { $lookup: { from: "shopCollection", localField: "product_name", foreignField: "product_name", as: "customers" } }, { $set: { "max_battery_life": { $add: ["$max_battery_life", 10] }, "customers.price": { $map: { input: "$customers.price", in: { $subtract: ["$$this", 100] } } } } }, { $project: { _id: 0, "customers.price": 1, product_name: "$product_name", max_battery_life: "$max_battery_life" } }] )
+db.device.aggregate([ { $match: { "battery_type": "Li-Po" } }, { $lookup: { from: "shopCollection", localField: "product_name", foreignField: "product_name", as: "customers" } }, { $set: { "max_battery_life": { $add: ["$max_battery_life", 10] }, "customers.price": { $map: { input: "$customers.price", in: { $subtract: ["$$this", 100] } } } } }, { $project: { _id: 0, "customers.price": 1, product_name: "$product_name", max_battery_life: "$max_battery_life" } }] )
+db.device.aggregate([ { $match: { "battery_type": "Li-Po" } }, { $lookup: { from: "shopCollection", localField: "product_name", foreignField: "product_name", as: "customers" } }, { $set: { "max_battery_life": { $add: ["$max_battery_life", 10] }, "customers.price": { $map: { input: "$customers.price", in: { $subtract: ["$$this", 100] } } } } }, { $project: { _id: 0, price: "$customers.price[1]", product_name: "$product_name", max_battery_life: "$max_battery_life" } }] )
+db.device.aggregate([ { $match: { "battery_type": "Li-Po" } }, { $lookup: { from: "shopCollection", localField: "product_name", foreignField: "product_name", as: "customers" } }, { $set: { "max_battery_life": { $add: ["$max_battery_life", 10] }, "customers.price": { $map: { input: "$customers.price", in: { $subtract: ["$$this", 100] } } } } }, { $project: { _id: 0, price: "$customers.price[0]", product_name: "$product_name", max_battery_life: "$max_battery_life" } }] )
+db.device.aggregate([ { $match: { "battery_type": "Li-Po" } }, { $lookup: { from: "shopCollection", localField: "product_name", foreignField: "product_name", as: "customers" } }, { $set: { "max_battery_life": { $add: ["$max_battery_life", 10] }, "customers.price": { $map: { input: "$customers.price", in: { $subtract: ["$$this", 100] } } } } }, { $project: { _id: 0, price: "$customers.price", product_name: "$product_name", max_battery_life: "$max_battery_life" } }] )
+db.device.aggregate([ { $match: { "battery_type": "Li-Po" } }, { $lookup: { from: "shopCollection", localField: "product_name", foreignField: "product_name", as: "customers" } }, { $set: { "max_battery_life": { $add: ["$max_battery_life", 10] }, "customers.price": { $add: ["$customers.price", 100] } } }, { $project: { _id: 0, price: "$customers.price", product_name: "$product_name", max_battery_life: "$max_battery_life" } }] )
+db.device.aggregate([ { $match: { "battery_type": "Li-Po" } }, { $lookup: { from: "shopCollection", localField: "product_name", foreignField: "product_name", as: "customers" } }, { $project: { _id: 0, price: "$customers.price", product_name: "$product_name", max_battery_life: "$max_battery_life" } }] )
+db.device.aggregate([ { $match: { "battery_type": "Li-Po" } }, { $set: { "max_battery_life": { $subtract: ["$max_battery_life", 10] } } }, { $lookup: { from: "shopCollection", localField: "product_name", foreignField: "product_name", as: "customers" } }, /* { $inc: { "customers.price": 100 } },*/ { $project: { _id: 0, price: "$customers.price", product_name: "$product_name", max_battery_life: "$max_battery_life" } }] )
+db.device.aggregate([ { $match: { "battery_type": "Li-Po" } }, { $lookup: { from: "shopCollection", localField: "product_name", foreignField: "product_name", as: "customers" } }, { $project: { _id: 0, price: "$customers.price", product_name: "$product_name", max_battery_life: "$max_battery_life" } }] )
+db.device.aggregate([ { $match: { "battery_type": "Li-Po" } }, { $set: { "max_battery_life": { $subtract: ["$max_battery_life", 10] } } }, { $lookup: { from: "shopCollection", localField: "product_name", foreignField: "product_name", as: "customers" } }, /* { $inc: { "customers.price": 100 } },*/ { $project: { _id: 0, price: "$customers.price", product_name: "$product_name", max_battery_life: "$max_battery_life" } }] )
+db.device.aggregate([ { $match: { "battery_type": "Li-Po" } }, { $lookup: { from: "shopCollection", localField: "product_name", foreignField: "product_name", as: "customers" } }, { $project: { _id: 0, price: "$customers.price", product_name: "$product_name", max_battery_life: "$max_battery_life" } }] )
+db.device.aggregate([ { $match: { "battery_type": "Li-Po" } }, { $set: { "max_battery_life": { $subtract: ["$max_battery_life", 10] } } }, { $lookup: { from: "shopCollection", localField: "product_name", foreignField: "product_name", as: "customers" } }, /* { $inc: { "customers.price": 100 } },*/ { $project: { _id: 0, price: "$customers.price", product_name: "$product_name", max_battery_life: "$max_battery_life" } }] )
+db.device.aggregate([ { $match: { "battery_type": "Li-Po" } }, { $lookup: { from: "shopCollection", localField: "product_name", foreignField: "product_name", as: "customers" } }, { $project: { _id: 0, price: "$customers.price", product_name: "$product_name", max_battery_life: "$max_battery_life" } }] )
+db.device.aggregate([ { $match: { "battery_type": "Li-Po" } }, { $lookup: { from: "shopCollection", localField: "product_name", foreignField: "product_name", as: "customers" } }, { $project: { _id: 0, price: { $avg: "$customers.price" }, product_name: "$product_name", max_battery_life: "$max_battery_life" } }] )
+db.device.aggregate([ { $match: { "battery_type": "Li-Po" } }, { $set: { "max_battery_life": { $subtract: ["$max_battery_life", 10] } } }, { $lookup: { from: "shopCollection", localField: "product_name", foreignField: "product_name", as: "customers" } }, /* { $inc: { "customers.price": 100 } },*/ { $project: { _id: 0, price: { $avg: "$customers.price" }, product_name: "$product_name", max_battery_life: "$max_battery_life" } }] )
+db.device.aggregate([ { $match: { "battery_type": "Li-Po" } }, { $subtract: { "max_battery_life": { $add: ["$max_battery_life", 10] } } }, { $lookup: { from: "shopCollection", localField: "product_name", foreignField: "product_name", as: "customers" } }, /* { $inc: { "customers.price": 100 } },*/ { $project: { _id: 0, price: { $avg: "$customers.price" }, product_name: "$product_name", max_battery_life: "$max_battery_life" } }] )
+db.device.aggregate([ { $match: { "battery_type": "Li-Po" } }, { $set: { "max_battery_life": { $add: ["$max_battery_life", 10] } } }, { $lookup: { from: "shopCollection", localField: "product_name", foreignField: "product_name", as: "customers" } }, /* { $inc: { "customers.price": 100 } },*/ { $project: { _id: 0, price: { $avg: "$customers.price" }, product_name: "$product_name", max_battery_life: "$max_battery_life" } }] )
+  // { $inc: { "customers.price": 100 } },
+  },
+    }
+foreignField: "product_name", as: "customers"
+$lookup: { from: "shopCollection", localField: "product_name",
+db.device.aggregate([ { $match: { "battery_type": "Li-Po" } }, { $set: { "max_battery_life": { $add: ["$max_battery_life", 10] }, } }  {
+db.device.aggregate([ { $match: { "battery_type": "Li-Po" } }, { $inc: { max_battery_life: 10 } }, { $lookup: { from: "shopCollection", localField: "product_name", foreignField: "product_name", as: "customers" } }, { $inc: { "customers.price": 100 } }, { $project: { _id: 0, price: { $avg: "$customers.price" }, product_name: "$product_name", max_battery_life: "$max_battery_life" } }] )
+db.device.aggregate([ { $match: { "battery_type": "Li-Po" } }, { $inc: { max_battery_life: 10 } }, { $lookup: { from: "shopCollection", localField: "product_name", foreignField: "product_name", as: "customers" } }, { $inc: { "customers.price": 100 } }, { $project: { _id: 0, price: { $avg: "$customers.price" }, product_name: "$product_name", max_battery_life: "$max_battery_life" } }] )
+  }
+    }
+product_name: "$product_name", max_battery_life: "$max_battery_life"
+$project: { _id: 0, price: { $avg: "$customers.price" },
+db.device.aggregate([ { $match: { "battery_type": "Li-Po" } }, { $inc: { max_battery_life: 10 } },  { $lookup: { from: "shopCollection", localField: "product_name", foreignField: "product_name", as: "customers" } }, { $inc: { "customers.price": 100 }, } {
+db.device.aggregate([ { $match: { "battery_type": "Li-Po" } }, { $lookup: { from: "shopCollection", localField: "product_name", foreignField: "product_name", as: "customers" } }, { $project: { _id: 0, price: { $avg: "$customers.price" }, product_name: "$product_name", max_battery_life: "$max_battery_life" } }] ).pretty()
+db.device.aggregate([ { $match: { "battery_type": "Li-Po" } }, { $lookup: { from: "shopCollection", localField: "product_name", foreignField: "product_name", as: "customers" } }, { $project: { _id: 0, price: { $avg: "$customers.price" }, product_name: "$product_name", max_battery_life: "$max_battery_life", battery_type: "$battery_type" } }] )
+db.device.aggregate([ { $match: { "battery_type": "Li-Po" } }, { $lookup: { from: "shopCollection", localField: "product_name", foreignField: "product_name", as: "customers" } }, { $project: { _id: 0, price: { $avg: "$customers.price" }, product_name: "$product_name", max_battery_life: "$max_battery_life" } }] )
+use shop
+учше
+db.shopCollection.aggregate([ { $group: { _id: { gender: "$gender", category: "$category" }, total_count: { $sum: 1 } } }, { $match: { _id: { gender: 'Female', category: 'game console' } } }, { $project: { _id: 0, category: "$_id", total_count: "$total_count" } }] ).pretty()
+db.shopCollection.aggregate([ { $group: { _id: { gender: "$gender", category: "$category" }, total_count: { $sum: 1 } } }, { $match: { _id: { gender: 'Female', category: 'game console' } } }, { $project: { _id: 0, category: "$_id", total_count: "$total_count" } }] )
+db.shopCollection.aggregate([ { $group: { _id: { gender: "$gender", category: "$category" }, total_count: { $sum: 1 } } }] )
+use shop
+db.shopCollection.aggregate([ { $group: { _id: { gender: "$gender", category: "$category" }, total_count: { $sum: 1 } } }, { $match: { category: "game console", gender: "Female" } }, { $project: { _id: 0, biggest_category: "$_id", total_count: "$total_count" } }] )
+db.shopCollection.aggregate([ { $group: { _id: { gender: "$field1", category: "$field2" }, total_count: { $sum: 1 } } }] )
+db.shopCollection.aggregate([ { $group: { _id: { gender: "$field1", category: "$field2" }, total_count: { $sum: 1 } } }, { $match: { category: "game console", gender: "Female" } }, { $project: { _id: 0, biggest_category: "$_id", total_count: "$total_count" } }] )
+db.shopCollection.aggregate([ { $group: { _id: { gender: "$field1", category: "$field2" }, total_count: { $sum: 1 } } }, { $match: { category: "game console", gender: "Female" } }, { $project: { _id: 0, total_count: "$total_count" } }] )
+{ $match: { category: "game console", gender: "Female" } }, { $project: { _id: 0, total_count: "$total_count" } } ])
+  },
+    }
+db.shopCollection.aggregate([ { $group: { _id: { gender: "$field1", category: "$field2" } total_count: { $sum: 1 }
+db.shopCollection.aggregate([ { $group: { _id: "$category", totalPurchases: { $sum: 1 } } }, { $sort: { totalPurchases: -1 } }, { $limit: 1 }, { $project: { _id: 0, mostPurchasedCategory: "$_id", totalPurchases: "$totalPurchases" } }] )
+db.shopCollection.aggregate([ { $group: { _id: "$category", totalPurchases: { $sum: 1 } } }, { $sort: { totalPurchases: -1 } }] )
+db.shopCollection.aggregate([ { $group: { _id: "$category", totalPurchases: { $sum: 1 } } }] )
+db.shopCollection.aggregate([ { $group: { _id: "$category", totalPurchases: { $sum: 1 } } }, { $sort: { totalPurchases: -1 } }, { $limit: 1 }, { $project: { _id: 0, mostPurchasedCategory: "$_id", totalPurchases: "totalPurchases" } }] )
+db.shopCollection.aggregate([ { $group: { _id: "$category", totalPurchases: { $sum: 1 } } }, { $sort: { totalPurchases: -1 } }, { $limit: 1 }, { $project: { _id: 0, mostPurchasedCategory: "$category", totalPurchases: "totalPurchases" } }] )
+db.device.aggregate([ { $match: { "loudness_dB": 1 } }, { $lookup: { from: "shopCollection", localField: "product_name", foreignField: "product_name", as: "customers" } }, { $project: { _id: 0, avg_age: { $avg: "$customers.age" }, product_name: "$product_name" } }] )
+db.device.aggregate([ { $match: { "loudness_dB": 1 } }, { $lookup: { from: "shopCollection", localField: "product_name", foreignField: "product_name", as: "customers" } }, { $project: { _id: 0, avg_age: { $avg: "$age" }, product_name: "$product_name" } }] )
+db.device.aggregate([ { $match: { "loudness_dB": 1 } }, { $lookup: { from: "shopCollection", localField: "product_name", foreignField: "product_name", as: "customers" } }, { $project: { _id: 0, age: "$customers.age", product_name: "$product_name" } }] )
+db.device.aggregate([ { $match: { "loudness_dB": 1 } }, { $project: { _id: 0, /*aby nevypisovat ObjectId*/ product_name: "$product_name" } }] )
+db.device.aggregate([ { $match: { "loudness_dB": 1 } }, { $lookup: { from: "shopCollection", localField: "product_name", foreignField: "product_name", as: "customers" } }, { $project: { _id: 0, age: "$customers.age" } }] )
+db.device.aggregate([ { $match: { "loudness_dB": 1 } }, { $project: { _id: 0, /*aby nevypisovat ObjectId*/ product_name: "$product_name" } }] )
+db.device.aggregate([ { $match: { "loudness_dB": 1 } }, { $project: { _id: 0, /*aby nevypisovat ObjectId*/ product_name: "$product_name", loudness_dB: "$loudness_dB" } }] )
+db.device.aggregate([ { $match: { "loudness_dB": 1 } }, { $project: { _id: 0, /*aby nevypisovat ObjectId*/ product_name: "$product_name", loudness_dB: "$loudness_dB", pocetPredmetu: { $size: "$product_name" } } }] )
+db.device.aggregate([ { $match: { "loudness_dB": 1 } }, { $lookup: { from: "shopCollection", localField: "product_name", foreignField: "product_name", as: "customers" } }, { $project: { _id: 0, age: "$customers.age", product_name: "$product_name" } }] )
+db.device.aggregate([ { $match: { "loudness_dB": 1 } }, { $project: { _id: 0, /*aby nevypisovat ObjectId*/ product_name: "$product_name", loudness_dB: "$loudness_dB" } }] )
+db.device.aggregate([ { $group: { _id: null, minLoudness: { $min: "$loudness_dB" } } }, { $match: { loudness_dB: { $eq: "$$minLoudness" } } }] )
+db.device.aggregate([ { $group: { _id: 0, minLoudness: { $min: "$loudness_dB" } } }, { $match: { "loudness_dB": { $eq: "$$minLoudness" } } }, { $project: { _id: 0, /*aby nevypisovat ObjectId*/ product_name: "$product_name", loudness_dB: "$loudness_dB" } }] )
+db.device.aggregate([ { $group: { _id: null, minLoudness: { $min: "$loudness_dB" } } }] )
+db.device.aggregate([ { $group: { _id: null, minLoudness: { $min: "$loudness_dB" } } }, { $match: { "loudness_dB": "minLoudness" } }, { $project: { _id: 0, /*aby nevypisovat ObjectId*/ product_name: "$product_name", loudness_dB: "$loudness_dB" } }] )
+db.device.aggregate([ { $group: { _id: null, minLoudness: { $min: "$loudness_dB" } } }, { $match: { "loudness_dB": minLoudness } }, { $project: { _id: 0, /*aby nevypisovat ObjectId*/ product_name: "$product_name", loudness_dB: "$loudness_dB" } }] )
+db.device.aggregate([ { $match: { "loudness_dB": { $min: "$loudness_dB" } } }, { $project: { _id: 0, /*aby nevypisovat ObjectId*/ product_name: "$product_name", loudness_dB: "$loudness_dB" } }] )
+db.device.aggregate([ { $match: { "loudness_dB": 1 } }, { $project: { _id: 0, product_name: "$product_name", loudness_dB: "$loudness_dB" } }] )
+db.device.aggregate([ { $match: { "loudness_dB": 1 } }, { $project: { product_name: "$product_name", loudness_dB: "$loudness_dB" } }] )
+db.device.aggregate([ { $match: { "loudness_dB": 1 } }, { $project: { _id: 0, product_name: "$product_name", loudness_dB: "$loudness_dB" } }] )
+db.device.aggregate([ { $match: { "loudness_dB": 1 } }, { $project: { product_name: "$product_name" } }] )
+{ $project: { product_name: "$product_name"; } }
+db.device.aggregate([ $match: { "loudness_dB": 1 },
+])
+{ $project: { product_name: "$product_name"; } }
+db.device.aggregate([ $match: { "loudness_dB": 1 },
+{ $project: { _id: 0, product_name: "$product_name" } } ])
+db.device.aggregate([ $match: { "loudness_dB": 1 },
+{ $project: { _id: 0, device_name: "$product_name" } } ])
+db.device.aggregate([ $match: { "loudness_dB": 1 },
+  }
+$project: { _id: 0, device_name: "$product_name"
+db.device.aggregate([ $match: { "loudness_dB": 1 },
+{ $project: { _id: 0, device_name: "$product_name" } } ])
+  },
+      minLoudness: { $min : "$loudness_dB"} 
+db.device.aggregate([ $match: {
+db.device.aggregate([ { minLoudness: { $min: "$loudness_dB" } }, { $project: { _id: 0, device_name: "$product_name" } }] )
+db.device.aggregate([ { $sort: { loudness_dB: { $min: "$loudness_dB" } } }, { $project: { _id: 0, device_name: "$product_name" } }] )
+db.device.aggregate([ { $sort: { loudness_dB: 1 } }, { $project: { _id: 0, device_name: "$product_name" } }] )
+db.device.aggregate([ { $group: { _id: { $eq: ['$loudness_dB', 1] }, "$product_name": "product_name" } }] )
+db.device.aggregate([ { $group: { _id: { $eq: ['$loudness_dB', 1] }, product_name: "$product_name" } }] )
+db.device.aggregate([ { $group: { _id: { $eq: ['$loudness_dB', 1] }, product_name: "product_name" } }] )
+db.device.aggregate([ { $group: { _id: { $eq: ['$loudness_dB', 1] } } }] )
+db.device.aggregate([ { $group: { _id: { $eq: ['$loudness_dB', 1] }, product_name: "product_name" } }] )
+db.device.aggregate([ { $group: { _id: { $eq: ['$loudness_dB', 1] }, product_name: "$product_name" } }] )
+db.device.aggregate([ { $group: { _id: "$product_name", loudness_dB: { $eq: 1 }  } }] )
+db.device.aggregate([ { $group: { _id: "$product_name", minLoudness: { loudness_dB: { $eq: 1 } } } }] )
+db.device.aggregate([ { $group: { _id: "$loudness_dB", minLoudness: { $min: "$loudness_dB" } } }] )
+db.device.aggregate([ { $group: { _id: "$product_name", minLoudness: { $eq: ["$loudness_dB", 1] } } }] )
+it
+db.device.aggregate([ { $group: { _id: "$product_name", minLoudness: { $min: "$loudness_dB" } } }] )
+it
+ше
+db.device.aggregate([ { $group: { _id: "$product_name", minLoudness: { $min: "$loudness_dB" } } }, { $project: { _id: 0, product_name: "$product_name", loudness_dB: "$loudness_dB" } }] )
+db.device.aggregate([ { $group: { _id: 0, minLoudness: { $min: "$loudness_dB" } } }, { $match: { minLoudness: { $exists: true } } }, { $project: { _id: 0, product_name: "$product_name", loudness_dB: "$loudness_dB" } }] )
+db.device.aggregate([ { $group: { _id: 0, minLoudness: { $min: "$loudness_dB" } } }, { $match: { minLoudness: { $exists: true } } }] )
+db.device.aggregate([ { $group: { _id: 0, minLoudness: { $min: "$loudness_dB" } } }, { $match: { minLoudness: { $exists: true } } }, { $project: { _id: 0, product_name: "$product_name", loudness_dB: "$loudness_dB" } }] )
+db.device.aggregate([ { $group: { _id: 0, minLoudness: { $min: "$loudness_dB" } } }, { $match: { $expr: { $eq: ["$loudness_dB", "$minLoudness"] } } }] )
+db.device.aggregate([ { $group: { _id: 0, minLoudness: { $min: "$loudness_dB" } } }] )
+db.device.aggregate([ { $group: { _id: 0, minLoudness: { $min: "$loudness_dB" } } }, { $match: { $expr: { $eq: ["$loudness_dB", "$minLoudness"] } } }, { $project: { _id: 0, product_name: "$product_name", loudness_dB: "$loudness_dB" } }] )
+db.device.aggregate([ { $group: { _id: "$product_name", minLoudness: { $min: "$loudness_dB" } } }, { $match: { $expr: { $eq: ["$loudness_dB", "$minLoudness"] } } }, { $project: { _id: 0, product_name: "$product_name", loudness_dB: "$loudness_dB" } }] )
+db.collection.aggregate([ { $group: { _id: "$product_name", minLoudness: { $min: "$loudness_dB" } } }, { $match: { $expr: { $eq: ["$loudness_dB", "$minLoudness"] } } }, { $project: { _id: 0, product_name: "$product_name", loudness_dB: "$loudness_dB" } }] )
+  }
+    }
+db.collection.aggregate([ { $group: { _id: "$product_name", minLoudness: { $min: "$loudness_dB" } } }, { $match: { $expr: { $eq: ["$loudness_dB", "$minLoudness"] } } }, { $project: { _id: 0, product_name: "$product_name" loudness_dB: "$loudness_dB"
+db.device.aggregate([ { $project: { _id: 0, product_name: "$product_name", loudness_dB: { $eq: 1 } } }] )
+db.device.aggregate([ { "loudness_dB": { $eq: 1 } }, { $project: { _id: 0, product_name: "$product_name", loudness_dB: { $eq: 1 } } }] )
+db.device.aggregate([ { "$loudness_dB": { $eq: 1 } }, { $project: { _id: 0, product_name: "$product_name", loudness_dB: "$loudness_dB" } }] )
+db.device.aggregate([ { "loudness_dB": { $eq: 1 } }, { $project: { _id: 0, product_name: "$product_name", loudness_dB: "$loudness_dB" } }] )
+db.device.aggregate([ { $sort: { loudness_dB: 1 } }, { $limit: 20 }, { $project: { _id: 0, product_name: "$product_name", loudness_dB: "$loudness_dB" } }] )
+db.device.aggregate([ { $sort: { loudness_dB: 1 } }, { $limit: 10 }, { $project: { _id: 0, product_name: "$product_name", loudness_dB: "$loudness_dB" } }] )
+db.device.aggregate([ { $sort: { loudness_dB: 1 } }, { $limit: 1 }, { $project: { _id: 0, product_name: "$product_name", loudness_dB: "$loudness_dB" } }] )
+db.device.aggregate([ { $sort: { loudness_dB: 1 } }, { $limit: 1 }, { $lookup: { from: "shopCollection", localField: "product_name", foreignField: "product_name", as: "customers" } }, { $project: { _id: 0, age: "$customers.age", product_name: "$product_name" } }] )
+db.shopCollection.find({"product_name" : "CyberNex-3000"})
+db.shopCollection.find({"$product_name" : "CyberNex-3000"})
+db.device.aggregate([ { $sort: { loudness_dB: 1 } }, { $limit: 1 }, { $lookup: { from: "shopCollection", localField: "product_name", foreignField: "product_name", as: "customers" } }, { $project: { _id: 0, age: "$customers.age" } }] )
+db.device.aggregate([ { $sort: { loudness_dB: 1 } }, { $limit: 1 }, { $lookup: { from: "customersCollection", localField: "product_name", foreignField: "product_name", as: "customers" } }, { $project: { _id: 0, age: "$customers.age" } }] )
+db.device.aggregate([ { $sort: { loudness_dB: 1 } }, { $limit: 1 }, { $project: { _id: 0, product_name: "$product_name" } }, { $lookup: { from: "customersCollection", localField: "product_name", foreignField: "product_name", as: "customers" } }, { $project: { _id: 0, age: "$customers.age" } }] )
+db.device.aggregate([ { $sort: { loudness_dB: 1 } }, { $limit: 1 }, { $project: { _id: 0, product_name: "$product_name" } }, { $lookup: { from: "customersCollection", localField: "product_name", foreignField: "product_name", as: "customers" } }, { $unwind: "$customers" }, { $project: { _id: 0, age: "$customers.age" } }] )
+db.device.aggregate([ { $sort: { loudness_dB: 1 } }, { $limit: 1 }, { $lookup: { from: "customersCollection", localField: "product_name", foreignField: "product_name", as: "customers" } }, { $project: { _id: 0, age: "$customers.age" } }] )
+db.device.aggregate([ { $sort: { loudness_dB: 1 } }, { $limit: 1 }, { $lookup: { from: "customersCollection", localField: "product_name", foreignField: "product_name", as: "customers" } }, { $unwind: "$customers" }, { $project: { _id: 0, age: "$customers.age" } }] )
+db.device.aggregate([ { $sort: { loudness_dB: 1 } }, { $limit: 1 }, { $project: { _id: 0, product_name: "$product_name", loudness_dB: "$loudness_dB" } }, { $lookup: { from: "customersCollection", localField: "product_name", foreignField: "product_name", as: "customers" } }, { $unwind: "$customers" }, { $project: { _id: 0, age: "$customers.age" } }] )
+db.shopCollection.aggregate([ { $match: { category: "tablet", product_name: "XG-2000", country: "Germany" } }, { $group: { _id: null, averagePrice: { $avg: "$price" } } }] )
+db.shopCollection.aggregate([ { $match: { category: "tablet", product_name: "XG-2000", country: "Germany" } }, { $group: { _id: none, averagePrice: { $avg: "$price" } } }] )
+db.shopCollection.aggregate([ { $match: { category: "tablet", product_name: "XG-2000", country: "Germany" } }, { $group: { _id: None, averagePrice: { $avg: "$price" } } }] )
+db.shopCollection.aggregate([ { $match: { category: "tablet", product_name: "XG-2000", country: "Germany" } }, { $group: { _id: 0, averagePrice: { $avg: "$price" } } }] )
+db.shopCollection.find({"product_name" : "CyberNex-3000"})
+db.shopCollection.find({"$product_name" : "CyberNex-3000"})
+db.device.aggregate([ { $sort: { loudness_dB: 1 } }, { $limit: 1 }, { $project: { _id: 0, product_name: "$product_name", loudness_dB: "$loudness_dB" } }, { $lookup: { from: "customersCollection", localField: "product_name", foreignField: "product_name", as: "customers" } }, { $project: { _id: 0, age: "$customers.age" } }] )
+  },
+    }
+foreignField: "product_name", as: "customers"
+$lookup: { from: "customersCollection", localField: "product_name",
+db.device.aggregate([ { $sort: { loudness_dB: 1 } }, { $limit: 1 }, { $project: { _id: 0, product_name: "$product_name", loudness_dB: "$loudness_dB" } } {
+db.device.aggregate([ { $sort: { loudness_dB: 1 } }, { $limit: 1 }, { $project: { _id: 0, product_name: "$product_name", loudness_dB: "$loudness_dB" } }] )
+db.device.aggregate([ { $sort: { loudness_dB: 1 } }, { $limit: 1 }, { $project: { _id: 0, product_name: 1, loudness_dB: 2 } }] )
+db.device.aggregate([ { $sort: { loudness_dB: 1 } }, { $limit: 1 }, { $project: { _id: 0, product_name: 1, loudness_dB: 1 } }] )
+  }
+    }
+db.device.aggregate([ { $sort: { loudness_dB: 1 } }, { $limit: 1 }, { $project: { _id: 0, product_name: 1 loudness_dB: 1
+db.device.aggregate([ { $sort: { loudness_dB: 1 } }, { $limit: 1 }, { $project: { _id: 0, product_name: 1 } }] )
+db.collection.aggregate([ { $sort: { loudness_dB: 1 } }, { $limit: 1 }, { $project: { _id: 0, product_name: 1 } }] )
+db.collection.aggregate([ { $sort: { loudness_dB: 1 } }, { $limit: 1 }, { $project: { _id: 0, product_name: 1 } } ]}
+use shop
+db.shopCollection.aggregate([ { $match: { category: "tablet", product_name: "XG-2000", country: "Germany" } }, { $group: { _id: null, averagePrice: { $avg: "$price" } } }] )
+/* 1. Průměrná cena tabletu XG-2000 v Německu. a. Filtrace na záznamy pro tablet XG-2000 v Německu. b. Výpočet průměrné ceny. */
+db.shopCollection.aggregate([ { $match: { category: "tablet", product_name: "XG-2000", country: "Germany" } }, { $group: { _id: null, averagePrice: { $avg: "$price" } } }] )
+//    b. Výpočet průměrné ceny.
+//    a. Filtrace na záznamy pro tablet XG-2000 v Německu.
+// 1. Průměrná cena tabletu XG-2000 v Německu.
+db.shopCollection.aggregate([ { "$comment": "Průměrná cena tabletu XG-2000 v Německu.", $match: { category: "tablet", product_name: "XG-2000", country: "Germany", $comment: "Filtrace na záznamy pro tablet XG-2000 v Německu." } }, { $group: { _id: null, averagePrice: { $avg: "$price" } } }] )
+db.shopCollection.aggregate([ { $match: { category: "tablet", product_name: "XG-2000", country: "Germany", $comment: "Filtrace na záznamy pro tablet XG-2000 v Německu." } }, { $group: {averagePrice: { $avg: "$price" } } }] )
+db.shopCollection.aggregate([ { $comment: "Průměrná cena tabletu XG-2000 v Německu.", $match: { category: "tablet", product_name: "XG-2000", country: "Germany", $comment: "Filtrace na záznamy pro tablet XG-2000 v Německu." } }, { $group: { _id: null, averagePrice: { $avg: "$price" } } }] )
+db.shopCollection.aggregate([ { $match: { category: "tablet", product_name: "XG-2000", country: "Germany", $comment: "Výpočet průměrné ceny." } }, { $group: { _id: null, averagePrice: { $avg: "$price" } } }] )
+db.shopCollection.aggregate([ { $match: { category: "tablet", product_name: "XG-2000", country: "Germany" } }, { $group: { _id: null, averagePrice: { $avg: "$price" } } }, $comment: "Výpočet průměrné ceny."] )
+db.shopCollection.aggregate([ { $match: { category: "tablet", product_name: "XG-2000", country: "Germany" } }, { $group: { _id: null, averagePrice: { $avg: "$price" } } }, { $comment: "Výpočet průměrné ceny." }] )
+db.shopCollection.aggregate([ { $match: { category: "tablet", product_name: "XG-2000", country: "Germany" } }, { $group: { _id: null, averagePrice: { $avg: "$price" }, $comment: "Výpočet průměrné ceny." } }] )
+db.shopCollection.aggregate([ { $match: { category: "tablet", product_name: "XG-2000", country: "Germany" } }, { $group: { _id: null, averagePrice: { $avg: "$price" }, $comment: "Find even values." } }] )
+  }
+    }
+{ $group: { _id: null, averagePrice: { $avg: "$price" } $comment: "Výpočet průměrné ceny."
+  },
+    }
+product_name: "XG-2000", country: "Germany"
+db.shopCollection.aggregate([ { $match: {                         $comment: "Filtrace na záznamy pro tablet XG-2000 v Německu." category: "tablet",
+$comment: "1. Průměrná cena tabletu XG-2000 v Německu."
+db.device.find({})
+db.shopCollection.aggregate([ { $match: { category: "tablet", product_name: "XG-2000", country: "Germany" } }, { $group: { _id: null, averagePrice: { $avg: "$price" } } }] )
+db.device.getShardDistribution()
+db.shopCollection.getShardDistribution()
+use shop
+exit
+db.shopCollection.getShardDistribution()
+db.device.getShardDistribution()
+use shop
+sh.shardCollection("shop.device", {"device_id" : "hashed"})
+db.shopCollection.find({})
+db.shopCollection.show()
+db.createUser( { user: "user", pwd: "user", roles: [{ role: "readWrite", db: "shop" }] } )
+use shop
+db.createUser( { user: "rootUser", pwd: "heslo", roles: [{ role: "userAdminAnyDatabase", db: "admin" }] } )
+use admin
+db.shopCollection.getShardDistribution()
+use shop
+sh.shardCollection("shop.shopCollection", {"user_id" : "hashed"})
+sh.enableSharding("shop")
+use shop
+sh.addShard("shard2/172.17.0.1:27024,172.17.0.1:27025,172.17.0.1:27026")
+sh.addShard("shard1/172.17.0.1:27021,172.17.0.1:27022,172.17.0.1:27023")/172.17.0.1:27021,172.17.0.1:27022,172.17.0.1:27023")0.1:27021,172.17.0.1:27022,172.17.0.1:27023")/172.17.0.1:27021,172.17.0.1:27022,172.17.0.1:27023")22,172.17.0.1:27023")/172.17.0.1:27021,172.17.0.1:27022,172.17.0.1:27023")023")/172.17.0.1:27021,172.17.0.1:27022,172.17.0.1:27023")

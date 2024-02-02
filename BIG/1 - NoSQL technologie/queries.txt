@@ -1,0 +1,443 @@
+/*
+1. Průměrná cena tabletu XG-2000 v Německu.
+  a. Vyfiltrujeme záznamy pro tablet XG-2000 v Německu.
+  b. Seskupíme všechny dokumenty po filtrace a vypočteme průměr.
+*/
+db.shopCollection.aggregate([
+  {
+    $match: {
+      category: "tablet",
+      product_name: "XG-2000",
+      country: "Germany",
+    }
+  },
+  {
+    $group: {
+      _id: 0,
+      averagePrice: { $avg: "$price" }
+    }
+  },
+])
+
+
+/*
+2. Jména zařízení, která jsou nejtišší.
+  a. Vyfiltrujeme zařízení s nejmenší hlasitostí(1 dB).
+  b. Vytvořime projekci pro zobrazení názvů zařízení a úrovní šumu 
+*/
+db.device.aggregate([
+  { $match: { "loudness_dB": 1 } },
+  {
+    $project: {
+      _id: 0, //aby nevypisovat ObjectId
+      product_name: "$product_name"       
+    }
+  }
+])
+
+
+/*
+3. Průměrný věk zákazníků, kteří zakoupili toto nejtišší zařízení.
+  a. Vyfiltrujeme  zařízení s nejmenší hlasitostí(1 dB).
+  b. Hledáme záznamy zákazníků, kteří koupili tyto nejtišší zařízení v kolekci shopCollection.
+  c. Vytvořime projekci pro zobrazení pouze průměrného věku zákazníků a nazvů zařízení.
+*/
+db.device.aggregate([
+  { $match: { "loudness_dB": 1 } },
+  {
+    $lookup: {
+      from: "shopCollection", 
+      localField: "product_name",
+      foreignField: "product_name",
+      as: "customers"
+    }
+  },
+  {
+    $project: {
+      _id: 0,
+      avg_age: { $avg: "$customers.age" },
+      product_name: "$product_name"
+    }
+  }
+])
+
+
+/*
+4. Nejčastěji nakupovaná kategorie zařízení.
+  a. Seskupíme záznamy podle atributu category a napočítáme počty záznamů v každé kategorii pomoci sum
+  b. Seřadíme kategorií podle počtu nákupů(sestupně).
+  c. Omezimé na nejčastěji se vyskytující kategorii.
+  d. Vytvořime projekci pro zobrazení pouze názvu kategorie a počtů zaznamů v db shop.
+*/
+db.shopCollection.aggregate([
+  {
+    $group: {
+      _id: "$category",
+      total_count: { $sum: 1 }
+    }
+  },
+  { $sort: { total_count: -1 } },
+  { $limit: 1 },
+  {
+    $project: {
+      _id: 0,
+      biggest_category: "$_id", 
+      total_count: "$total_count"
+    }
+  }
+])
+
+
+/*
+5. Počet žen, které nakoupily herní konzole.
+  a. Seskupíme záznamy podle atributů category a gender a napočítáme počty záznamů v každé kategorii pomoci sum. 
+  b. Vyfiltrujeme jenom  gender = Female a category = game console.
+  c. Vytvořime projekci pro zobrazení pouze názvu kombinace atributů gender a category a počtů zaznamů v db shop.
+*/
+db.shopCollection.aggregate([
+  {
+    $group: {
+      _id: {
+        gender: "$gender",
+        category: "$category"
+      },
+      total_count: { $sum: 1 }
+    }
+  },
+
+  {
+    $match: {
+      _id: { gender: 'Female', category: 'game console' }
+    }
+  },
+
+  {
+    $project: {
+      _id: 0,
+      category: "$_id",
+      total_count: "$total_count" 
+    }
+  }
+])
+
+
+/*
+6. Najdi všechna zařízení s typem baterie Li-Po. Zobraz cenu zařízení, název a maximální výdrž baterie.
+  a. Vyfiltrujeme jenom  zařízení s typem baterie Li-Po.
+  b. Hledáme záznamy zákazníků, kteří koupili tyto zařízení v kolekci shopCollection.
+  c. Vytvořme projekci pro zobrazení pouze ceny zařízení, názvu a maximální výdrže baterie.
+*/
+db.device.aggregate([
+  { $match: { "battery_type": "Li-Po" } },
+  
+  {
+    $lookup: {
+      from: "shopCollection", 
+      localField: "product_name",
+      foreignField: "product_name",
+      as: "customers"
+    }
+  },
+
+  {
+    $project: {
+      _id: 0,
+      price: "$customers.price",
+      product_name: "$product_name",
+      max_battery_life: "$max_battery_life",
+    }
+  }
+])
+
+
+/*
+7. Z důvodu zvýšení výkonnosti baterií typu Li-Po a nákladů na výrobu,
+  zvýšíme maximální výdrž baterie všech zařízení s touto baterií o 10 hodin. Cena zařízení se zvýší o 100.
+  
+  a. Vyfiltrujeme jenom  zařízení s typem baterie Li-Po.
+  b. Hledáme záznamy zákazníků, kteří koupili tyto zařízení v kolekci shopCollection.
+  c. Použitím add zvětšíme maximální výdrž baterie o 10. Cenu zvětšíme pomocí map, který projde pole a pou6itim add zvětší každou položku pole o 100.
+  d. Vytvořme projekci pro zobrazení pouze názvu a maximální výdrže baterie.
+*/
+db.device.aggregate([
+  { $match: { "battery_type": "Li-Po" } },
+  
+  {
+    $lookup: {
+      from: "shopCollection", 
+      localField: "product_name",
+      foreignField: "product_name",
+      as: "customers"
+    }
+  },
+
+  {
+    $set: {
+      "max_battery_life": { $add: ["$max_battery_life", 10] },
+      "customers.price": { $map: { input: "$customers.price", in: { $add: ["$$this", 100] } } }
+    }
+  }, 
+  
+  {
+    $project: {
+      _id: 0,
+      product_name: "$product_name",
+      max_battery_life: "$max_battery_life"
+    }
+  }
+])
+
+
+/*
+8. Vypiš všechny nejlépe ohodnocené laptopy.
+  
+  a. Vyfiltrujeme jenom  zařízení s typem laptop.
+  b. Seskupíme záznamy podle jmena a napočítáme maximalní rating pro každé  zařízení
+  c. Vyfiltrujeme jenom zařízení s ratingem 5.
+  d. Vytvořme projekci pro zobrazení pouze názvu zařízení.
+*/
+db.shopCollection.aggregate([
+  { $match: { "category": "laptop" } },
+
+  {
+    $group: {
+      _id: "$product_name",
+      max_rating: { $max: "$rating" }
+    }
+  },
+
+  { $match: { "max_rating": 5 } },
+
+  {
+    $project: {
+      _id: 0,
+      product_name: "$_id",
+    }
+  }
+])
+
+
+/*
+9. Průměrná cena nákupu německých důchodců podle kategorie zařízení.
+  a. Vyfiltrujeme jenom lidi z Německa, kterým je více než 60 let.
+  b. Seskupíme podle kategorie zařízení a vypočteme průměrnou cenu pro každou z kategorií.
+  c. Vytvořme projekci pro zobrazení názvu kategorie a průměrné ceny.
+*/
+db.shopCollection.aggregate([
+  {
+    $match: {
+      age: { $gt: 60 },
+      country: "Germany",
+    }
+  },
+
+  {
+    $group: {
+      _id: "$category",
+      avg_price: { $avg: "$price" }
+    }
+  },
+
+  {
+    $project: {
+      _id: 0,
+      category: "$_id",
+      averagePrice: "$avg_price"
+    }
+  },
+])
+
+
+/*
+10. V jaké kategorii má firma TechPro nejdražší zařízení?
+  a. Vyfiltrujeme jenom firmu TechPro.
+  b. Seskupíme podle kategorie zařízení a najdeme maximalní cenu pro každou z kategorií.
+  c. Seřadíme kategorií podle maximalní ceny(sestupně).
+  d. Omezíme to pouze na první prvek.
+  e. Vytvořme projekci pro zobrazení názvu kategorie a maximalní ceny.
+*/
+db.shopCollection.aggregate([
+  { $match: { provider: "TechPro" } },
+
+  {
+    $group: {
+      _id: "$category",
+      max_price: { $max: "$price" }
+    }
+  },
+
+  { $sort: { max_price: -1 } },
+  { $limit: 1 },
+
+  {
+    $project: {
+      _id: 0,
+      category: "$_id",
+      max_price: "$max_price"
+    }
+  },
+])
+
+
+/*
+11. Druhý nejpopularnější typ zařízení pro lidi ve věku od 18 do 30 let v Polsku.
+  a. Vyfiltrujeme jenom uživatelů z Polska, ve veku 18 až 30 let pomoci match.
+  b. Seskupíme podle kategorie zařízení a a napočítáme počty záznamů v každé kategorii pomoci sum.
+  c. Seřadíme kategorií podle počtu nákupů(sestupně).
+  d. Přeskočíme první záznam.
+  e. Omezíme to pouze na jeden horní prvek.
+  f. Vytvořme projekci pro zobrazení názvu kategorie a počtu výskytů.
+*/
+db.shopCollection.aggregate([
+  { $match: { 
+      country: "Poland",
+      age: { $gte: 18 },
+      age: { $lte: 30 },
+    } 
+  },
+
+  {
+    $group: {
+      _id: "$category",
+      total_count: { $sum: 1 }
+    }
+  },
+
+  { $sort: { total_count: -1 } },
+  { $skip: 1 },
+  { $limit: 1 },
+
+  {
+    $project: {
+      _id: 0,
+      category: "$_id",
+      total_count: "$total_count"
+    }
+  },
+])
+
+
+/*
+12. Nejoblíbenější barva zařízení uživatelů.
+  a. Seskupíme podle barvy zařízení a a napočítáme počty záznamů pro každou barvu pomoci sum.
+  b. Seřadíme barvy podle počtu nákupů(sestupně).
+  c. Omezíme to pouze na první prvek.
+  d. Vytvořme projekci pro zobrazení barvy a počtu nákupů. 
+*/
+db.device.aggregate([
+  {
+    $group: {
+      _id: "$color",
+      total_count: { $sum: 1 }
+    }
+  },
+
+  { $sort: { total_count: -1 } },
+  { $limit: 1 },
+  
+  {
+    $project: {
+      _id: 0,
+      color: "$_id",
+      total_count: "$total_count"
+    }
+  }
+])
+
+
+/*
+13. Uživatelé z jakých států zakoupili nejlevnější chytré zrcadlo (smart mirror). 
+  a. Vyfiltrujeme jenom kategorii chytré zrcadlo.
+  b. Seskupíme podle státu uživatele a najdeme minimalní cenu pro každý stát.
+  c. Seřadíme kategorií podle minimalní ceny(vzestupně).
+  d. Omezíme to pouze na první prvek.
+  e. Vytvořme projekci pro zobrazení názvu státu a minimalní ceny. 
+*/
+db.shopCollection.aggregate([
+  { $match: { category: "smart mirror" } },
+
+  {
+    $group: {
+      _id: "$country",
+      min_price: { $min: "$price" }
+    }
+  },
+
+  { $sort: { min_price: 1 } },
+  { $limit: 1 },
+
+  {
+    $project: {
+      _id: 0,
+      category: "$_id",
+      min_price: "$min_price"
+    }
+  },
+])
+
+
+/*
+14. Uživatelé z jakých státu nejčastěji hodnotí zboží nejvyšší značkou(5). Vypsat prvních 3.
+  a. Vyfiltrujeme jenom zařízení s hodnocením 5.
+  b. Seskupíme podle státu uživatele a najdeme počet zaznamů pro každý stát.
+  c. Seřadíme kategorií podle počtu zaznamů(sestupně).
+  d. Omezíme to pouze na prvních pět prveků.
+  e. Vytvořme projekci pro zobrazení názvu státu a počtu zaznamů. 
+
+  Na tomto dotazu se dá dobře vyzkoušet, jak funguje sharding a replikační set.
+
+  1. Nejprve odpojíme node shard1_1 (pomocí příkazu docker stop shard1_1).
+  Výsledek dotazu se nezmění, protože primární node shardu 1 bude nahrazen jedním ze sekundárních.
+  2. Nyní zkusíme odpojit zbývající dva sekundární nody a provést stejný dotaz (příkazy docker stop shard1_2, docker stop shard1_3).
+  Už vidíme, že dotaz vrátí chybu, protože shard1 nemá žádný primární node a tedy část dat není k dispozici.
+*/
+db.shopCollection.aggregate([
+  { $match: { rating: 5 } },
+
+  {
+    $group: {
+      _id: "$country",
+      total_count: { $sum: 1 }
+    }
+  },
+
+  { $sort: { total_count: -1 } },
+  { $limit: 5 },
+
+  {
+    $project: {
+      _id: 0,
+      category: "$_id",
+      total_count: "$total_count"
+    }
+  },
+])
+
+
+/*
+15. Průměrná cena chytrých hodinek u jednotlivých výrobců seřazená sestupně.
+  a. Vyfiltrujeme jenom zařízení typu smartwatch.
+  b. Seskupíme podle státu uživatele a najdeme průměrnou cenu hodinek.
+  c. Seřadíme firmy podle počtu zaznamů(sestupně).
+  d. Vytvořme projekci pro zobrazení názvu státu a průměrné ceny hodinek. 
+*/
+db.shopCollection.aggregate([
+  { $match: { category: "smartwatch" } },
+
+  {
+    $group: {
+      _id: "$provider",
+      avg_price: { $avg: "$price" }
+    }
+  },
+
+  { $sort: { avg_price: -1 } },
+
+  {
+    $project: {
+      _id: 0,
+      provider: "$_id",
+      avg_price: "$avg_price"
+    }
+  },
+])

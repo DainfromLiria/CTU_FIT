@@ -1,0 +1,51 @@
+{
+  "index_patterns": ["london*"],
+  "settings": {
+    "number_of_shards": 1,
+    "number_of_replicas": 0
+    
+  },
+  "mappings": {
+    "dynamic": true,
+    "properties": {
+
+      "date": {"type": "date", "format": "yyyy-MM-dd"},
+      "time": {"type": "date", "format": "HH:mm:ss"},
+      "time_of_bike_sharing": {"type": "date", "format": "HH:mm:ss"},
+
+      "Day_of_Week": {"type": "integer"},
+      "Number_of_Casualties": {"type": "integer"},
+      "Number_of_Vehicles": {"type": "integer"},
+      "Did_Police_Officer_Attend_Scene_of_Accident": {"type": "integer"},
+      "fatal": {"type": "integer"},
+      "cnt": {"type": "integer"},
+
+      "season": {"type": "float"},
+      "weather_code": {"type": "float"},
+      "Speed_limit": {"type": "float"},
+      "Latitude": {"type": "float"},
+      "Longitude": {"type": "float"},
+      "t1": {"type": "float"},
+      "t2": {"type": "float"},
+      "hum": {"type": "float"},
+      "wind_speed": {"type": "float"},
+      "is_holiday": {"type": "float"},
+      "is_weekend": {"type": "float"},
+      "cloud_cover": {"type": "float"},
+      "sunshine": {"type": "float"},
+      "global_radiation": {"type": "float"},
+      "max_temp": {"type": "float"},
+      "mean_temp": {"type": "float"},
+      "min_temp": {"type": "float"},
+      "precipitation": {"type": "float"},
+      "pressure": {"type": "float"},
+      "snow_depth": {"type": "float"},
+      
+      "location": {"type": "geo_point"},
+
+    }
+  },
+  "template": {
+    "name": "london_template"
+  }
+}
