@@ -1,0 +1,218 @@
+
+= 2. Domácí úkol: Mocninná metoda
+:toc:
+:author: Tomáš Kalvoda
+:date: 2023-10-24
+:stem: latexmath
+
+
+[[intro]]
+== Úvod
+
+Tento úkol se zabývá vlastními čísly a vektory matic.
+Nebudeme se pro zadanou matici snažit počítat všechna vlastní čísla, ale podíváme se na algoritmus umožňující nalézt tzv. dominantní vlastní číslo (největší v absolutní hodnotě) a pomocí jednoduché modifikace i nejmenší v absolutní hodnotě, resp. nejbližší k zadané komplexní hodnotě.
+
+Konkrétně si zde ozkoušíme tzv. mocninnou metodu (nebo mocninnou iteraci; _power method_ resp. _power iteration_).
+Důvod k tomuto pojmenování bude patrný z popisu níže.
+V aplikacích na tuto metodu můžete narazit například v Google PageRank algoritmu, při hledání základních stavů kvantových systémů, nebo při vylepšování aproximace ke konkrétnímu hledanému vlastnímu číslu matice.
+
+
+[[theory]]
+== Teoretický background
+
+=== Hledání dominantního vlastního čísla
+
+Mějme matici stem:[\mathbf{A} \in \mathbb{C}^{n,n}], mající dominantní vlastní číslo stem:[\lambda_1 \in \mathbb{C}] jednoduché násobnosti.
+Tj. pro libovolné další vlastní číslo stem:[\lambda] matice stem:[\mathbf{A}] platí stem:[0 \leq |\lambda| < |\lambda_1|].
+
+Pro jednoduchost v tento okamžik dále předpokládejme, že matice stem:[\mathbf{A}] je diagonalizovatelná s vlastními čísly stem:[\lambda_1,\ldots,\lambda_n], pro která platí nerovnosti stem:[|\lambda_1| > |\lambda_2| \geq \cdots geq |\lambda_n|], a vlastními vektory stem:[v_1,\ldots,v_n] tvořícími ortonormální bázi prostoru stem:[\mathbb{C}^n].
+
+[NOTE]
+====
+Tohoto přepokladu se ale lze zbavit použitím tzv. Jordanova normálního tvaru.
+Pro běh metody jsou skutečně zásadní předpoklady zmíněné v prvním odstavci této sekce.
+====
+
+Zvolme nyní vektor stem:[x_0 \in \mathbb{C}^n], typicky náhodně (nebo pomocí nějaké heuristiky plynoucí z daného problému; to v obecné metodě ale neřešíme).
+Pak ho lze vyjádřit ve tvaru
+
+[stem]
+++++
+  x_0 = c_1 v_1 + c_2 v_2 + \cdots + c_n v_n,
+++++
+
+kde stem:[c_1,\ldots,c_n] jsou jisté komplexní konstanty a typicky stem:[c_1 \neq 0] (toto při náhodné volbě vysoce pravděpodobně bude splněno, případně efektivně následně vynuceno numerickými chybami ve výpočtech).
+
+Nyní pojďme zkoumat vlastnosti posloupnosti stem:[(x_n)_{n=0}^\infty] zadané rekurentně vztahem
+
+[stem]
+++++
+  x_{n+1} = \frac{\mathbf{A} x_n}{\|\mathbf{A} x_n\|}, \ n=0,1,2,\ldots,
+++++
+
+kde stem:[\|z\|] označuje standardní Euklidovskou normu vektoru v stem:[z \in \mathbb{C}^n], tj.
+
+[stem]
+++++
+  \|z\| = \sqrt{\sum_{j=1}^n |z_j|^2}.
+++++
+
+Platí tedy vztah (odtud je vidět důvod pro označení "mocninná metoda")
+
+[stem]
+++++
+  x_{k+1} = \frac{\mathbf{A}^{k+1} x_0}{\|\mathbf{A}^{k+1} x_0\|},
+++++
+
+kde působení mocnin matice lze vyjádřit explicitně s využitím linearity a předpokladů výše takto:
+
+[stem]
+++++
+  \mathbf{A}^{k+1} x_0 = c_1 \lambda_1^{k+1} v_1 + c_2 \lambda_2^{k+1} v_2 + \cdots + c_n \lambda_n^{k+1} v_n.
+++++
+
+Po dosazení a vytknutí dominantní vlastní hodnoty v čitateli i jmenovateli dostaneme
+
+[stem]
+++++
+  x_{k+1} = \left( \frac{\lambda_1}{|\lambda_1|} \right)^{k+1} \frac{c_1 v_1 + c_2 \left(\frac{\lambda_2}{\lambda_1}\right)^{k+1} v_2 + \cdots + c_n \left(\frac{\lambda_n}{\lambda_1}\right)^{k+1} v_n}{\left\| c_1 v_1 + c_2 \left(\frac{\lambda_2}{\lambda_1}\right)^{k+1} v_2 + \cdots + c_n \left(\frac{\lambda_n}{\lambda_1}\right)^{k+1} v_n \right\|}
+  = \left( \frac{\lambda_1}{|\lambda_1|} \right)^{k+1} \frac{c_1 v_1}{\|c_1 v_1\|} + o(1), \quad \text{pro} \ k \to \infty.
+++++
+
+NOTE: Kvalitativně stejný výsledek bychom dostali i v případě, že matice není diagonalizovatelná nebo kdy má dominantní vlastní číslo vyšší násobnost.
+
+Všimněme si, že členy stem:[x_{k+1}] této posloupnosti se limitně blíží násobkům vlastního vektoru stem:[v_1] příslušnému vlastnímu číslu stem:[\lambda_1], tedy výrazu tvaru stem:[\alpha_k v_1].
+Odtud můžeme získat aproximaci odpovídajícího vlastního čísla pomocí tzv. Rayleighova podílu
+
+[stem]
+++++
+  \frac{\langle x_{k+1}, \mathbf{A} x_{k+1} \rangle}{\|x_{k+1}\|^2}
+  \approx
+  \frac{\langle \alpha_k v_1, \mathbf{A} \alpha_k v_1 \rangle}{\|\alpha_k v_1\|^2}
+  =
+  \frac{|\alpha_k|^2 \langle v_1, \lambda_1 v_1 \rangle}{|\alpha_k|^2 \|v_1\|^2} = \lambda_1,
+++++
+
+kde stem:[\langle x, y \rangle = \sum_{j=1}^n \overline{x_j} y_j] označuje standardní skalární součin v prostoru stem:[\mathbb{C}^n].
+
+[NOTE]
+====
+Z této analýzy je vidět, že konvergence metody je kontrolována velikostí podílu stem:[|\lambda_1/\lambda_2|].
+Pokud je "mezera" mezi dominantním a druhým největším (v absolutní hodnotě) vlastním číslem malá, pak konvergence bude pomalá.
+====
+
+Pro zastavení výpočtu použijeme dvě podmínky (v konjunkci):
+
+  * abslutní hodnota rozdílu dvou posledních aproximací vlastních čísel je menší než zadaná tolerance stem:[\varepsilon_1],
+  * norma rezidua, tj. stem:[\|\mathbf{A} x - \lambda x\|], kde stem:[\lambda] je poslední aproximace vlastního čísla s přibližným vlastním vektorem stem:[x], je menší než zadaná tolerance stem:[\varepsilon_2].
+
+=== Nejmenší a nejbližší vlastní číslo
+
+Nyní využijme dvě následující jednoduchá pozorování plynoucí přímo z definice:
+
+  * stem:[\lambda] je vlastním číslem matice stem:[\mathbf{A}], právě když je stem:[\lambda + \mu] vlastním číslem matice stem:[\mathbf{A} + \mu \mathbf{E}].
+  * Máme-li regulární matici stem:[\mathbf{A}], pak stem:[\lambda] je vlastním číslem (nutně nenulovým) matice stem:[\mathbf{A}], právě když je stem:[\frac{1}{\lambda}] vlastním číslem matice stem:[\mathbf{A}^{-1}].
+
+V obou případech jsou vždy vlastní vektory shodné.
+Z toho plyne, že aplikujeme-li mocninnou metodu popsanou výše na matici stem:[(\mathbf{A} - \mu \mathbf{E})^{-1}], pro zadané stem:[\mu\in\mathbb{C}], pak najdeme vlastní číslo matice stem:[\mathbf{A}], které je nejblíže stem:[\mu].
+Ovšem za předpokladu, že takovéto vlastní číslo existuje právě jedno.
+
+[[implementation]]
+== Implementační pokyny
+
+V souboru `main.jl` doplňte implementaci funkcí `maxeig` a `mineig`.
+První metoda se snaží nalézt dominantní vlastní číslo.
+Druhá metoda pak hledá vlastní číslo nejblíže k zadanému číslu.
+Níže obě metody podrobněji rozebereme.
+Obě metody v případě úspěchu vrací dvojici mající v první složce aproximaci vlastního čísla a v druhé aproximaci příslušného vlastního vektoru.
+
+=== Funkce `maxeig`
+
+Na vstupu máme jeden poziční argument
+
+  * čtvercovou matici `A` s prvky typu `Complex{T}`, kde `T` je podtyp typu `AbstractFloat` (pokud není čtvercová, pak vyvoláme výjimku `ArgumentError`)
+
+a dále tři parametry
+
+  * `epsilon`: absolutní tolerace pro porovnání aproximace vlastních hodnot (výchozí hodnota `sqrt(eps(T))`),
+  * `norm_epsilon`: absolutní tolerace pro porovnání nulovosti normy rezidua (výchozí hodnota `epsilon * length(A)`),
+  * `max_iter`: maximální povolený počet iterací (výchozí hodnota je `1_000`).
+
+Všechny tyto parametry musí být nezáporné, jinak vyvoláme výjimku `ArgumentError`.
+
+Algoritmus nejprve vygeneruje náhodný vektor a postupně napočítává normalizované mocniny `A` na tomto vektoru.
+
+Iterace je zastavena, pokud je absolutní hodnota rozdílu dvou posledních aproximací vlastních čísel menší než `epsilon` a současně norma rezidua (tj. vektoru stem:[A x - \lambda x], kde stem:[\lambda] je poslední aproximace vlastního čísla a stem:[x] vlastního vektoru) je menší než `norm_epsilon`.
+V tomto případě metoda vrací dvojici (_tuple_) složenou z aproximace vlastního čísla a vlastního vektoru.
+
+Pokud k situaci popsané v předchozím odstavci nedojde do `max_iter` iterací, pak vyvoláme výjimku `ErrorException`.
+
+Pro pohodlí uživatele nechť je dále k dispozici metoda `maxeig` akceptující na vstupu matici typu `Matrix{T}`, kde `T` je podtyp typu `Real`.
+V tomto případě matici přetypujeme na typ `Complex{Float64}` a dále vše běží jako výše.
+
+=== Funkce `mineig`
+
+Tato funkce se od `maxeig` liší pouze druhým nepovinným pozičním argumentem `mu` (výchozí hodnota `0`), který představuje hodnotu, kolem které hledáme nejbližší vlastní číslo matice `A`.
+Funkce tedy implementuje mocninnou metodu pro matici `(A - mu * I)^(-1)` a vrací (aproximaci) vlastního čísla matice `A`, které je nejblíže číslu `mu`, spolu s odpovídajícím přibližným vlastním vektorem (nebo opět vyvolá výjimku, pokud narazíme na singulární matici či nedosáhneme konvergence).
+
+Kritérium pro zastavení je stejné jako v případě základní mocninné metody, reziduum počítáme vzhledem k původní matici `A` a jejím vlastním číslům/vektorů.
+
+=== Testy
+
+Vaši implementaci prověříte spuštěním testů (automaticky se spouštějí i na Gitlabu).
+
+[source]
+----
+$ julia test/runtests.jl
+┌ Info: Running tests in test_maxeig.jl...
+└ ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Test Summary:                                                | Pass  Total  Time
+Exceptions.                                                  |    5      5  0.9s
+Test Summary:                                                | Pass  Total  Time
+Matrices with complex (floating point) coefficients.         |    3      3  3.1s
+Test Summary:                                                | Pass  Total  Time
+Matrices with real (floating point) coefficients.            |    2      2  0.2s
+Test Summary:                                                | Pass  Total  Time
+Matrices with rational coefficients.                         |    2      2  0.3s
+Test Summary:                                                | Pass  Total  Time
+Matrices with integer coefficients.                          |    2      2  0.1s
+Test Summary:                                                | Pass  Total  Time
+Matrices with big integer coefficients.                      |    2      2  0.9s
+Test Summary:                                                | Pass  Total  Time
+Matrices with big float coefficients.                        |    2      2  0.2s
+Test Summary:                                                | Pass  Total  Time
+Matrices with non-unique dominant eigenvalue.                |    2      2  0.0s
+Test Summary:                                                | Pass  Total  Time
+Matrices with degenerate dominant eigenvalue.                |    2      2  0.4s
+Test Summary:                                                | Pass  Total  Time
+An example of a larger matrix.                               |    1      1  0.1s
+┌ Info: Running tests in test_mineig.jl...
+└ ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Test Summary:                                                | Pass  Total  Time
+Exceptions.                                                  |    7      7  1.5s
+Test Summary:                                                | Pass  Total  Time
+Matrices with complex (floating point) coefficients.         |    4      4  1.7s
+Test Summary:                                                | Pass  Total  Time
+Matrices with real (floating point) coefficients.            |    2      2  0.0s
+Test Summary:                                                | Pass  Total  Time
+Matrices with rational coefficients.                         |    1      1  0.2s
+Test Summary:                                                | Pass  Total  Time
+Matrices with integer coefficients.                          |    2      2  0.1s
+Test Summary:                                                | Pass  Total  Time
+Matrices with big integer coefficients.                      |    2      2  0.0s
+Test Summary:                                                | Pass  Total  Time
+Matrices with big float coefficients.                        |    2      2  0.1s
+Test Summary:                                                | Pass  Total  Time
+Matrices with non-unique 'smallest dominant' eigenvalue.     |    2      2  0.0s
+Test Summary:                                                | Pass  Total  Time
+An example of a larger matrix.                               |    3      3  0.1s
+----
+
+
+[[submission]]
+== Řešení a odevzdání
+
+Opět vytvořte větev odvozenou z větve `assignment/02-power` a nezvěte ji `solution/02-power`.
+Do `solution/02-power` vložte své řešení editací souboru `main.jl` případně přidáním testů do složky `test`.
+Až budete se svým řešením spokojeni, vytvořte MR (to můžete i dříve, aspoň uvidíte výsledek testů, pokud je nespouštíte lokálně) a přiřaďte mě k němu jako `assignee`.
+Tímto aktem úkol odevzdáte.

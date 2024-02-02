@@ -1,0 +1,32 @@
+
+= 4. Domácí úkol: Astro
+:toc:
+:author: Tomáš Kalvoda
+:date: 2023-12-10
+:stem: latexmath
+
+
+[[intro]]
+== Úvod
+
+Tento úkol se svým zadáním a stylem liší od předchozí.
+Tentokrát budeme Julia využívat spíše jako datoví vědci a provedeme několik výpočtů a vizualizací s astronomickou tématikou.
+Primárně tak půjde o práci s balíčkem DataFrames.
+
+[[implementation]]
+== Zadání a implementační pokyny
+
+Podrobné zadání úkolu naleznete v notebooku `hw04-astro.ipynb`, kam i své řešení doplňte.
+Tento úkol tak není opatřen automatizovanými testy.
+
+V kořenovém repozitáři opět vytvořte Julia projekt, kde uveďte své závislosti (typicky vámi preferovaný nástroj na vizualizaci).
+
+NOTE: V rámci řešení úkolu budete muset stáhnout astronomická data ve formátu CSV a pracovat s nimi. Jde o stovky MB. Soubor uložte do adresáře `data`, který je v `.gitignore` a nehrozí, že byste tento obří datový souboru omylem pushnuli do repozitáře.
+
+[[submission]]
+== Řešení a odevzdání
+
+Opět vytvořte větev odvozenou z větve `assignment/04-astro` a nezvěte ji `solution/04-astro`.
+Do `solution/04-astro` vložte své řešení, což zde znamená vytvoření projektu a primárně editaci `hw04-astro.ipynb`.
+Až budete se svým řešením spokojeni, vytvořte MR (to můžete i dříve, aspoň uvidíte výsledek testů, pokud je nespouštíte lokálně) a přiřaďte mě k němu jako `assignee`.
+Tímto aktem úkol odevzdáte.

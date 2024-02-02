@@ -1,0 +1,7 @@
+# run tests in the Julia image provided by BI-JUL
+tests:
+  image: ${CI_REGISTRY}/bi-jul/bi-jul:latest
+  stage: test
+  script:
+    - julia --version
+    - julia --color=yes test/runtests.jl 

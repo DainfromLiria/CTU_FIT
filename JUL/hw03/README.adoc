@@ -1,0 +1,128 @@
+
+= 3. Domácí úkol: Kulečník
+:toc:
+:author: Tomáš Kalvoda
+:date: 2023-11-08
+:stem: latexmath
+
+
+[[intro]]
+== Úvod
+
+V teorii chaosu se studuje chování tzv. dynamických kulečníků (_dynamical billiards_).
+Jde o jednoduché modely popisující pohyb kuličky zanedbatelných rozměrů v rovině omezený překážkami, na kterých dochází k dokonale pružnému odrazu.
+Ve volném prostoru se kulička pohybuje rovnoměrně přímočaře (po přímce) a směr pohybu se mění jenom při odrazu na překážce podle známého zákona odrazu (úhel dopadnu je shodný s úhlem odrazu).
+
+[[theory]]
+== Teoretický background
+
+[[odraz]]
+=== Odraz na překážkách
+
+V našem simulátoru se zaměříme pouze na dva typy překážek, z kterých bude možné okraj kulečníku sestavit:
+
+  * úsečky spojující dva zadané body,
+  * části kružnice.
+
+Naše kulička bude popsána polohou (bod v rovině) a vektorem rychlosti.
+Zřejmě si stačí zaznamenávat pouze body, kdy dochází k odrazu (viz níže).
+
+Odraz v obou případech probíhá podobně.
+Dojde pouze k změně velikosti rychlosti stem:[v \in \mathbb{R}^2] podle následujícího pravidla: je-li stem:[s \in \mathbb{R}^2] vektor udávající směrnici tečny k překážce a stem:[n \in \mathbb{R}^2] odpovídající normálový směr, oba normalizované na jedničku (délky 1), pak nový směr kuličky po odrazu je
+
+[stem]
+++++
+  \langle s, v \rangle s - \langle n, v \rangle n,
+++++
+
+kde stem:[\langle,\rangle] označuje standardní skalární součin.
+Vektory stem:[s] a stem:[v] uvedené výše v případě jednotlivých překážek určíme snadno:
+
+  * v případě úsečky: směrovým vektorem stem:[s] je směrový vektor přímky, na které úsečka leží, normálový vektor stem:[n] je pak libovolný vektor kolmý na stem:[s] s jednotkovou délkou,
+  * v případě kružnice: normálový vektor stem:[n] je vektor spojující bod dopadu a střed kružnice, směrový vektor stem:[s] je pak libovolný vektor kolmý na stem:[m] s jednotkovou délkou.
+
+
+[[chaos]]
+=== Poincarého řezy
+
+Jedním z vizuálních nástrojů pro pozorování chaosu jsou tzv. Poincarého řezy.
+
+Stav kuličky v našem kulečníku je dán její polohou (bod v rovině) a směrem rychlosti (velikost nehraje roli).
+Libovolný stav kuličky je proto prvek množiny stem:[\mathbb{R}^2 \times \langle -\pi, \pi \rangle] (tzv. fázový prostor).
+Prvky této množiny, ale i trajektorie v rovině, sice jde vizualizovat, ale výsledek je značně nepřehledný.
+
+Poincarého myšlenka spočívá v "řezu" této množiny.
+V našem případě konkrétně zafixujeme úsečku (podél které kulečník rozřízneme) a zaznamenáme si pouze průsečíky trajektorií s touto úsečkou a směr rychlosti.
+Jsou-li krajní body řezu stem:[A] a stem:[B] a trajektorie prochází bodem stem:[X] ležícím na úsečce spojující tyto dva body, tj. stem:[X = A + t (B - A)], kde stem:[t \in \langle 0, 1\rangle], pak zobrazíme bod o souřadnicích stem:[t, \varphi], kde stem:[\varphi] je úhel, který vektor rychlosti svírá s kladným směrem osy stem:[x], tj. hodnota mezi stem:[-\pi] a stem:[\pi].  
+
+
+[[implementation]]
+== Implementační pokyny
+
+V souboru `src/billiard.jl` doplňte implementaci modulu `Billiard`, který bude umožňovat vytvoření hranice kulečníku z dvou primitivních překážek:
+
+  * úsečka zadaná svými krajními body (typ `Segment`, podrobněji níže),
+  * oblouk kružnice zadaný středem a poloměr kružnice a dvěma úhly (typ `Arc`, podrobněji níže).
+
+Celou implementaci pro jednoduchost a rychlost provedeme ve strojových číslech (tj. vektory a různé hodnoty budou uvažovány pouze typu `Float64`).
+
+Tento úkol vytvořte jako projekt, tj. bude možné ho aktivovat a doinstalovat závislosti, které použijete na vykreslování.
+
+NOTE: Kdykoliv porovnáváte přibližnou rovnost (čísel, vektorů, nulovost), tak použijte metodu `isapprox`.
+
+=== Typy
+
+Abstraktní typ `Obstacle` modeluje libovolnou překážku a má dva podtypy, typ `Segment` a typ `Arc`.
+
+Typ `Segment` představuje úsečku a k vytvoření objektu jednoduše vyžaduje dva body dané úsečky.
+Body chápeme jako `Vector{Float64}` o dvou složkách.
+Nelze vytvořit úsečku mezi body, které jsou u sebe moc blízko nebo jsou dokonce si rovny (blízkost bodů ověřujte pomocí metody `isapprox`)
+
+Typ `Arc` představuje část oblouku kružnice se středem v bodě (`Vector{Float64}`) a poloměrem (`Float64`) a dále dvěma úhly (oba `Float64`).
+První úhel musí být menší než druhý a ukazují (proti směru hodinových ručiček od kladného směru osy stem:[x]) začátek a konec oblouku.
+Tj. pokud bychom měli jednotkovou kružnici, tak s úhly stem:[0] a stem:[\pi] mluvíme pouze o její části nad osou stem:[x].
+
+NOTE: Podívejte se do ukázkového notebooku, z kterého je použití a význam snad jasné.
+
+Střed kružnice musí být svousložkový vektor (jsme v rovině), poloměr musí být nezáporný, první úhel musí být menší než druhý a musí být možné je zadat i jako násobky stem:[\pi] (v Julia existuje abstraktní konstanta `pi`, její použití je pohodlné pro uživatele).
+
+Posledním použitým vlastním typem je typ `Table`, který jednoduše modeluje kulečník sestavený z překážek z dvou výše uvedených typů.
+Tyto překážky jednoduše ukládá/dostává v poli typu `Vector{Obstacle}`.
+
+TIP: Vzhledem k množství dat je vhodné si dodefinovat odpovídající metodu `show`, aby dlouhé výpisy v notebooku nebyly rušivé. 
+
+=== Funkce `simulate!`
+
+Tato metoda počítá postupně body odrazu na okraji kulečníku, který jí předáme v prvním argumentu (`table`).
+Druhý argument (`path`) obsahuje matici `Float64` hodnot rozměru stem:[4 \times n], kde v prvním sloupci jsou uloženy počáteční podmínky: popořadě souřadnice polohy a složky vektoru rychlosti (nemusí být jednotkový).
+Metoda z této počáteční podmínky poté vyplní zbývající sloupce pole hodnotami souřadnic dopadů na hranici a _novými_ složkami rychlosti (po odrazu).
+
+Počet odrazů, které algoritmus napočítá je tedy stem:[n-1].
+
+Hodnota stem:[n] musí být alespoň stem:[2].
+Matice `path` musí mít právě čtyři řádky.
+Pokud algoritmus nenajde další dopadu ("děravý" kulečník, nebo špatné počáteční podmínky vně kulečníku), dojde k výjimce `RuntimeError`.
+
+=== Vizualizační funkce `draw_path` a `draw_poincare`
+
+Konečně budou k dispozici dvě vizualizační metody:
+
+  * `draw_path` přijme minimálně kulečník `table` a trajektorii `path`, které vykreslí.
+  * `draw_poincare` přijme minimálně pole trajektorií `paths`, dva body `P1` a `P2` určující koncové body řezu a vykreslí Poincarého řez popsaný výše.
+
+NOTE: Slovíčko "minimálně" je zde použito, abyste mohli použít další argumenty ke kontrole vizualizace (název souboru, barvy, rozsahy, atp.). 
+
+HINT: Na tyto dvě metody neklade zadání žádné přesnější omezení. Buďte kreativní. Ukázku možné vizualizace naleznete v notebooku `examples.ipynb`.
+
+
+=== Testy
+
+Vaši implementaci prověříte spuštěním testů (automaticky se spouštějí i na Gitlabu) příkazem `julia --project=@. test/runtests.jl`.
+
+[[submission]]
+== Řešení a odevzdání
+
+Opět vytvořte větev odvozenou z větve `assignment/03-billiard` a nezvěte ji `solution/03-billiard`.
+Do `solution/03-billiard` vložte své řešení, což zde znamená vytvoření projektu a primárně editaci `src/billiard.jl`. Zdrojový kód ale můžete rozdělit na více souboru, případně přidat testy do složky `test`.
+Až budete se svým řešením spokojeni, vytvořte MR (to můžete i dříve, aspoň uvidíte výsledek testů, pokud je nespouštíte lokálně) a přiřaďte mě k němu jako `assignee`.
+Tímto aktem úkol odevzdáte.

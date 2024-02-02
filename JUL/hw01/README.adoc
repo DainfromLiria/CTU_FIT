@@ -1,0 +1,102 @@
+
+= 1. Domácí úkol: Catalanova čísla
+:toc:
+:author: Tomáš Kalvoda
+:date: 2023-09-27
+:stem: latexmath
+
+
+[[intro]]
+== Úvod
+
+Při řešení kombinatorických úloh jste možná již potkali Catalanova čísla.
+V tomto prvním jednodušším úkolu se budeme zabývat jejich implementací v Julia.
+Budeme potřebovat pouze základní vlastnosti jazyka a proto by vám úloha neměla zabrat příliš času.
+
+Catalanova čísla získala jméno po link:https://en.wikipedia.org/wiki/Eug%C3%A8ne_Charles_Catalan[Eugène Charles Catalanovi], francouzsko-belgickém matematikovi žijícím v 19. století.
+
+
+[[theory]]
+== Teoretický background
+
+Pro celé nezáporné stem:[n] (tj. stem:[n=0,1,2,\ldots]) definujeme stem:[n]-té Catalanovo číslo předpisem
+
+[stem]
+++++
+  C_n = \frac{1}{n+1} \binom{2n}{n},
+++++
+
+kde stem:[\binom{a}{b}] označuje známé kombinační číslo.
+
+Catalanova čísla mají zajímavé vlastnosti.
+Například splňují rekurentní vztah
+
+[stem]
+++++
+  C_0 = 1, \quad C_n = \sum_{i=1}^n C_{i-1} C_{n-i}, \ n \in \mathbb{N},
+++++
+
+a rekurentní vztah
+
+[stem]
+++++
+  C_0 = 1, \quad C_n = \frac{2(2n-1)}{n+1} C_{n - 1}, \ n \in \mathbb{N}.
+++++
+
+Dále také platí
+
+[stem]
+++++
+  C_n = \binom{2n}{n} - \binom{2n}{n+1}, \quad n \geq 0, \ n \in \mathbb{Z}.
+++++
+
+
+[[implementation]]
+== Implementační pokyny
+
+V souboru `main.jl` doplňte implementaci metody `catalan`, která bude přijímat celá čísla a počítat odpovídající Catalanovo číslo.
+Například
+
+[source]
+----
+julia> catalan(25)
+4861946401452
+----
+
+V případě neceločíselného typu argumentu (např. float nebo řetězec) dojde k vyvolání výjimky `MethodError`.
+Pokud je argument záporný celočíselný, pak dostaneme výjimku `ArgumentError`.
+
+Přetečení nutně řešit nemusíte (není testováno), ale snažte se vaší metodu alespoň implementovat tak, aby bylo možné napočítat co nejvíce Catalanových čísel v daném typu.
+Součástí vyhodnocení řešení bude porovnání rychlosti i robustnosti vaší implementace s ostatními studentskými řešeními.
+
+Metoda musí být typově stabilní.
+Tj. pokud dostaneme argument typu např. `UInt64`, pak návratová hodnota je také typu `UInt64`.
+
+Svou implementaci můžete lokálně snadno otestovat příkazem `julia test/runtests.jl`, výstup by měl vypadat přibližně takto
+
+[source]
+----
+$ julia test/runtests.jl
+┌ Info: Running tests in test_sets.jl...
+└ ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Test Summary:                                                | Pass  Total  Time
+Argument types.                                              |    9      9  0.2s
+Test Summary:                                                | Pass  Total  Time
+Return types.                                                |    7      7  0.0s
+Test Summary:                                                | Pass  Total  Time
+Invalid arguments.                                           |    2      2  0.0s
+Test Summary:                                                | Pass  Total  Time
+First few values.                                            |   12     12  0.0s
+Test Summary:                                                | Pass  Total  Time
+Randomized test of one of the recurrence equations.          |    1      1  0.0s
+----
+
+Tyto testy se spouští i automaticky na Gitlabu.
+
+[[submission]]
+== Řešení a odevzdání
+
+Opět vytvořte větev odvozenou z větve `assignment/01-catalan` a nezvěte ji `solution/01-catalan`.
+Do `solution/01-catalan` vložte své řešení editací souboru `main.jl` případně přidáním testů do složky `test`.
+Až budete se svým řešením spokojeni, vytvořte MR (to můžete i dříve, aspoň uvidíte výsledek testů, pokud je nespouštíte lokálně) a přiřaďte mě k němu jako `assignee`.
+Tímto aktem úkol odevzdáte.
