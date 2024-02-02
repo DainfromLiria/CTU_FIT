@@ -1,0 +1,1 @@
+IF fractal_dimension3 >= 0.05787999927997589 AND  THEN 0
