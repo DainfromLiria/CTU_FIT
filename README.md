@@ -30,6 +30,14 @@ This repository contains some of the assignments from subjects I studied at univ
   ---
   * [PST](/PST) - _Probability and Statistics_. This folder contains the last assignment of this subject, which I completed in a team with my friend. This assignment includes distribution testing, finding basic statistical information such as median, mean, and variance, and hypothesis testing.
   ---
+  * [SQL](/SQL) - _Advanced SQL_. This folder contains assignments on Oracle (PL/SQL) and PostgreSQL (PL/pgSQL) databases.
+    * [hw01](/SQL/hw01) - [Oracle PL/SQL] - Procedures for data generation.
+    * [hw02](/SQL/hw02) - [Oracle PL/SQL] - Implementation of complex I/O operations using triggers and packages.
+    * [hw03](/SQL/hw03) - [Oracle PL/SQL] - Recursion and parameterized cursor.
+    * [hw04](/SQL/hw04) - [Oracle PL/SQL] - Optimization.
+    * [hw05](/SQL/hw05) - [PostgreSQL PL/pgSQL] - Processing CSV data in a PostgreSQL database.
+    * [test](/SQL/test) - Test in semester.
+  ---
   * [SVZ](/SVZ) - _Machine Vision and Image Processing_. This folder contains assignments on processing image data using Python and the OpenCV library.
     * [hw01](/SVZ/hw01) - Calculation of the shortest distance between rectangles in a given source image.
     * [hw02](/SVZ/hw02) - Transforming A4 paper for OCR application.
