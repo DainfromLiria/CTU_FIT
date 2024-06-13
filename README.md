@@ -28,3 +28,7 @@ This repository contains some of the assignments from subjects I studied at univ
     * [hw02](/SVZ/hw02) - Transforming A4 paper for OCR application.
     * [hw03](/SVZ/hw03) - Measuring BMI using a depth sensor.
     * [hw04](/SVZ/hw04) - Calculation of the area of the heated chip using data from a thermal camera and an RGB camera.
+  * [VIZ](/VIZ) - _Data visualisation_. This folder contains data analysis and visualizations using Python libraries `numpy`, `pandas`, `seaborn`, `matplotlib`, and `networkx`.
+    * [hw01](/VIZ/HW_01) - Exploratory data analysis of pet shelter in the city of Austin in USA.
+    * [hw02](/VIZ/HW_02) - Network analysis of Prague Integrated Transport.
+    * [hw03](/VIZ/HW_03) - Visualization in machine learning.
