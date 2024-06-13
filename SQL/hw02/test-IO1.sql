@@ -1,0 +1,36 @@
+ALTER TRIGGER inzenyr_count_on_project ENABLE; -- on trigger
+
+INSERT INTO PROJEKT VALUES (1, 'test1'); -- Create new project
+
+-- Create new employees
+INSERT INTO ZAMESTNANEC VALUES (1, 'Jaroslav', 15000, 'Kovář');
+INSERT INTO ZAMESTNANEC VALUES (2, 'Eva', 13500, 'Novotná');
+INSERT INTO ZAMESTNANEC VALUES (3, 'Jan', 18000, 'Svoboda');
+INSERT INTO ZAMESTNANEC VALUES (4, 'Marie', 14000, 'Dvořáková');
+INSERT INTO ZAMESTNANEC VALUES (5, 'Tomáš', 16000, 'Procházka');
+INSERT INTO ZAMESTNANEC VALUES (6, 'Lucie', 12500, 'Vaněčková');
+INSERT INTO ZAMESTNANEC VALUES (7, 'Martin', 17000, 'Král');
+INSERT INTO ZAMESTNANEC VALUES (8, 'Jana', 14500, 'Nová');
+INSERT INTO ZAMESTNANEC VALUES (9, 'Pavel', 19000, 'Beneš');
+INSERT INTO ZAMESTNANEC VALUES (10, 'Hana', 13000, 'Havlíčková');
+INSERT INTO ZAMESTNANEC VALUES (11, 'Michal', 15500, 'Marek');
+
+-- Set employees as engineers to this project
+INSERT INTO INZENYR VALUES (1, 1, 12);
+INSERT INTO INZENYR VALUES (2, 1, 12);
+INSERT INTO INZENYR VALUES (3, 1, 12);
+INSERT INTO INZENYR VALUES (4, 1, 12);
+INSERT INTO INZENYR VALUES (5, 1, 12);
+INSERT INTO INZENYR VALUES (6, 1, 12);
+INSERT INTO INZENYR VALUES (7, 1, 12);
+INSERT INTO INZENYR VALUES (8, 1, 12);
+INSERT INTO INZENYR VALUES (9, 1, 12);
+INSERT INTO INZENYR VALUES (10, 1, 12);
+
+-- Check INZENYR table
+select * from INZENYR;
+
+-- Try to add a new engineer to project (There trigger must be raise an error)
+INSERT INTO INZENYR VALUES (11, 1, 12);
+
+rollback;

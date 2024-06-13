@@ -1,0 +1,34 @@
+ANOPADEN> -- Film nesmí mít přiřazeno více než 4 žánry
+          create or replace trigger hlidej_zanr
+          BEFORE INSERT ON FILM_ZANR
+          FOR EACH ROW
+
+          declare
+              zanr_cnt NUMBER := 0;
+              MAX_ZANR_COUNT NUMBER := 4;
+          begin
+              select count(*) into zanr_cnt from FILM_ZANR where ID_FILMU=:new.ID_FILMU;
+
+              -- if zanr count is max
+              if zanr_cnt >= MAX_ZANR_COUNT then
+                  RAISE_APPLICATION_ERROR(-20001, 'ORA-20002: Film '||:new.ID_FILMU||' nemůže být přiřazen do více než 4 žánrů.');
+              end if;
+
+          end hlidej_zanr;
+[2024-04-04 15:41:06] completed in 16 ms
+[2024-04-04 15:41:06] 0:0:PLW-06015: parameter PLSQL_DEBUG is deprecated; use PLSQL_OPTIMIZE_LEVEL = 1
+[2024-04-04 15:41:06] 0:0:PLW-06013: deprecated parameter PLSQL_DEBUG forces PLSQL_OPTIMIZE_LEVEL <= 1
+ANOPADEN> begin
+              INSERT INTO FILM_ZANR values (4, 'AKCE');
+          end;
+[2024-04-04 15:41:06] [72000][20001]
+[2024-04-04 15:41:06] 	ORA-20001: ORA-20002: Film 4 nemůže být přiřazen do více než 4 žánrů.
+[2024-04-04 15:41:06] 	ORA-06512: at "ANOPADEN.HLIDEJ_ZANR", line 9
+[2024-04-04 15:41:06] 	ORA-04088: error during execution of trigger 'ANOPADEN.HLIDEJ_ZANR'
+[2024-04-04 15:41:06] 	ORA-06512: at line 2
+[2024-04-04 15:41:06] Position: 0
+ANOPADEN> begin
+              INSERT INTO FILM_ZANR values (5, 'AKCE');
+              rollback;
+          end;
+[2024-04-04 15:41:11] completed in 9 ms

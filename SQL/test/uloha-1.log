@@ -1,0 +1,15 @@
+ANOPADEN> begin
+          --     plt := kolik_penez(id_zamn => 1);
+              DBMS_OUTPUT.PUT_LINE('Zaměstnanec: '||3||' ma plat: '||kolik_penez(id_zamn => 3));
+              DBMS_OUTPUT.PUT_LINE('Zaměstnanec: '||1||' ma plat: '||kolik_penez(id_zamn => 1));
+              DBMS_OUTPUT.PUT_LINE('Zaměstnanec: '||17||' ma plat: '||kolik_penez(id_zamn => 17));
+              DBMS_OUTPUT.PUT_LINE('Zaměstnanec: '||33||' ma plat: '||kolik_penez(id_zamn => 33));
+          end;
+[2024-04-04 15:12:37] [72000][20001]
+[2024-04-04 15:12:37] 	ORA-20001: ORA-20001: Zaměstnanec s číslem 33 buď neexistuje nebo nemá žádnou historii.
+[2024-04-04 15:12:37] 	ORA-06512: at "ANOPADEN.KOLIK_PENEZ", line 20
+[2024-04-04 15:12:37] 	ORA-06512: at line 6
+[2024-04-04 15:12:37] Position: 0
+Zaměstnanec: 3 ma plat: 3100000
+Zaměstnanec: 1 ma plat: 60000
+Zaměstnanec: 17 ma plat: 5764000

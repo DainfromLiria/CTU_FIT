@@ -1,0 +1,13 @@
+ANOPADEN> begin
+              get_ancestral_line('Iason', 'mužská');
+              get_ancestral_line('Iason', 'ženská');
+              get_ancestral_line('Iason', 'obě');
+              get_ancestral_line('Zoran', 'obě');
+              get_ancestral_line('Celestyn', 'obě');
+          end;
+[2024-04-02 13:10:01] completed in 11 ms
+Rodová linie vydry Iason je : Ringo(1), Nestor(2),
+Rodová linie vydry Iason je : Lilien(1), Malvina(2),
+Rodová linie vydry Iason je : Lilien(1), Ringo(1), Malvina(2), Nestor(2), Nestor(2), Jarmila(2),
+Rodová linie vydry Zoran je :
+Otter with name Celestyn does not exists
