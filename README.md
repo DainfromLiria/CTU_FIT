@@ -32,3 +32,8 @@ This repository contains some of the assignments from subjects I studied at univ
     * [hw01](/VIZ/HW_01) - Exploratory data analysis of pet shelter in the city of Austin in USA.
     * [hw02](/VIZ/HW_02) - Network analysis of Prague Integrated Transport.
     * [hw03](/VIZ/HW_03) - Visualization in machine learning.
+  * [ZNS](/ZNS) - _Knowledge systems_.
+    * [hw01](/ZNS/hw01) - A simple knowledge system for receipt checking in Prolog.
+    * [hw03](/ZNS/hw03) - Cluster analysis for knowledge systems.
+    * [hw04](/ZNS/hw04) - Rule extraction for a knowledge system from a random forest.
+    * [hw05](/ZNS/hw05) - Fuzzy expert system.
