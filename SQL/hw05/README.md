@@ -3,7 +3,7 @@
 ## Popis
 * Máme databázi obsahující tabulky `ROBOT` a `CUSTOMER`. V tabulce `ROBOT` ukládáme ID zákazníka, který ho zakoupil.
 
-![schema](/schema.png)
+![schema](schema.png)
 
 * Obchodní manažer chce zjistit, kolik peněz určitý zákazník utratil 
 za nákup robota v definovaném časovém intervalu (od - do). 
