@@ -17,3 +17,14 @@ This repository contains some of the assignments from subjects I studied at univ
   * [ML2](/ML2) - _Machine Learning 2_.
     * [hw01](/ML2/HW01) - Classification problem. Preprocessing image data using PCA and LLE. Models for classification is SVM, Naive Bayes and LDA.
     * [hw02](/ML2/HW02) - Classification problem. Classification of images using Forward and Convolutional neural networks.
+  * [OSY](/OSY) - _Operating Systems_. This folder contains .cpp file with my own implementation of memory allocation using “Buddy system”.
+  * [PRS](/PRS) - _Practical statistic_. This folder contains three assignments on data analytics using R. These assignments were completed in a team with two of my friends.
+    * [hw01](/PRS/HW01) - Analysis of Albania's Demographic Data.
+    * [hw02](/PRS/HW02) - The Proportion of Unhatched Frog Eggs.
+    * [hw03](/PRS/HW03) - Analysis of the Gross Domestic Product of European Countries in 2022.
+  * [PST](/PST) - _Probability and Statistics_. This folder contains the last assignment of this subject, which I completed in a team with my friend. This assignment includes distribution testing, finding basic statistical information such as median, mean, and variance, and hypothesis testing.
+  * [SVZ](/SVZ) - _Machine Vision and Image Processing_. This folder contains assignments on processing image data using Python and the OpenCV library.
+    * [hw01](/SVZ/hw01) - Calculation of the shortest distance between rectangles in a given source image.
+    * [hw02](/SVZ/hw02) - Transforming A4 paper for OCR application.
+    * [hw03](/SVZ/hw03) - Measuring BMI using a depth sensor.
+    * [hw04](/SVZ/hw04) - Calculation of the area of the heated chip using data from a thermal camera and an RGB camera.
